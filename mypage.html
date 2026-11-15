@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>마이리디 - 게임 (교육용 데모)</title><meta name="robots" content="noindex">
+<!-- 원본: 게시본 「마이리디 - 게임 (시안)」 https://claude.ai/artifact/MHDUQd81Q3D6dABnZB787W
+     64차(11/16) 데모 사이트로 옮기며 고친 것: 결제 수단 = 카드 정기결제(리디 웹, 캐시·포인트 불가, S4) · 해지 창 = 안내만(해지 방해 금지)
+     · 게임/이어 하기/원작/사전예약 링크를 데모 페이지로 연결 · data-evt를 GA4 이벤트로 보냄(demo.js) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="assets/js/demo.js"></script>
+<style>
+@font-face{font-family:"Pretendard";src:url(assets/fonts/Pretendard-Regular.subset.woff2) format("woff2");font-weight:100 400}
+@font-face{font-family:"Pretendard";src:url(assets/fonts/Pretendard-Medium.subset.woff2) format("woff2");font-weight:500}
+@font-face{font-family:"Pretendard";src:url(assets/fonts/Pretendard-SemiBold.subset.woff2) format("woff2");font-weight:600}
+@font-face{font-family:"Pretendard";src:url(assets/fonts/Pretendard-Bold.subset.woff2) format("woff2");font-weight:700 900}
+:root{
+  --ridi:#1f8ce6; --ridi-n:#4a9ff5; --ridi-bg:#eaf4fe;
+  --deep:#0a3faa; --gold:#c8962b; --gold-bg:#fff6dd;
+  --ink:#141a24; --ink-2:#4b5566; --ink-3:#8a93a3;
+  --line:#e3e7ee; --frame:#6b7280; --paper:#fff; --page:#fff; --soft:#f6f8fb;
+  --warn:#e5484d; --ok:#14a06b;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e9edf4;--ink-2:#b6bfcd;--ink-3:#808a9b;--line:#2a3242;--frame:#3a4558;
+    --paper:#151b27;--page:#0d121c;--soft:#111827;--ridi-bg:#13243a;--gold-bg:#2a2412;color-scheme:dark}
+}
+:root[data-theme="dark"]{--ink:#e9edf4;--ink-2:#b6bfcd;--ink-3:#808a9b;--line:#2a3242;--frame:#3a4558;
+  --paper:#151b27;--page:#0d121c;--soft:#111827;--ridi-bg:#13243a;--gold-bg:#2a2412;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--page);color:var(--ink);font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--ridi);outline-offset:2px}
+.proto{font-size:11px;color:#7d889c;text-align:center;padding:6px;background:#000}
+.proto b{color:#fff}
+
+/* 리디 공통 헤더 (실제 마이리디와 같은 구성 + 게임 메뉴) */
+.gh{background:var(--paper);border-bottom:1px solid var(--line)}
+.gh-in{max-width:1140px;margin:0 auto;padding:0 20px}
+.gh-top{display:flex;align-items:center;gap:16px;height:64px}
+.logo{font-weight:900;font-size:25px;letter-spacing:-.5px;color:var(--ridi)}
+.search{margin-left:auto;width:min(320px,40vw);height:40px;border-radius:8px;background:#f2f4f7;display:flex;align-items:center;padding:0 12px;color:#9aa3b1;font-size:14px}
+:root[data-theme="dark"] .search{background:#1d2433}
+.ico{display:flex;gap:20px}
+.ico span{width:22px;height:22px;display:inline-block;border:2px solid var(--ink);border-radius:6px;opacity:.85}
+.ico span:nth-child(1){border-radius:10px 10px 4px 4px;position:relative}
+.ico span:nth-child(1)::after{content:"";position:absolute;right:-5px;top:-5px;width:6px;height:6px;border-radius:50%;background:var(--warn)}
+.ico span:nth-child(4){border-radius:50%}
+.gh-nav{display:flex;gap:24px;height:46px;align-items:center;font-size:15px;color:var(--ink-2);overflow-x:auto;scrollbar-width:none}
+.gh-nav a{white-space:nowrap;position:relative}
+.gh-nav .n::after{content:"N";position:absolute;right:-8px;top:-4px;font-size:9px;color:var(--warn);font-weight:700}
+.gh-nav .r{margin-left:auto;display:flex;gap:20px;color:var(--ink)}
+.gh-nav a.go{color:var(--ridi);font-weight:700}
+
+/* 레이아웃 */
+.wrap{max-width:1140px;margin:0 auto;padding:36px 20px 80px;display:grid;grid-template-columns:200px 1fr;gap:56px}
+.side h1{font-size:28px;margin:0 0 30px;letter-spacing:-.02em}
+.side .home{display:flex;gap:6px;align-items:center;font-size:15px;color:var(--ink-2);padding-bottom:16px;border-bottom:1px solid var(--line)}
+.side .grp{padding:16px 0;border-bottom:1px solid var(--line)}
+.side .gt{display:flex;align-items:center;gap:6px;font-weight:700;font-size:15px;margin-bottom:6px}
+.side .gt .new{font-size:10px;color:#fff;background:var(--warn);border-radius:4px;padding:0 4px;line-height:15px}
+.side a.m{display:block;padding:5px 0 5px 22px;font-size:15px;color:var(--ink-2)}
+.side a.m:hover{color:var(--ink)}
+.side a.on,.side .home.on{color:var(--ridi);font-weight:700}
+.side .grp.game{background:linear-gradient(180deg,var(--ridi-bg),transparent);margin:0 -10px;padding:16px 10px;border-radius:10px;border-bottom:0}
+.gi{width:16px;height:16px;display:inline-block;border-radius:4px;background:var(--ink-2)}
+.game .gi{background:var(--ridi)}
+
+/* 요약 카드: 실제 마이리디 형식 */
+.sumcard{display:grid;grid-template-columns:260px 1fr;border:2px solid var(--frame);min-height:250px}
+.sumcard .me{background:var(--ridi-bg);padding:24px 26px;display:flex;flex-direction:column}
+.me .id{font-weight:700;font-size:21px}
+.me .mail{font-size:13px;color:var(--ink-3)}
+.me .badge{margin-top:18px;align-self:flex-start;font-size:13px;font-weight:700;border-radius:99px;padding:3px 12px}
+.badge.prem{background:linear-gradient(90deg,#f5d77f,#e7b54c);color:#4a3200}
+.badge.basic{background:var(--ridi);color:#fff}
+.badge.none{background:var(--line);color:var(--ink-2)}
+.me .nx{font-size:13px;color:var(--ink-2);margin-top:8px}
+.me .out{margin-top:auto;align-self:flex-start;border:1px solid var(--line);background:var(--paper);font-size:13px;padding:6px 12px;border-radius:4px}
+.cells{display:grid;grid-template-columns:repeat(3,1fr);padding:10px 36px}
+.cell{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 6px;text-align:center;border:0;background:none}
+.cells .cell:nth-child(-n+3){border-bottom:1px solid var(--line)}
+.cell .ci{width:28px;height:28px;border:2px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;margin-bottom:8px}
+.cell b{font-size:15px}
+.cell .v{font-size:24px;color:var(--ridi-n);font-weight:500;line-height:1.3}
+.cell .v small{font-size:14px}
+.cell .s{font-size:13px;color:var(--ink-2)}
+.cell .s::after{content:" »";color:var(--ridi)}
+
+/* 섹션 머리 (실제: 제목 + 가는 선 + 검은 전체보기) */
+.sh{display:flex;align-items:center;gap:14px;margin:42px 0 14px}
+.sh h2{font-size:18px;margin:0;white-space:nowrap}
+.sh::after{content:"";flex:1;height:1px;background:var(--line);order:1}
+.sh .all{order:2;background:#222;color:#fff;font-size:13px;font-weight:700;padding:6px 12px;border-radius:3px;border:0}
+:root[data-theme="dark"] .sh .all{background:#e9edf4;color:#111}
+.box{border:3px solid var(--soft);border-radius:2px;padding:18px}
+
+/* 이어 하기 */
+.cont{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.game-c{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper);display:flex;flex-direction:column}
+.game-c .art{height:120px;position:relative;color:#fff;padding:12px;display:flex;flex-direction:column;justify-content:flex-end;font-weight:900;line-height:1.3;font-size:15px}
+.game-c .art .tag{position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;background:rgba(0,0,0,.35);padding:1px 7px;border-radius:99px}
+.game-c .art .newep{position:absolute;top:10px;right:10px;font-size:11px;font-weight:700;background:var(--warn);padding:1px 7px;border-radius:99px}
+.a1{background:radial-gradient(circle at 70% 25%,#f6dd96 0,#b98a2a 40%,#163a2b 100%)}
+.a2{background:radial-gradient(circle at 30% 35%,#ffb36b 0,#c24ae0 48%,#22114a 100%)}
+.a3{background:radial-gradient(circle at 55% 25%,#ffe28a 0,#3a3fbf 48%,#0c1238 100%)}
+.game-c .bd{padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ridi)}
+.game-c .meta{font-size:13px;color:var(--ink-2);display:flex;justify-content:space-between}
+.btn{height:42px;border-radius:8px;border:0;padding:0 14px;font-weight:700;font-size:14px}
+.btn.pri{background:var(--ridi);color:#fff}
+.btn.sub{background:transparent;border:1px solid var(--line);color:var(--ink-2);font-weight:500}
+.btn.gold{background:linear-gradient(90deg,#f5d77f,#e7b54c);color:#4a3200}
+.btn.warn{background:transparent;border:1px solid var(--line);color:var(--warn);font-weight:500}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row2{display:grid;grid-template-columns:1fr auto;gap:8px}
+
+/* 패스 */
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pcard{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--paper);display:flex;flex-direction:column;gap:12px;position:relative}
+.pcard.cur{border:2px solid var(--ridi)}
+.pcard.prem.cur{border-color:#e7b54c}
+.pcard .cur-t{position:absolute;top:-11px;left:16px;background:var(--ridi);color:#fff;font-size:12px;font-weight:700;padding:1px 10px;border-radius:99px}
+.pcard.prem .cur-t{background:#e7b54c;color:#4a3200}
+.pcard h3{margin:0;font-size:18px}
+.pcard .price{font-size:26px;font-weight:900}
+.pcard .price small{font-size:14px;font-weight:500;color:var(--ink-3)}
+.pcard ul{margin:0;padding:0;list-style:none;font-size:14px;display:flex;flex-direction:column;gap:7px}
+.pcard li{padding-left:20px;position:relative}
+.pcard li::before{content:"";position:absolute;left:2px;top:7px;width:9px;height:5px;border-left:2px solid var(--ridi);border-bottom:2px solid var(--ridi);transform:rotate(-45deg)}
+.pcard.prem li::before{border-color:var(--gold)}
+.pcard li.off{color:var(--ink-3)}
+.pcard li.off::before{border:0;width:10px;height:2px;background:var(--ink-3);top:10px;transform:none}
+.pcard .act{margin-top:auto}
+.kv{width:100%;border-collapse:collapse;font-size:14px}
+.kv th{text-align:left;font-weight:500;color:var(--ink-3);padding:12px 0;width:30%}
+.kv td{padding:12px 0}
+.kv tr+tr th,.kv tr+tr td{border-top:1px solid var(--line)}
+.status{display:flex;align-items:center;gap:10px;padding:14px 16px;border-radius:10px;background:var(--soft);font-size:14px;margin-bottom:14px}
+.status.cancel{background:#fff1f1;color:#a12a2e}
+:root[data-theme="dark"] .status.cancel{background:#3a1c1e;color:#ffb3b5}
+.hist{width:100%;border-collapse:collapse;font-size:14px}
+.hist th{font-weight:500;color:var(--ink-3);text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+.hist td{padding:10px 6px;border-bottom:1px solid var(--line)}
+.hist .r{text-align:right}
+
+/* 연속 구독 */
+.streak{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.st{border:1px solid var(--line);border-radius:12px;padding:14px 8px;text-align:center;font-size:13px;background:var(--paper)}
+.st .m{font-size:12px;color:var(--ink-3)}
+.st b{display:block;font-size:14px;margin:6px 0 8px;line-height:1.35;min-height:38px}
+.st.got{background:var(--ridi-bg);border-color:transparent}
+.st.now{border:2px solid var(--ridi)}
+.st .ok{color:var(--ridi);font-weight:700;font-size:12px}
+.st button{height:32px;font-size:12px;padding:0 10px}
+.meter{display:flex;align-items:baseline;gap:8px;margin-bottom:14px}
+.meter .big{font-size:40px;font-weight:900;color:var(--ridi)}
+
+/* 수집 카드 */
+.ftabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.ftabs button{border:1px solid var(--line);background:var(--paper);border-radius:99px;padding:5px 14px;font-size:13px}
+.ftabs button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:12px}
+.cc{aspect-ratio:3/4;border-radius:10px;position:relative;overflow:hidden;color:#fff;padding:10px;display:flex;flex-direction:column;justify-content:flex-end;font-size:12px;font-weight:700;line-height:1.35}
+.cc .frm{position:absolute;inset:5px;border:1px solid rgba(255,255,255,.5);border-radius:7px;pointer-events:none}
+.cc small{font-weight:500;opacity:.8}
+.cc.lock{background:var(--soft)!important;color:var(--ink-3);align-items:center;justify-content:center;text-align:center;border:1px dashed var(--line)}
+.cc.lock .frm{display:none}
+
+/* 꾸미기 */
+.deco{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.dc{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--paper);display:flex;flex-direction:column;gap:8px}
+.dc .pv{height:70px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px}
+.dc .nm{font-size:13px;font-weight:700}
+.dc .lim{font-size:11px;color:var(--gold);font-weight:700}
+.dc.on{border:2px solid #e7b54c}
+.preview{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;background:#0b1430;color:#fff;margin-bottom:14px}
+.preview .rk{font-weight:900;font-size:18px;width:28px;text-align:center}
+.preview .pf{width:40px;height:40px;border-radius:50%;background:#2c3b66;display:flex;align-items:center;justify-content:center;font-weight:900;position:relative}
+.preview .pf.ring{box-shadow:0 0 0 3px #f5d77f,0 0 14px #f5d77f}
+.preview .nb{font-size:11px;padding:1px 8px;border-radius:4px;margin-left:6px}
+.locked{position:relative}
+.locked::after{content:"프리미엄 패스 전용";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.72);font-weight:700;color:#7a5a00;border-radius:12px}
+:root[data-theme="dark"] .locked::after{background:rgba(13,18,28,.78);color:#f5d77f}
+
+
+/* 호요랩식 프로필 헤더 */
+.prof{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--paper);margin-bottom:22px}
+.pbanner{height:190px;position:relative}
+.pnote{position:absolute;right:12px;bottom:10px;font-size:11px;color:rgba(255,255,255,.75);background:rgba(0,0,0,.25);padding:1px 8px;border-radius:99px}
+.prow{display:flex;align-items:flex-end;gap:16px;padding:0 22px;margin-top:-46px;position:relative}
+.pav{width:104px;height:104px;border-radius:50%;flex:0 0 104px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:30px;border:4px solid var(--paper);box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.pname{padding-bottom:8px;display:flex;flex-direction:column}
+.pname b{font-size:22px;line-height:1.2}
+.pname span{font-size:13px;color:var(--ink-3)}
+.pedit{margin-left:auto;padding-bottom:10px;position:relative}
+.pedit .btn{height:36px;font-size:13px}
+.pmenu{position:absolute;right:0;top:42px;background:var(--paper);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.14);padding:6px;z-index:5;min-width:170px}
+.pmenu button{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 12px;border-radius:6px;font-size:14px}
+.pmenu button:hover{background:var(--soft)}
+.pstats{display:flex;gap:26px;padding:14px 22px 18px 142px;font-size:13px;color:var(--ink-2);flex-wrap:wrap}
+.pstats b{font-size:17px;color:var(--ink);margin-right:5px}
+.prof.compact .pbanner{height:120px}
+.prof.compact .prow{margin-top:-24px;padding:0 16px 12px}
+.prof.compact .pav{width:72px;height:72px;flex-basis:72px;font-size:22px;border-width:3px}
+.prof.compact .pname b{font-size:17px}
+.dgrid{display:grid;gap:10px}
+.dgrid.icon{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
+.dgrid.banner{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.dg{position:relative;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.dg .dart{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+.dgrid.icon .dart{width:64px;height:64px;border-radius:50%;font-size:20px}
+.dgrid.banner .dart{width:100%;height:62px;border-radius:8px}
+.dnm{font-size:13px;font-weight:700}
+.dtag{font-size:11px;font-weight:700;padding:0 7px;border-radius:99px}
+.dtag.prem{background:var(--gold-bg);color:var(--gold)}
+.dtag.free{background:var(--soft);color:var(--ink-3)}
+.dtag.event{background:#ffe6f0;color:#b0457a}
+:root[data-theme="dark"] .dtag.event{background:#3a1a2a}
+.dg.on{border:2px solid var(--ridi)}
+.dcheck{position:absolute;top:6px;right:6px;font-size:10px;font-weight:700;background:var(--ridi);color:#fff;padding:0 6px;border-radius:99px}
+.dg.lk{opacity:.55}
+.dg.lk::after{content:"🔒";position:absolute;top:6px;left:8px;font-size:12px}
+.dmodal .dm-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.dmodal .dm-h h3{margin:0}
+.dmodal .x{border:0;background:none;font-size:18px;color:var(--ink-3)}
+.dmodal .prof{margin-bottom:0}
+.dm-list{max-height:300px;overflow:auto;padding:2px}
+.modal:has(.dmodal){width:min(640px,100%)}
+.preview .pf{color:#fff}
+@media (max-width:860px){
+  .pbanner{height:130px}
+  .prow{margin-top:-28px;padding:0 14px;gap:12px}
+  .pnote{display:none}
+  .pav{width:78px;height:78px;flex-basis:78px;font-size:24px;border-width:3px}
+  .pname b{font-size:18px}
+  .pname{min-width:0}
+  .pname span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pedit{position:absolute;right:12px;top:-6px;padding:0;transform:translateY(-100%)}
+  .pedit .btn{background:rgba(255,255,255,.9);color:#141a24;border:0;height:32px}
+  .pmenu{top:38px}
+  .pstats{padding:12px 14px 14px;gap:16px}
+  .dgrid.banner{grid-template-columns:1fr 1fr}
+}
+
+/* 팝업 기록 */
+.pop{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}
+.pbox{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--paper)}
+.pbox h3{margin:0 0 12px;font-size:15px}
+.stp{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stp i{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;font-size:12px;background:var(--ridi);color:#fff}
+.vote{display:flex;gap:12px;align-items:center}
+.vote .vb{width:54px;height:72px;border-radius:6px;background:linear-gradient(160deg,#3b2a6b,#b5486b)}
+.vote p{margin:0;font-size:13px;color:var(--ink-2)}
+.tiny{font-size:12px;color:var(--ink-3)}
+
+/* 모달·토스트 */
+.dim{position:fixed;inset:0;background:rgba(5,10,25,.55);display:none;align-items:center;justify-content:center;z-index:80;padding:16px}
+.dim.open{display:flex}
+.modal{background:var(--paper);width:min(440px,100%);border-radius:16px;padding:24px;max-height:90vh;overflow:auto}
+.modal h3{margin:0 0 8px;font-size:19px}
+.modal p{margin:0 0 14px;color:var(--ink-2);font-size:14px}
+.lose{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-direction:column;gap:8px}
+.lose li{display:flex;justify-content:space-between;gap:10px;background:var(--soft);border-radius:8px;padding:10px 12px;font-size:14px}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:#1d2433;color:#fff;padding:12px 18px;border-radius:10px;font-size:14px;opacity:0;transition:.25s;z-index:90;pointer-events:none;max-width:90vw}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* 시안 상태 패널 (팀용) */
+.dev{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:70;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px;box-shadow:0 4px 18px rgba(0,0,0,.14);font-size:12px;display:flex;flex-direction:column;gap:6px;width:210px}
+.dev b{font-size:11px;color:var(--ink-3)}
+.dev .seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.dev .seg button{flex:1;border:0;background:transparent;height:28px;font-size:12px;white-space:nowrap;padding:0 4px}
+.dev .seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.dev .tg{height:28px;border:1px solid var(--line);border-radius:8px;background:transparent;font-size:12px}
+.dev.min > :not(.hd){display:none}
+.dev .hd{display:flex;justify-content:space-between;align-items:center}
+.dev .hd button{border:0;background:none;font-size:12px;color:var(--ink-3)}
+.show-evt [data-evt]{outline:1px dashed #ff7a00;outline-offset:2px;position:relative}
+.show-evt [data-evt]::before{content:attr(data-evt);position:absolute;left:0;top:-17px;font:600 10px/15px ui-monospace,Menlo,monospace;background:#ff7a00;color:#fff;padding:0 5px;border-radius:3px;z-index:5;white-space:nowrap;pointer-events:none}
+
+/* 모바일: 실제 리디 앱처럼 사이드 메뉴 → 위쪽 가로 탭 */
+.mtabs{display:none}
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr;gap:0;padding:0 0 90px}
+  .side{display:none}
+  .mtabs{display:block;position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--paper);border-bottom:1px solid var(--line)}
+  .mtabs .t1{padding:14px 16px 4px;font-weight:900;font-size:20px}
+  .mtabs .t2{display:flex;gap:6px;overflow-x:auto;padding:8px 16px 12px;scrollbar-width:none}
+  .mtabs .t2 a{flex:0 0 auto;border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-size:13px;color:var(--ink-2)}
+  .mtabs .t2 a.on{background:var(--ridi);border-color:var(--ridi);color:#fff;font-weight:700}
+  main.view{padding:16px}
+  .sumcard{grid-template-columns:1fr;border-width:1px;border-radius:12px;overflow:hidden}
+  .sumcard .me{padding:18px}
+  .me .out{display:none}
+  .cells{padding:4px 8px}
+  .cell{padding:14px 4px}
+  .cell .v{font-size:20px}
+  .cont{grid-template-columns:1fr}
+  .game-c{flex-direction:row}
+  .game-c .art{width:110px;height:auto;min-height:130px;flex:0 0 110px;font-size:13px}
+  .plan,.pop{grid-template-columns:1fr}
+  .streak{grid-template-columns:repeat(3,1fr)}
+  .sh{margin:30px 0 12px}
+  .gh-nav .r{display:none}
+  .search{width:auto;flex:1;margin-left:8px}
+  .ico span:nth-child(2),.ico span:nth-child(3){display:none}
+  .dev{width:200px}
+  .game-c .art .newep{top:auto;bottom:auto;right:auto;left:10px;top:34px}
+}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body data-nosheet data-page="mypage">
+<div class="proto"><b>교육용 데모</b> · 리디와 무관하며 로그인·결제가 되지 않아요 · 가격·보상·수치는 가정 · 화면 시점: 출시 석 달 뒤(2027년 6월 · 가상 런칭일 2027-03-05 기준)</div>
+<header class="gh">
+  <div class="gh-in">
+    <div class="gh-top">
+      <a class="logo" href="index.html">RIDI</a>
+      <div class="search" role="search">검색</div>
+      <div class="ico" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    </div>
+    <nav class="gh-nav" aria-label="리디 메뉴">
+      <a href="#" data-out>만화</a><a href="#" data-out>웹툰</a><a href="#" data-out>웹소설</a><a href="#" data-out>도서</a><a href="#" class="n" data-out>리디샵</a><a href="index.html?utm_content=myridi" class="n go">게임</a><a href="#" data-out>셀렉트</a>
+      <span class="r"><a href="reserve.html">팝업 사전예약</a><a href="#" data-out>전체 카테고리</a><a href="#" data-out>캐시충전</a></span>
+    </nav>
+  </div>
+</header>
+
+<div class="mtabs">
+  <div class="t1">마이리디 · 게임</div>
+  <nav class="t2" id="mtabs" aria-label="게임 메뉴"></nav>
+</div>
+
+<div class="wrap">
+  <aside class="side" aria-label="마이리디 메뉴">
+    <h1>마이리디</h1>
+    <a class="home" href="#" data-out>⌂ 마이리디 홈</a>
+    <div class="grp"><div class="gt"><span class="gi"></span>책</div>
+      <a class="m" href="#" data-out>관심 작품</a><a class="m" href="#" data-out>최근 조회한 작품</a><a class="m" href="#" data-out>위시리스트</a><a class="m" href="#" data-out>독서노트</a><a class="m" href="#" data-out>신간알림</a><a class="m" href="#" data-out>이벤트 알림 설정</a></div>
+    <div class="grp game" id="sideGame"><div class="gt"><span class="gi"></span>게임<span class="new">NEW</span></div></div>
+    <div class="grp"><div class="gt"><span class="gi"></span>개인</div>
+      <a class="m" href="#" data-out>내 정보 관리</a><a class="m" href="#" data-out>1:1 문의</a><a class="m" href="#" data-out>기기 관리</a><a class="m" href="#" data-out>리뷰 관리</a><a class="m" href="#" data-out>리서치 참여 신청</a></div>
+    <div class="grp"><div class="gt"><span class="gi"></span>구매/혜택</div>
+      <a class="m" href="#" data-out>결제 내역</a><a class="m" href="#" data-out>리디캐시</a><a class="m" href="#" data-out>리디포인트</a><a class="m" href="#" data-out>쿠폰</a><a class="m" href="#" data-out>리디페이 관리</a></div>
+    <div class="grp" style="border:0"><div class="gt"><span class="gi"></span>굿즈 주문/배송관리</div>
+      <a class="m" href="#" data-out>주문 배송 내역</a><a class="m" href="#" data-out>취소/교환/반품 내역</a><a class="m" href="#" data-out>재입고 알림 내역</a><a class="m" href="#" data-out>위시리스트</a><a class="m" href="#" data-out>상품 리뷰</a><a class="m" href="#" data-out>배송지 관리</a><a class="m" href="#" data-out>상품 문의</a></div>
+  </aside>
+  <main class="view" id="view" tabindex="-1"></main>
+</div>
+
+<div class="dim" id="dim" role="dialog" aria-modal="true"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="dev" id="dev">
+  <div class="hd"><b>시안 상태 (팀용)</b><button id="devMin" aria-label="패널 접기">접기</button></div>
+  <div class="seg" role="group" aria-label="패스 상태">
+    <button data-plan="none">없음</button><button data-plan="basic">기본</button><button data-plan="prem">프리미엄</button>
+  </div>
+  <button class="tg" id="evtBtn" aria-pressed="false">측정 이벤트 보기</button>
+</div>
+
+<script>
+(function(){
+var MENU=[["game","게임 홈"],["pass","패스 구독 관리"],["streak","연속 구독 보상"],["cards","수집 카드"],["deco","꾸미기 보관함"],["play","이어 하기"],["popup","팝업 기록"]];
+var GAMES=[
+ {id:"chat",cls:"a1",genre:"로맨스 판타지 · AI 대화",t:"저와 공범이 되어 주시겠습니까?",hero:"카시안",ep:6,tot:10,next:"7화 · 서신 속 이름",origin:"원작 소설 이어 읽기",side:"외전 루트: 이복동생의 편지"},
+ {id:"shoot",cls:"a2",genre:"헌터물 · 슈팅",t:"지각 사유: 게이트 폭주",hero:"공이삼",ep:9,tot:10,next:"10화 · 운동장의 균열",origin:"원작 웹툰 이어 보기",side:"외전 루트: 의문의 S급"},
+ {id:"escape",cls:"a3",genre:"마법학원 · 방탈출",t:"저를 가두셨죠? 덕분에 전설의 환수를 얻었습니다",hero:"녹스",ep:1,tot:10,next:"2화 · 잠긴 도서관",origin:"원작 소설 이어 읽기",side:"외전 루트: 녹스의 첫 계약자"}];
+var S={plan:"prem",cancel:false,months:3,claimed:false,filter:"all",icon:"ic3",banner:"bc3",dtab:"icon"};
+var PRICE={basic:"9,900",prem:"14,900"};
+var NAME={none:"패스 없음",basic:"기본 패스",prem:"프리미엄 패스"};
+var $=function(s){return document.querySelector(s)};
+
+/* 메뉴 그리기 */
+var sg=$("#sideGame"),mt=$("#mtabs");
+MENU.forEach(function(m){
+  var a=document.createElement("a");a.className="m";a.href="#"+m[0];a.textContent=m[1];a.dataset.k=m[0];sg.appendChild(a);
+  var b=a.cloneNode(true);b.className="";mt.appendChild(b)});
+document.querySelectorAll("[data-out]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();toast("이 메뉴는 실제 마이리디 그대로예요 (데모 범위 밖)")})});
+
+function head(t,btn){return '<div class="sh"><h2>'+t+'</h2>'+(btn?'<button class="all" onclick="location.hash=\''+btn+'\'">전체 보기 »</button>':'')+'</div>'}
+function gameCard(g){
+  var locked=S.plan==="none"&&g.ep>=1;
+  return '<article class="game-c"><div class="art '+g.cls+'"><span class="tag">'+g.genre.split(" · ")[1]+'</span>'+(g.id!=="escape"?'<span class="newep">새 회차</span>':'')+g.t+'</div>'+
+  '<div class="bd"><div class="meta"><span>'+g.ep+'화까지 플레이</span><span>공개 '+g.tot+'화</span></div><div class="bar"><i style="width:'+(g.ep/g.tot*100)+'%"></i></div>'+
+  '<div class="tiny">다음: '+g.next+'</div>'+
+  '<div class="row2"><button class="btn pri" data-evt="'+(locked?'pass_offer_view(from=myridi)':'play_resume(game_id='+g.id+')')+'" onclick="'+(locked?"location.hash='pass'":"location.href='detail.html?g="+g.id+"&from=mypage'")+'">'+(locked?'2화부터는 패스로':'이어 하기')+'</button>'+
+  '<button class="btn sub" data-evt="origin_click(game_id='+g.id+',placement=myridi)" onclick="location.href=\'origin.html?g='+g.id+'\'">원작</button></div></div></article>'}
+
+/* 화면들 */
+var V={};
+V.game=function(){
+  var cancelTxt=S.cancel?'<div class="nx" style="color:var(--warn)">해지 예약 · 6. 7까지 이용</div>':'';
+  var nx=S.plan==="none"?'<div class="nx">1화는 무료로 즐길 수 있어요</div>':'<div class="nx">다음 결제 6. 7 · '+PRICE[S.plan]+'원 (카드 정기결제)</div>'+cancelTxt;
+  return profHTML(S.icon,S.banner,false)+'<section class="sumcard" aria-label="게임 요약"><div class="me"><div class="id">rid***** ›</div><div class="mail">rid*****@gmail.com</div>'+
+  '<span class="badge '+S.plan+'">'+NAME[S.plan]+'</span>'+nx+'<button class="out" onclick="toast(\'로그아웃 (데모)\')">로그아웃</button></div>'+
+  '<div class="cells">'+
+   cell("P","패스",S.plan==="none"?'<span class="v">-</span>':'<span class="v">'+(S.plan==="prem"?"프리미엄":"기본")+'</span>',S.plan==="none"?"패스 알아보기":"구독 관리","pass","pass_manage_view")+
+   cell("연","연속 구독",'<span class="v">'+(S.plan==="none"?0:S.months)+'<small>개월</small></span>',"다음 보상","streak","streak_view")+
+   cell("카","수집 카드",'<span class="v">7<small>장</small></span>',"보관함","cards","card_collection_view")+
+   cell("꾸","꾸미기",'<span class="v">'+(S.plan==="prem"?7:2)+'<small>개</small></span>',S.plan==="prem"?"바꾸기":"한정은 프리미엄","deco","deco_view")+
+   cell("게","하는 게임",'<span class="v">3<small>개</small></span>',"이어 하기","play","play_list_view")+
+   cell("팝","팝업 스탬프",'<span class="v">4<small>/4</small></span>',"팝업 기록","popup","popup_record_view")+
+  '</div></section>'+
+  head("이어 하기","play")+'<div class="cont">'+GAMES.map(gameCard).join("")+'</div>'+
+  head("팝업 기록","popup")+'<div class="box" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><div class="stp" style="width:200px"><i>챗</i><i>슈팅</i><i>탈출</i><i>투표</i></div><div><b>스탬프 4개 완주 · 특전 스티커 받음</b><div class="tiny">2027. 3. 7(일) 14:30 회차 방문 · 투표한 작품: 모란연회</div></div></div>'};
+function cell(ic,t,v,s,to,evt){return '<button class="cell" data-evt="'+evt+'" onclick="location.hash=\''+to+'\'"><span class="ci">'+ic+'</span><b>'+t+'</b>'+v+'<span class="s">'+s+'</span></button>'}
+
+V.pass=function(){
+  var st="";
+  if(S.plan==="none") st='<div class="status">지금은 패스가 없어요. 게임마다 1화는 무료로 즐길 수 있어요.</div>';
+  else if(S.cancel) st='<div class="status cancel">해지 예약됨 · 6. 7까지 지금 혜택을 그대로 쓸 수 있어요.<button class="btn pri" style="margin-left:auto;height:34px" data-evt="pass_resubscribe" onclick="resub()">다시 구독</button></div>';
+  else st='<div class="status">'+NAME[S.plan]+' 이용 중 · 다음 결제 6. 7에 '+PRICE[S.plan]+'원이 등록한 카드로 자동 결제돼요.</div>';
+  var basic=['세 게임 본편 전 회차','게임별 주간 도전·퍼즐·이벤트','수집 카드 받기','구독자 전용 굿즈 구매','연속 구독 보상'];
+  var premX=['외전 루트 전부','그달 한정 꾸미기(아이콘·배너)','팝업 우선 입장','연속 구독 상위 보상','AI 챗 지난 대화 기억'];
+  function pc(k){var cur=S.plan===k,isP=k==="prem";
+    var li=basic.map(function(b){return '<li>'+b+'</li>'}).join("")+premX.map(function(b){return '<li class="'+(isP?'':'off')+'">'+b+'</li>'}).join("");
+    var act;
+    if(cur) act='<button class="btn sub" disabled style="width:100%">이용 중</button>';
+    else if(S.plan==="none") act='<button class="btn '+(isP?'gold':'pri')+'" style="width:100%" data-evt="pass_subscribe(tier='+k+')" onclick="sub(\''+k+'\')">'+(isP?'프리미엄':'기본')+' 패스 구독하기</button>';
+    else act='<button class="btn '+(isP?'gold':'sub')+'" style="width:100%" data-evt="pass_change(to='+k+')" onclick="chg(\''+k+'\')">'+(isP?'프리미엄으로 올리기':'기본으로 바꾸기')+'</button>';
+    return '<div class="pcard '+k+(cur?' cur':'')+'">'+(cur?'<span class="cur-t">이용 중</span>':'')+'<h3>'+(isP?'프리미엄 패스':'기본 패스')+'</h3><div class="price">'+PRICE[k]+'원<small> / 월 · 가정</small></div><ul>'+li+'</ul><div class="act">'+act+'</div></div>'}
+  return head("패스 구독 관리")+st+'<div class="plan">'+pc("basic")+pc("prem")+'</div>'+
+  (S.plan!=="prem"&&S.plan!=="basic"?'':'')+
+  (S.plan!=="none"?head("결제 정보")+'<table class="kv"><tr><th>결제 수단</th><td>카드 정기결제 (리디 웹)<div class="tiny">리디캐시·포인트로는 패스를 결제할 수 없어요</div></td></tr><tr><th>결제 경로</th><td>웹 · 앱 결제는 앱 마켓 정책을 따라요</td></tr><tr><th>구독 시작</th><td>2027. 3. 7</td></tr></table>'+
+   (S.cancel?'':'<div style="margin-top:16px;text-align:right"><button class="btn warn" data-evt="pass_cancel_start" onclick="askCancel()">구독 해지</button></div>')+
+   head("최근 결제")+'<table class="hist"><thead><tr><th>일자</th><th>내용</th><th class="r">금액</th></tr></thead><tbody><tr><td>5. 7</td><td>'+NAME[S.plan]+' (3개월째)</td><td class="r">'+PRICE[S.plan]+'원</td></tr><tr><td>4. 21</td><td>힌트 돋보기 10개 (방탈출)</td><td class="r">2,000원</td></tr><tr><td>4. 7</td><td>'+NAME[S.plan]+' (2개월째)</td><td class="r">'+PRICE[S.plan]+'원</td></tr></tbody></table><p class="tiny">아이템 가격은 가정이에요.</p>':'')};
+
+V.streak=function(){
+  var m=S.plan==="none"?0:S.months;
+  var R=[[1,"수집 카드 1장"],[2,"주간 도전 2배 보상"],[3,"한정 프로필 테두리"],[6,"구독자 전용 굿즈 할인권"],[9,"작가 사인 디지털 카드"],[12,"1주년 한정 일러스트"]];
+  return head("연속 구독 보상")+'<div class="meter"><span class="big">'+m+'</span><span>개월째 이어서 구독 중</span></div>'+
+  '<p class="tiny" style="margin:-6px 0 16px">구독을 끊으면 개월 수가 처음부터 다시 쌓여요. 보상 내용은 가정이에요.'+(S.plan==="prem"?' 프리미엄은 같은 달에 보상이 한 단계 더 좋아요.':'')+'</p>'+
+  '<div class="streak">'+R.map(function(r){var got=m>r[0]||(m===r[0]&&S.claimed),now=m===r[0]&&!S.claimed;
+    return '<div class="st'+(got?' got':'')+(now?' now':'')+'"><div class="m">'+r[0]+'개월</div><b>'+r[1]+'</b>'+(got?'<span class="ok">받음</span>':now?'<button class="btn pri" data-evt="streak_reward_claim(month='+r[0]+')" onclick="claim()">받기</button>':'<span class="tiny">'+(r[0]-m)+'개월 남음</span>')+'</div>'}).join("")+'</div>'};
+
+V.cards=function(){
+  var C=[["chat","a1","카시안","인장 반지"],["chat","a1","카시안","서신을 건네며"],["chat","a1","카시안","공범의 밤"],["shoot","a2","공이삼","등굣길 게이트"],["shoot","a2","공이삼","손가락총"],["shoot","a2","공이삼","원래 이런 표정"],["escape","a3","녹스","작은 검은 용"],["escape","a3","녹스","계약의 빛"]];
+  var got=[1,1,0,1,1,1,1,0];
+  var tabs=[["all","전체"],["chat","AI 챗"],["shoot","슈팅"],["escape","방탈출"]];
+  return head("수집 카드")+'<p class="tiny" style="margin:-4px 0 14px">패스 구독 중 주간 도전을 깨면 받아요. 팝업 결과 카드도 여기 모여요.</p><div class="ftabs" role="group" aria-label="게임 필터">'+
+  tabs.map(function(t){return '<button aria-pressed="'+(S.filter===t[0])+'" onclick="filt(\''+t[0]+'\')">'+t[1]+'</button>'}).join("")+'</div><div class="cards">'+
+  C.map(function(c,i){if(S.filter!=="all"&&S.filter!==c[0])return"";
+    return got[i]?'<div class="cc '+c[1]+'" data-evt="card_view"><span class="frm"></span><small>'+c[2]+'</small>'+c[3]+'</div>':'<div class="cc lock">아직 못 받은 카드<br><small>주간 도전 보상</small></div>'}).join("")+'</div>'};
+
+V.deco=function(){
+  return head("꾸미기 보관함")+'<p class="tiny" style="margin:-4px 0 12px">프리미엄 패스를 구독하면 매달 한정 프로필 아이콘과 배너가 들어와요. 고른 꾸미기는 내 프로필, 팝업 랭킹 보드, 투표 결과 페이지에 보여요.</p>'+
+  '<div class="ftabs" role="tablist" aria-label="꾸미기 종류"><button aria-pressed="'+(S.dtab==="icon")+'" onclick="S.dtab=\'icon\';render()">프로필 아이콘</button><button aria-pressed="'+(S.dtab==="banner")+'" onclick="S.dtab=\'banner\';render()">배너</button></div>'+
+  profHTML(S.icon,S.banner,true)+
+  '<div class="preview" aria-label="랭킹 보드 미리보기" style="margin-top:14px"><span class="rk">7</span><span class="pf" style="background:'+art(S.icon).bg+'">'+art(S.icon).g+'</span><div><b>서연</b><div style="font-size:12px;opacity:.7">슈팅 랭킹 · 12,480점</div></div><span style="margin-left:auto;font-size:11px;opacity:.6">랭킹 보드에서는 이렇게 보여요</span></div>'+
+  head(S.dtab==="icon"?"보유한 프로필 아이콘":"보유한 배너")+gridHTML(S.dtab,S.dtab==="icon"?S.icon:S.banner,"applyDeco")+
+  (S.plan!=="prem"?'<div style="margin-top:14px;text-align:center"><button class="btn gold" data-evt="pass_offer_view(from=deco)" onclick="location.hash=\'pass\'">프리미엄 패스로 한정 꾸미기 열기</button></div>':'')};
+
+/* 프로필 꾸미기 데이터 (호요랩 개인센터 방식) */
+var DECO={
+ icon:[["i0","리디 기본","base","free","","linear-gradient(135deg,#7aa7ff,#1f8ce6)","R"],["ip","팝업 기념","base","event","3월","linear-gradient(135deg,#ffd1e6,#8a2d62)","팝"],
+  ["ic3","카시안","chat","prem","6월","radial-gradient(circle at 40% 30%,#f9e3a3,#1e4a37)","카"],["is3","공이삼","shoot","prem","6월","radial-gradient(circle at 40% 30%,#ffb070,#6b1fa8)","공"],
+  ["ie3","녹스","escape","prem","6월","radial-gradient(circle at 40% 30%,#fff0b0,#2a2f9e)","녹"],["ic2","카시안 · 서신","chat","prem","5월","linear-gradient(160deg,#e7c873,#2f6b4f)","서"],
+  ["ie1","녹스 · 계약","escape","prem","4월","linear-gradient(160deg,#ffd86b,#2b33a6)","약"]],
+ banner:[["b0","리디 블루","base","free","","linear-gradient(120deg,#1f8ce6,#0a3faa)"],["b1","밤의 서재","base","free","","linear-gradient(120deg,#1c2350,#0d1230 60%,#3a2a6b)"],
+  ["bc3","공범의 밤","chat","prem","6월","radial-gradient(ellipse at 70% 40%,#f9e3a3 0,#c39234 25%,#1e4a37 65%,#0b1a14)"],["bs3","게이트 폭주","shoot","prem","6월","radial-gradient(ellipse at 30% 50%,#ffd0a0 0,#ff7a3d 20%,#9a2fd0 55%,#1b0c3d)"],
+  ["be3","환수 계약진","escape","prem","6월","radial-gradient(ellipse at 60% 40%,#fff0b0 0,#6b6ff0 30%,#1d2180 65%,#080b2a)"],["bc2","백작가 정원","chat","prem","5월","linear-gradient(120deg,#2f6b4f,#e7c873)"]]};
+function find(id){var all=DECO.icon.concat(DECO.banner);for(var i=0;i<all.length;i++)if(all[i][0]===id)return all[i]}
+function art(id){var d=find(id);return {bg:d[5],g:d[6]||"",nm:d[1]}}
+function usable(d){return d[3]!=="prem"||S.plan==="prem"}
+function profHTML(icon,banner,compact){
+  var b=find(banner),ic=find(icon);
+  return '<section class="prof'+(compact?' compact':'')+'" aria-label="내 게임 프로필"><div class="pbanner" style="background:'+b[5]+'"><span class="pnote">배너: '+b[1]+'</span></div>'+
+  '<div class="prow"><span class="pav" style="background:'+ic[5]+'">'+ic[6]+'</span><div class="pname"><b>서연</b><span>리디 독자 · '+NAME[S.plan]+'</span></div>'+
+  (compact?'':'<div class="pedit"><button class="btn sub" data-evt="profile_edit_open" aria-haspopup="menu" aria-expanded="false" onclick="toggleEdit(this)">편집 ▾</button><div class="pmenu" role="menu" hidden><button role="menuitem" data-evt="profile_icon_edit" onclick="openDeco(\'icon\')">프로필 아이콘 변경</button><button role="menuitem" data-evt="profile_banner_edit" onclick="openDeco(\'banner\')">배너 변경</button></div></div>')+'</div>'+
+  (compact?'':'<div class="pstats"><span><b>3</b>하는 게임</span><span><b>7</b>수집 카드</span><span><b>'+(S.plan==="none"?0:S.months)+'</b>연속 구독</span><span><b>4/4</b>팝업 스탬프</span></div>')+'</section>'}
+function gridHTML(kind,sel,fn,filter){
+  filter=filter||"all";
+  return '<div class="dgrid '+kind+'">'+DECO[kind].filter(function(d){return filter==="all"||d[2]===filter}).map(function(d){var ok=usable(d),on=d[0]===sel;
+    return '<button class="dg'+(on?' on':'')+(ok?'':' lk')+'" '+(ok?'':'aria-disabled="true"')+' data-evt="deco_select(type='+kind+')" onclick="'+(ok?fn+'(\''+kind+'\',\''+d[0]+'\')':"toast('프리미엄 패스 구독 중에 적용할 수 있어요')")+'">'+
+    '<span class="dart" style="background:'+d[5]+'">'+(kind==="icon"?d[6]:"")+'</span><span class="dnm">'+d[1]+'</span>'+
+    '<span class="dtag '+d[3]+'">'+(d[3]==="prem"?d[4]+" 한정":d[3]==="event"?"팝업 기념":"기본")+'</span>'+(on?'<span class="dcheck">적용 중</span>':'')+'</button>'}).join("")+'</div>'}
+V.play=function(){
+  return head("이어 하기")+'<div class="cont">'+GAMES.map(gameCard).join("")+'</div>'+head("외전 루트")+
+  '<div class="cont">'+GAMES.map(function(g){var ok=S.plan==="prem";
+    return '<div class="box" style="display:flex;flex-direction:column;gap:8px"><b style="font-size:14px">'+g.side+'</b><span class="tiny">'+g.t+'</span>'+
+    '<button class="btn '+(ok?'pri':'sub')+'" data-evt="'+(ok?'side_route_open':'side_route_offer')+'" onclick="'+(ok?"toast('외전 루트를 열어요 (데모)')":"location.hash='pass'")+'">'+(ok?'외전 열기':S.plan==="basic"?'첫 화 무료 · 이후 프리미엄':'첫 화 무료로 보기')+'</button></div>'}).join("")+'</div><p class="tiny">외전 루트는 조건부 출시예요. 첫 화는 누구나 무료이고, 전부 열려면 프리미엄 패스가 필요해요.</p>'};
+
+V.popup=function(){
+  return head("팝업 기록")+'<div class="pop"><div class="pbox"><h3>스탬프판</h3><div class="stp"><i>챗</i><i>슈팅</i><i>탈출</i><i>투표</i></div><p class="tiny" style="margin:12px 0 0">4개 완주 · 특전 스티커 받음 (3. 7 15:12)</p></div>'+
+  '<div class="pbox"><h3>내 투표</h3><div class="vote"><div class="vb"></div><div><b>모란연회: 모란꽃에 감춰진 진실</b><p>결과 발표됨 (3. 19, 리디 앱)</p></div></div><button class="btn sub" style="width:100%;margin-top:12px" data-evt="vote_result_view" onclick="toast(\'투표 결과 페이지로 이동 (데모 범위 밖)\')">투표 결과 보기</button></div></div>'+
+  head("방문 예약")+'<table class="kv"><tr><th>예약 번호</th><td>RP-307-1263</td></tr><tr><th>일시</th><td>2027. 3. 7(일) 14:30 · 사전예약</td></tr><tr><th>상태</th><td style="color:var(--ok);font-weight:700">입장 완료</td></tr></table>'+
+  '<div style="margin-top:12px;text-align:right"><a class="btn sub" style="display:inline-flex;align-items:center" href="reserve.html">팝업 사전예약 페이지 보기 →</a></div>'+
+  head("체험 결과 카드")+'<div class="cards"><div class="cc a1"><span class="frm"></span><small>AI 챗 결과</small>카시안의 답장</div><div class="cc a2"><span class="frm"></span><small>슈팅 결과</small>12,480점 · 7위</div><div class="cc a3"><span class="frm"></span><small>방탈출 결과</small>48초 탈출</div></div>'};
+
+/* 상태 바꾸기 */
+window.sub=function(k){S.plan=k;S.cancel=false;S.months=1;S.claimed=false;toast(NAME[k]+" 구독을 시작했어요 (데모 · 결제 안 됨)");sync();render()};
+window.chg=function(k){var up=k==="prem";openModal('<h3>'+(up?'프리미엄으로 올릴까요?':'기본 패스로 바꿀까요?')+'</h3><p>'+(up?'지금 바로 바뀌고, 남은 기간만큼 차액 2,500원(가정)이 결제돼요. 외전 루트와 이번 달 한정 꾸미기가 열려요.':'다음 결제일(6. 7)부터 기본 패스로 바뀌어요. 그때까지는 프리미엄 혜택을 그대로 써요.')+'</p><div class="mrow"><button class="btn sub" onclick="closeModal()">취소</button><button class="btn '+(up?'gold':'pri')+'" data-evt="pass_change_confirm(to='+k+')" onclick="doChg(\''+k+'\')">'+(up?'올리기':'바꾸기')+'</button></div>')};
+window.doChg=function(k){closeModal();if(k==="prem"){S.plan="prem";toast("프리미엄 패스로 올렸어요")}else{S.plan="basic";fallback();toast("기본 패스로 바꿨어요 (데모는 바로 반영)")}sync();render()};
+/* 해지 = 안내만 (54차: 해지 방해 금지 · 다크패턴 규제) — 잃는 것 강조·붙잡는 버튼 없이 같은 무게의 두 버튼 */
+window.askCancel=function(){
+  openModal('<h3>구독을 해지할까요?</h3><p>다음 결제일(6. 7)부터 자동 결제가 멈춰요. 그때까지는 지금 혜택을 그대로 쓸 수 있어요.</p><ul class="lose"><li>6. 7 이후<span>세 게임 2화 이후 회차와 패스 혜택이 잠겨요</span></li><li>연속 구독<span>다시 구독하면 1개월부터 쌓여요</span></li></ul><div class="mrow"><button class="btn sub" onclick="closeModal()">닫기</button><button class="btn sub" data-evt="pass_cancel" onclick="doCancel()">해지 예약</button></div>')};
+window.doCancel=function(){closeModal();S.cancel=true;toast("해지 예약됐어요. 6. 7까지 이용할 수 있어요");render()};
+window.resub=function(){S.cancel=false;toast("해지 예약을 취소했어요. 연속 구독도 그대로 이어져요");render()};
+window.claim=function(){S.claimed=true;toast("보상을 받았어요. 수집 카드·꾸미기 보관함에서 볼 수 있어요");render()};
+window.filt=function(f){S.filter=f;render()};
+window.applyDeco=function(kind,id){if(kind==="icon")S.icon=id;else S.banner=id;toast((kind==="icon"?"프로필 아이콘":"배너")+"을 바꿨어요");render()};
+window.toggleEdit=function(btn){var m=btn.nextElementSibling,open=m.hidden;m.hidden=!open;btn.setAttribute("aria-expanded",open);if(open){setTimeout(function(){document.addEventListener("click",function c(e){if(!btn.parentNode.contains(e.target)){m.hidden=true;btn.setAttribute("aria-expanded","false");document.removeEventListener("click",c)}})},0)}};
+var D={kind:"icon",icon:null,banner:null,f:"all"};
+window.openDeco=function(kind){D.kind=kind;D.icon=S.icon;D.banner=S.banner;D.f="all";drawDeco()};
+function drawDeco(){var F=[["all","전체"],["chat","공범"],["shoot","게이트"],["escape","환수"],["base","기본·기념"]];
+  openModal('<div class="dmodal"><div class="dm-h"><h3>'+(D.kind==="icon"?"프로필 아이콘 변경":"배너 변경")+'</h3><button class="x" aria-label="닫기" onclick="closeModal()">✕</button></div>'+
+  profHTML(D.icon,D.banner,true)+
+  '<div class="ftabs" role="group" aria-label="작품 필터" style="margin-top:14px">'+F.map(function(f){return '<button aria-pressed="'+(D.f===f[0])+'" onclick="D_f(\''+f[0]+'\')">'+f[1]+'</button>'}).join("")+'</div>'+
+  '<div class="dm-list">'+gridHTML(D.kind,D.kind==="icon"?D.icon:D.banner,"D_pick",D.f)+'</div>'+
+  (S.plan!=="prem"?'<p class="tiny" style="margin:10px 0 0">자물쇠가 걸린 항목은 프리미엄 패스 구독 중에 적용할 수 있어요.</p>':'')+
+  '<div class="mrow" style="margin-top:14px"><button class="btn sub" onclick="closeModal()">취소</button><button class="btn pri" data-evt="deco_apply(type='+D.kind+')" onclick="D_save()">저장</button></div></div>')}
+window.D_f=function(f){D.f=f;drawDeco()};
+window.D_pick=function(kind,id){D[kind]=id;drawDeco()};
+window.D_save=function(){var k=D.kind;S.icon=D.icon;S.banner=D.banner;closeModal();toast((k==="icon"?"프로필 아이콘":"배너")+"을 바꿨어요");render()};
+
+/* 라우팅 */
+function key(){var h=location.hash.replace("#","");return V[h]?h:"game"}
+function render(){var k=key();$("#view").innerHTML=V[k]();
+  document.querySelectorAll("#sideGame a, #mtabs a").forEach(function(a){a.classList.toggle("on",a.dataset.k===k)});
+  var on=document.querySelector("#mtabs a.on");if(on&&on.scrollIntoView&&window.innerWidth<=860)on.scrollIntoView({inline:"center",block:"nearest"});
+  document.title=MENU.filter(function(m){return m[0]===k})[0][1]+" - 마이리디 (교육용 데모)"}
+window.addEventListener("hashchange",function(){render();window.scrollTo(0,0)});
+
+/* 모달·토스트 */
+var last;
+window.openModal=function(h){last=document.activeElement;$("#modal").innerHTML=h;$("#dim").classList.add("open");var b=$("#modal button");if(b)b.focus()};
+window.closeModal=function(){$("#dim").classList.remove("open");if(last&&document.body.contains(last))last.focus()};
+$("#dim").addEventListener("click",function(e){if(e.target.id==="dim")closeModal()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal()});
+var tt;window.toast=function(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},2400)};
+
+/* 팀용 패널 */
+function sync(){document.querySelectorAll("[data-plan]").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.plan===S.plan)})}
+document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=function(){S.plan=b.dataset.plan;S.cancel=false;fallback();sync();render()}});
+function fallback(){if(S.plan!=="prem"){if(find(S.icon)[3]==="prem")S.icon="ip";if(find(S.banner)[3]==="prem")S.banner="b1"}}
+var eb=$("#evtBtn");eb.onclick=function(){var on=document.body.classList.toggle("show-evt");eb.setAttribute("aria-pressed",on);eb.textContent=on?"측정 이벤트 숨기기":"측정 이벤트 보기"};
+$("#devMin").onclick=function(){var d=$("#dev");d.classList.toggle("min");this.textContent=d.classList.contains("min")?"펼치기":"접기"};
+sync();render();
+if(window.innerWidth<=860){$("#dev").classList.add("min");$("#devMin").textContent="펼치기"}
+})();
+</script>
+</body>
+</html>

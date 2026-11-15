@@ -31,7 +31,7 @@
       shoot: { id: 'shoot', origin: 'o2', type: '슈팅', title: '지각 사유 : 게이트 폭주', title2: ['지각 사유 :', '게이트 폭주'],
         tags: ['슈팅', '헌터물', '액션'], cover: 'cover_shoot_v.jpg', play: 'play_shoot.jpg', thumb: 'thumb_shoot.jpg',
         desc: ['60초 동안 몰려오는 몬스터를 처치하고 대사 컷을 확인하세요.', '콤보를 이어 가고 능력을 강화해 그날의 랭킹에 도전합니다.'],
-        stages: ['1 stage', '2 stage', '3 stage', '4 stage'], who: '주인공', line: ['"지각 사유요? 게이트가 터졌거든요.', '다음엔… 더 큰 놈이 옵니다."'],
+        stages: ['1 stage', '2 stage', '3 stage', '4 stage'], who: '공이삼', line: ['"지각 사유요? 게이트가 터졌거든요.', '다음엔… 더 큰 놈이 옵니다."'],
         real: 'https://late-gate.vercel.app', kw: ['#슈팅', '#헌터물', '#액션', '#웹소설', '#RIDI_ONLY'], note: '설명·회차 이름은 목업에 없어 데모용 예시' },
       escape: { id: 'escape', origin: 'o3', type: '방탈출', title: '저를 가두셨죠? 덕분에 전설의 환수를 얻었습니다', title2: ['저를 가두셨죠?', '덕분에 전설의 환수를 얻었습니다'],
         tags: ['방탈출', '판타지', '학원물'], cover: 'cover_escape_v.jpg', play: 'play_escape.jpg', thumb: 'thumb_escape.jpg',
@@ -64,7 +64,7 @@
 
   // ---- 머리 · 꼬리 (목업 그대로 · 리디 실제 링크 없음)
   var HEAD = '<div class="demo-bar"><b>교육용 데모</b> · AI그로스마케팅 캡스톤 · 실제 리디 서비스가 아니며 로그인·결제가 되지 않습니다</div>' +
-    '<header class="hd"><div class="wrap"><div class="r1"><a class="logo" href="index.html">RIDI GAME</a><div class="sr"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div><a class="lg" href="#" data-inert>로그인 / 회원가입</a></div></div>' +
+    '<header class="hd"><div class="wrap"><div class="r1"><a class="logo" href="index.html">RIDI GAME</a><div class="sr"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div><span class="lg"><a href="reserve.html">팝업 사전예약</a> · <a href="mypage.html">마이페이지</a> · <a href="#" data-inert>로그인 / 회원가입</a></span></div></div>' +
     '<div class="r2"><nav class="nav"><a href="#" data-inert>만화</a><a href="#" data-inert>웹툰</a><a href="#" data-inert>웹소설</a><a href="#" data-inert>도서</a><a href="#" data-inert>리디샵</a><a href="#" data-inert>셀렉트</a><a class="on" href="index.html">게임</a></nav>' +
     '<div class="rt"><span>☰ 전체 카테고리</span><span>ⓒ 캐시충전</span></div></div></div></header>';
   var FOOT = '<footer class="ft"><div class="wrap"><div class="cols"><div><p>🎧 고객센터</p><p>📢 공지사항</p></div><div><b>서비스</b><p>제휴카드</p><p>뷰어 다운로드</p><p>CP사이트</p><p>리디바탕</p></div><div><b>기타 문의</b><p>원고 투고</p><p>사업 제휴 문의</p></div><div><b>회사</b><p>회사 소개</p><p>인재채용</p></div>' +
@@ -100,7 +100,16 @@
   document.addEventListener('DOMContentLoaded', function () {
     var h = document.getElementById('hd'); if (h) h.outerHTML = HEAD;
     var f = document.getElementById('ft'); if (f) f.outerHTML = FOOT;
-    document.body.insertAdjacentHTML('beforeend', SHEET);
+    if (!document.body.hasAttribute('data-nosheet')) document.body.insertAdjacentHTML('beforeend', SHEET);
+    // 사전예약·마이페이지 시안: 버튼의 data-evt="이름(k=v)"를 그대로 GA4 이벤트로 보냄 (reserve_complete → reserve, 대응표 A)
+    var page = document.body.getAttribute('data-page');
+    if (page) document.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-evt]'); if (!t || t.disabled) return;
+      var m = t.getAttribute('data-evt').match(/^([a-z_]+)(?:\((.*)\))?$/); if (!m) return;
+      var name = m[1] === 'reserve_complete' ? 'reserve' : m[1], p = { page: page };
+      (m[2] || '').split(',').forEach(function (kv) { kv = kv.trim(); if (!kv) return; var i = kv.indexOf('='); if (i > 0) p[kv.slice(0, i)] = kv.slice(i + 1); else p.detail = kv; });
+      RD.ev(name, p);
+    }, true);
     if (DEBUG) { try { JSON.parse(sessionStorage.getItem('ridi_demo_log') || '[]').forEach(function (r) { var el = document.getElementById('evlog'); if (!el) { el = document.createElement('div'); el.id = 'evlog'; el.className = 'on'; el.innerHTML = '<b>GA4 이벤트 기록 (debug)</b>'; document.body.appendChild(el); } var d = document.createElement('div'); d.style.opacity = '.55'; d.innerHTML = '▸ <b>' + r[0] + '</b> ' + r[1]; el.appendChild(d); }); } catch (e) {} }
     document.body.addEventListener('click', function (e) {
       var t = e.target.closest('[data-inert]'); if (t) { e.preventDefault(); toast('데모에서는 게임 메뉴만 열려 있어요'); return; }
