@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=1240">
+<title>원작 이어 읽기 · 리디 게임 (교육용 데모)</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="assets/css/site.css"><script src="assets/js/demo.js"></script></head>
+<body>
+<div id="hd"></div>
+<!-- ⑤ 원작 이어 읽기: 실제로는 리디 원작 작품 페이지로 이동. 원작 구매(origin_purchase)는 리디 쪽 데이터라 데모에서 보내지 않음 -->
+<main class="wrap orig" id="og"></main>
+<div id="ft"></div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var id = new URLSearchParams(location.search).get('g') || 'escape';
+  var g = RD.GAMES[id] || RD.GAMES.escape;
+  document.getElementById('og').innerHTML = '<img src="assets/img/' + g.cover + '" alt="">' +
+    '<h1>「' + g.title + '」 원작 웹소설</h1>' +
+    '<p>실제 서비스라면 여기서 리디 원작 작품 페이지로 이동합니다.<br>원작은 게임패스에 포함되지 않고 지금처럼 따로 소장해요.</p>' +
+    '<div class="btns"><a class="btn-b" href="detail.html?g=' + g.id + '">게임으로 돌아가기</a><a class="btn-b" style="background:#fff;color:#141414;border:1.5px solid #ddd" href="index.html">게임 메인</a></div>';
+});
+</script>
+</body></html>

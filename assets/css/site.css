@@ -1,0 +1,151 @@
+/* 리디 게임 데모(교육용) — 민지 목업(메인 main-1~4 · 상세 detail-1~4)을 1600px 화면 기준으로 옮김 */
+@font-face{font-family:"PretendardL";src:url(../fonts/Pretendard-Regular.subset.woff2) format("woff2");font-weight:400}
+@font-face{font-family:"PretendardL";src:url(../fonts/Pretendard-Medium.subset.woff2) format("woff2");font-weight:500}
+@font-face{font-family:"PretendardL";src:url(../fonts/Pretendard-SemiBold.subset.woff2) format("woff2");font-weight:600}
+@font-face{font-family:"PretendardL";src:url(../fonts/Pretendard-Bold.subset.woff2) format("woff2");font-weight:700 900}
+:root{--b:#1E9EFF;--ink:#141414;--ink2:#555;--ink3:#999;--line:#e5e5e5;--g1:#F2F2F2;--g2:#F7F7F7;--w:1190px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans KR","Noto Sans CJK KR","PretendardL",sans-serif;color:var(--ink);background:#fff;word-break:keep-all;-webkit-font-smoothing:antialiased;min-width:1240px}
+a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
+.wrap{width:var(--w);margin:0 auto}
+/* 교육용 띠 (목업에 없음 · 데모 표기용) */
+.demo-bar{background:#141414;color:#cfd3d8;font-size:12px;text-align:center;padding:6px 0;letter-spacing:.2px}
+.demo-bar b{color:#fff}
+/* 머리 */
+.hd{border-bottom:1px solid var(--line);background:#fff}
+.hd .r1{height:62px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:27px;font-weight:900;color:var(--b);letter-spacing:.5px}
+.hd .sr{display:flex;align-items:center;gap:40px}
+.search{width:280px;height:40px;border-radius:8px;background:#f4f4f4;display:flex;align-items:center;padding:0 14px;color:#aaa;font-size:14px}
+.search svg{width:16px;height:16px;margin-right:8px}
+.hd .lg{font-size:13px;color:#666}
+.hd .r2{height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav{display:flex;gap:28px;font-size:15px;font-weight:700}
+.nav a.on{color:var(--b)}
+.hd .rt{display:flex;gap:22px;font-size:13px;font-weight:500;color:#333}
+.hd .rt span{display:flex;align-items:center;gap:6px}
+/* 메인 · 히어로 (민지 목업 이미지 그대로 · 탭과 버튼은 그 위 투명 링크) */
+.hero{position:relative;height:633px;background:#1a255d url(../img/hero_chat.jpg) center top/1600px 633px no-repeat;overflow:hidden}
+.hero a{position:absolute;display:block}
+.hero .hs-play{left:calc(50% + 172px);top:385px;width:374px;height:59px;border-radius:8px}
+.hero .hs-t{top:524px;height:109px;width:460px}
+.hero .t1{left:calc(50% - 663px)}.hero .t2{left:calc(50% - 202px)}.hero .t3{left:calc(50% + 258px)}
+.hero a:hover{background:rgba(255,255,255,.06)}
+/* 내가 읽은 작품의 게임 */
+.sec1{background:var(--g1);padding:92px 0 128px}
+.h2{font-size:28px;font-weight:700;margin-bottom:28px;display:flex;align-items:center;gap:6px}
+.read{background:#fff;padding:16px;display:flex;gap:35px;height:423px}
+.read img{width:294px;height:391px;object-fit:cover}
+.read .tx{padding-top:30px;display:flex;flex-direction:column}
+.read h3{font-size:40px;font-weight:700;line-height:1.45}
+.chips{display:flex;gap:10px;margin-top:14px}
+.chips span{font-size:15px;background:#f2f2f2;border-radius:4px;padding:5px 13px;color:#333}
+.btn-b{display:inline-flex;align-items:center;justify-content:center;background:var(--b);color:#fff;border:0;border-radius:8px;font-size:15px;font-weight:700;height:56px;padding:0 24px;box-shadow:0 2px 0 rgba(0,0,0,.08)}
+.read .btn-b{margin-top:auto;margin-bottom:36px;align-self:flex-start;height:56px;width:113px;font-size:14px}
+/* 패스 띠 */
+.pass{background:#1F9EFF;height:680px;position:relative;text-align:center;color:#fff;cursor:pointer;overflow:hidden}
+.pass .k{padding-top:44px;font-size:23px;font-weight:500}
+.pass .h{font-size:50px;font-weight:700;margin-top:10px;letter-spacing:-.5px}
+.pass .pill{display:inline-block;margin-top:20px;background:#fff;color:var(--b);border-radius:8px;font-size:22px;font-weight:700;padding:8px 18px;border:0}
+.pass .art{position:absolute;left:calc(50% - 530px);bottom:0;width:860px;height:393px;background:url(../img/pass_band_art.png) left bottom/860px 393px no-repeat}
+.pass .note{position:absolute;right:25px;bottom:18px;font-size:15px;opacity:.95}
+/* 리디 게임 */
+.sec3{background:var(--g2);padding:96px 0 200px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+.cards a{background:#fff;border-radius:12px;height:415px;padding:9px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.cards img{width:100%;height:258px;object-fit:cover}
+.cards a:hover{box-shadow:0 6px 20px rgba(0,0,0,.08)}
+/* 꼬리 */
+.ft{padding:72px 0 120px;border-top:1px solid #eee;background:#fff;font-size:12px;color:#777}
+.ft .cols{display:flex;gap:110px}
+.ft .cols b{display:block;font-size:12px;font-weight:500;color:#333;margin-bottom:12px}
+.ft .cols p{margin-bottom:9px}
+.ft .sns{margin-left:auto;display:flex;gap:12px}
+.ft .sns i{width:44px;height:44px;border:1px solid #e3e3e3;border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:13px;color:#555}
+.ft .biz{margin-top:56px}.ft .biz p{margin-bottom:10px}.ft .biz .lk{display:flex;gap:14px;color:#999;font-size:11px}
+/* 상세 */
+.dt-top{display:flex;gap:32px;padding:66px 0 0;margin-left:21px}
+.dt-top .cv{width:386px;height:578px;object-fit:cover;flex:none}
+.dt-top .in{flex:1;padding-top:1px}
+.tg{display:flex;gap:9px}.tg span{font-size:14px;background:#f2f2f2;border-radius:3px;padding:3px 12px;color:#333}
+.dt-top h1{font-size:44px;font-weight:700;line-height:1.38;margin-top:10px}
+.dt-top .ds{font-size:17px;color:#555;line-height:1.75;margin-top:14px}
+.dt-top .bt{display:flex;gap:16px;margin-top:22px}
+.dt-top .bt .btn-b{width:113px;height:58px;font-size:15px}
+.btn-w{width:113px;height:58px;border:1.5px solid #ddd;border-radius:8px;background:#fff;font-size:15px;color:#666}
+.info{margin-top:28px;border-top:1px solid #ddd}
+.info a{display:flex;align-items:center;height:54px;border-bottom:1px solid #ddd;font-size:16px;font-weight:600}
+.info em{font-style:normal;width:62px;height:30px;background:#E8F0FB;color:#667;font-size:13px;font-weight:500;display:flex;align-items:center;justify-content:center;margin-right:30px}
+.info .rr{margin-left:auto;margin-right:14px;color:#888;font-size:20px;font-weight:300}.info .cnt{margin-left:auto;margin-right:14px;color:var(--b);font-size:14px}
+.dt-sec{margin:0 21px}
+.dt-sec h2{font-size:34px;font-weight:700;margin:150px 0 30px}
+.stg a,.stg div{display:flex;align-items:center;height:51px;border-bottom:1px solid #ddd;font-size:17px;font-weight:500}
+.stg .bd{margin-left:auto;width:60px;height:32px;border:1.5px solid #ddd;border-radius:5px;font-size:13px;color:#666;display:flex;align-items:center;justify-content:center;background:#fff}
+.stg .bd.pay{background:var(--b);border-color:var(--b);color:#fff}
+.notice{margin:84px 21px 0;border:1px solid #e3e3e3;background:#F6F6F6;border-radius:12px;padding:34px 40px;font-size:24px;color:#666;line-height:1.75}
+.kw{display:flex;flex-wrap:wrap;gap:16px 18px;margin-top:0}
+.kw span{background:#e6e6e6;border-radius:4px;font-size:19px;font-weight:600;padding:6px 18px;color:#333}
+.rv{margin:0 21px}
+.rv .sc{display:flex;align-items:center;gap:24px;margin-top:30px}
+.rv .sc b{font-size:80px;font-weight:700;letter-spacing:-2px}.rv .sc p{font-size:17px;font-weight:600}.rv .sc .st{color:#E5484D;font-size:30px;letter-spacing:-2px}
+.rv .ex{font-size:12px;color:#999;margin-left:12px;font-weight:400}
+.rv .ask{text-align:center;color:#999;font-size:17px;margin-top:60px}.rv .big{text-align:center;font-size:66px;color:#ddd;letter-spacing:4px}
+.rv .box{border:1px solid #ddd;border-radius:6px;margin:30px 10px 0;padding:22px 20px;height:186px;position:relative;color:#aaa;font-size:16px}
+.rv .box .sp{position:absolute;left:20px;bottom:22px}.rv .box .reg{position:absolute;right:20px;bottom:16px;background:#ccc;color:#fff;border-radius:4px;padding:10px 22px;font-size:16px}
+.rv .tabs{display:grid;grid-template-columns:1fr 1fr;margin:60px 15px 0;border-top:2px solid #555}
+.rv .tabs span{height:72px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:600}.rv .tabs span+span{background:#f4f4f4;color:#888;font-weight:400}
+.rv .sort{display:flex;gap:14px;margin:22px 15px}.rv .sort span{border-radius:99px;background:#eee;color:#666;font-size:17px;padding:9px 16px}.rv .sort span:first-child{background:#141414;color:#fff;font-weight:700}
+.rv .one{margin:30px 26px 0;padding-bottom:40px;border-bottom:1px solid #ddd;position:relative;font-size:15px;color:#333}
+.rv .one .st{color:#E5484D;font-size:16px}.rv .one .meta{color:#999;margin-top:20px;font-size:14px}
+.rv .one .act{position:absolute;right:0;top:80px;display:flex;gap:10px}.rv .one .act span{border:1px solid #ddd;border-radius:6px;padding:8px 14px;color:#666;font-size:14px}
+.rv .more{margin:40px 15px 0;height:72px;border:1px solid #ccc;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:17px}
+/* 1화 끝 (데모 화면 · 목업 없음 → 패스 시안 ① 화면을 데스크톱으로) */
+.ep{background:#0b0f22;color:#fff;min-height:calc(100vh - 150px);position:relative;overflow:hidden}
+.ep .bg{position:absolute;inset:0;background:center 30%/cover no-repeat;opacity:.75}
+.ep .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,15,34,.85) 0%,rgba(11,15,34,.25) 45%,rgba(11,15,34,.8) 100%)}
+.ep .in{position:relative;width:var(--w);margin:0 auto;padding:80px 0 100px;display:grid;grid-template-columns:1fr 480px;gap:80px;align-items:center}
+.ep .pill{display:inline-block;background:var(--b);border-radius:99px;padding:5px 14px;font-size:14px;font-weight:700}
+.ep .gt{font-size:16px;color:#b7bfd6;margin-top:14px}
+.ep .bub{margin-top:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:24px 28px;backdrop-filter:blur(6px);max-width:560px}
+.ep .bub em{font-style:normal;color:#9ED3FF;font-size:15px;font-weight:700}.ep .bub p{font-size:28px;font-weight:700;line-height:1.5;margin-top:6px}
+.ep .real{margin-top:22px;font-size:14px;color:#b7bfd6}.ep .real a{color:#9ED3FF;text-decoration:underline}
+.ep .cta{background:#fff;color:var(--ink);border-radius:24px;padding:34px 32px}
+.ep .cta h3{font-size:28px;font-weight:800;line-height:1.4}.ep .cta h3 i{font-style:normal;color:var(--b)}
+.ep .cta .sub{font-size:16px;color:#555;margin-top:6px}
+.ep .g3{display:flex;gap:8px;margin-top:16px}.ep .g3 span{flex:1;background:#f3f5f7;border-radius:8px;padding:8px 4px;text-align:center;font-size:13px;font-weight:700}
+.ep .pr{display:flex;align-items:baseline;gap:10px;margin-top:18px}.ep .pr b{font-size:34px;font-weight:900;color:var(--b)}.ep .pr span{font-size:14px;color:#888;font-weight:600}
+.ep .b1{display:block;width:100%;height:56px;border:0;border-radius:12px;background:var(--b);color:#fff;font-size:18px;font-weight:800;margin-top:14px}
+.ep .b2{display:flex;align-items:center;justify-content:center;width:100%;height:48px;border:1.5px solid #e5e7eb;border-radius:12px;background:#fff;font-size:16px;font-weight:700;margin-top:10px}
+/* 원작 이동 (데모 자리) */
+.orig{padding:120px 0 160px;text-align:center}
+.orig img{width:240px;height:360px;object-fit:cover;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.orig h1{font-size:32px;margin-top:30px}.orig p{color:#666;margin-top:10px;font-size:16px;line-height:1.7}
+.orig .btns{display:flex;gap:12px;justify-content:center;margin-top:28px}
+/* 패스 결제 시트 (시안 ② 화면 그대로) */
+.sheet-bg{position:fixed;inset:0;background:rgba(11,15,34,.6);display:none;align-items:center;justify-content:center;z-index:50}
+.sheet-bg.on{display:flex}
+.sheet{width:440px;background:#fff;border-radius:24px;padding:24px 22px 20px;position:relative;font-family:"PretendardL","Noto Sans KR",sans-serif;max-height:94vh;overflow:auto}
+.sheet .x{position:absolute;right:16px;top:14px;border:0;background:none;font-size:26px;color:#999}
+.sheet .tag{display:inline-block;font-size:11px;font-weight:700;background:#141414;color:#fff;border-radius:6px;padding:3px 8px;margin-bottom:10px}
+.sheet h2{font-size:22px;font-weight:800}.sheet .h2s{font-size:13px;color:#8C939D;margin-top:2px}
+.pl{display:block;width:100%;text-align:left;border:1.5px solid #E5E7EB;border-radius:14px;padding:13px 15px;margin-top:12px;position:relative;background:#fff}
+.pl.on{border:2px solid var(--b);background:#E6F4FF}
+.pl .r{position:absolute;right:15px;top:15px;width:22px;height:22px;border-radius:50%;border:2px solid #C9CFD6}.pl.on .r{border:7px solid var(--b);background:#fff}
+.pl .t{font-size:14px;font-weight:800}.pl .p{font-size:22px;font-weight:900;margin-top:2px}.pl.on .p{color:var(--b)}
+.pl ul{list-style:none;margin-top:4px}.pl li{font-size:13px;color:#4B5563;line-height:1.55}.pl li::before{content:"✓ ";color:var(--b);font-weight:800}
+.gift{margin-top:12px;display:flex;gap:12px;align-items:center;background:#FFF6DA;border-radius:12px;padding:10px 14px}
+.gift b{font-size:22px;font-weight:900;white-space:nowrap}.gift span{font-size:12.5px;color:#4B5563;line-height:1.45}
+.pay{margin-top:12px}.pay .lb{font-size:13px;font-weight:800}
+.pm{display:flex;align-items:center;gap:8px;border:2px solid var(--b);border-radius:12px;padding:10px 14px;margin-top:6px;font-size:14px;font-weight:700}.pm i{font-style:normal;margin-left:auto;font-size:12px;color:var(--b);font-weight:800}
+.pay .nt{font-size:12px;color:#8C939D;margin-top:5px}
+.og{margin-top:12px;font-size:13px;font-weight:600;color:#4B5563;background:#F3F5F7;border-radius:10px;padding:9px 13px}
+.law{font-size:11.5px;color:#8C939D;line-height:1.5;margin-top:14px}
+.sheet .go{display:block;width:100%;height:54px;border:0;border-radius:12px;background:var(--b);color:#fff;font-size:17px;font-weight:800;margin-top:10px}
+.sheet .go.gray{background:#fff;color:#141414;border:1.5px solid #E5E7EB;height:46px;font-size:15px}
+.sheet .cf{display:none;text-align:center;padding:20px 4px 6px}.sheet .cf h3{font-size:20px;font-weight:800}.sheet .cf p{font-size:14px;color:#555;margin-top:8px;line-height:1.6}
+.sheet.st-confirm .main,.sheet.st-done .main{display:none}.sheet.st-confirm .cf1{display:block}.sheet.st-done .cf2{display:block}
+/* 이벤트 기록 보기(?debug=1) */
+#evlog{position:fixed;left:12px;bottom:12px;width:380px;max-height:300px;overflow:auto;background:rgba(20,20,20,.92);color:#cfe8ff;font:12px/1.5 ui-monospace,Menlo,monospace;border-radius:10px;padding:10px 12px;z-index:60;display:none}
+#evlog.on{display:block}#evlog b{color:#fff}
+.toast{position:fixed;left:50%;top:80px;transform:translateX(-50%);background:#141414;color:#fff;border-radius:10px;padding:10px 18px;font-size:14px;z-index:70;opacity:0;transition:.2s;pointer-events:none}.toast.on{opacity:1}

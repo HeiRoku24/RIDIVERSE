@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=1240">
+<title>리디 게임 (교육용 데모)</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="assets/css/site.css"><script src="assets/js/demo.js"></script></head>
+<body>
+<div id="hd"></div>
+<!-- 히어로: 민지 목업 이미지(main-1) 그대로 · 탭 3개와 "지금 플레이하기"는 그 위 투명 링크 -->
+<section class="hero" aria-label="추천 게임">
+  <a class="hs-play" href="ep1.html?g=chat" data-play="chat" aria-label="지금 플레이하기"></a>
+  <a class="hs-t t1" href="detail.html?g=chat" data-detail="chat" aria-label="AI채팅 저와 공범이 되어 주시겠습니까?"></a>
+  <a class="hs-t t2" href="detail.html?g=shoot" data-detail="shoot" aria-label="슈팅 지각 사유 게이트 폭주"></a>
+  <a class="hs-t t3" href="detail.html?g=escape" data-detail="escape" aria-label="방탈출 저를 가두셨죠?"></a>
+</section>
+<section class="sec1"><div class="wrap">
+  <h2 class="h2">내가 읽은 작품의 게임</h2>
+  <div class="read"><img src="assets/img/cover_escape_v.jpg" alt="">
+    <div class="tx"><h3>저를 가두셨죠?<br>덕분에 전설의 환수를 얻었습니다</h3><div class="chips"><span>방탈출</span><span>판타지</span><span>학원물</span></div>
+      <a class="btn-b" href="detail.html?g=escape" data-detail="escape">바로가기</a></div></div>
+</div></section>
+<section class="pass" id="passBand" role="button" aria-label="게임패스 안내">
+  <p class="k">게임패스 30일</p><p class="h">세 게임의 모든 회차가 열려요</p><button class="pill">9900원</button>
+  <div class="art"></div><p class="note">인 게임 내 아이템 별도 구매</p>
+</section>
+<section class="sec3"><div class="wrap">
+  <h2 class="h2">리디 게임 <span style="font-weight:300;font-size:32px">›</span></h2>
+  <div class="cards">
+    <a href="detail.html?g=chat" data-detail="chat"><img src="assets/img/thumb_chat.jpg" alt="저와 공범이 되어 주시겠습니까?"></a>
+    <a href="detail.html?g=shoot" data-detail="shoot"><img src="assets/img/thumb_shoot.jpg" alt="지각 사유 : 게이트 폭주"></a>
+    <a href="detail.html?g=escape" data-detail="escape"><img src="assets/img/thumb_escape.jpg" alt="저를 가두셨죠?"></a>
+  </div>
+</div></section>
+<div id="ft"></div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // ① 게임 메뉴 메인 진입 (출구 QR이면 utm_content=exit)
+  RD.ev('game_tab_view', { utm_source: RD.utm.utm_source || '(direct)', utm_content: RD.utm.utm_content || '(none)' });
+  document.querySelectorAll('[data-detail]').forEach(function (a) {
+    a.href = a.getAttribute('href') + '&from=game_home';  // 상세가 열릴 때 game_detail_view 한 번만(placement=game_home)
+  });
+  document.querySelectorAll('[data-play]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); RD.ev('play_start', { game_id: a.dataset.play, placement: 'game_home' }); var h = a.href; setTimeout(function () { location.href = h; }, 150); });
+  });
+  document.getElementById('passBand').addEventListener('click', function () { RD.openPass('all', 'game_home'); });
+});
+</script>
+</body></html>
