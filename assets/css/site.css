@@ -233,3 +233,9 @@ body{letter-spacing:0}
 .read img{object-position:center 47%}
 .cards img{object-fit:cover;object-position:center}
 .ep .bg{background-position:center 40%;opacity:.85}
+
+/* 66차: '내가 읽은 작품의 게임' — 세로 일러스트 원본 비율 그대로(잘림 없음) · 설명 한 줄 따옴표 + 리디바탕 */
+@font-face{font-family:"RIDIBatang";src:url(../fonts/RIDIBatang.subset.woff2) format("woff2");font-display:swap}
+.read{height:auto;align-items:flex-start}
+.read img{width:294px;height:auto;aspect-ratio:772/1372;object-fit:contain;object-position:center}
+.read .desc{font-family:"RIDIBatang","Pretendard",serif;font-size:20px;line-height:1.5;color:#333;letter-spacing:0}
