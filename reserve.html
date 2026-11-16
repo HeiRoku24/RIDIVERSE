@@ -454,6 +454,23 @@ footer.a2f b{display:block;color:#fff;font-size:13px;margin-bottom:4px}
 @media (max-width:860px){.band .in{grid-template-columns:1fr}.dateimg{justify-self:start;height:auto;width:min(100%,360px)}.gf-wm{font-size:130px}.gf-t{padding:22px 20px}}
 .a2-bar .xl{color:#e6f4ff;font-size:13px;font-weight:700;white-space:nowrap;margin-left:6px;padding:6px 8px;border-radius:99px}.a2-bar .xl:hover{background:rgba(255,255,255,.15)}
 @media (max-width:700px){.a2-bar .xl{display:none}}
+/* 66차: 탭 간격 · REWARD 포토카드 · 제목만 · 굿즈 이미지 · 투표 안내 */
+.a2-bar nav{gap:8px}
+.a2-bar nav a{padding:7px 14px;background:rgba(255,255,255,.14)}
+.a2-bar nav a.on{background:#fff;color:var(--blue)}
+.evs{align-items:stretch;margin-bottom:10px}
+.ev{display:flex;flex-direction:column;padding-bottom:0}
+.ev .card{flex:1;display:flex;flex-direction:column}
+.ev .bd{flex:1;padding-bottom:58px}
+.ev .rw{position:relative;right:auto;bottom:auto;align-self:flex-end;margin:-46px -8px 0 0;width:78%;max-width:none}
+.ev .rw-in{display:flex;align-items:center;gap:12px;padding:10px 12px 10px 10px}
+.ev .rw-in img{width:84px;aspect-ratio:480/628;object-fit:cover;border-radius:8px;background:#fff;flex:none}
+.ev .rw-in span{padding:0;text-align:left;font-size:15px;line-height:1.4}
+.goods-img{max-width:1920px;margin:84px auto 0;padding:0}
+.goods-img img{display:block;width:100%;height:auto}
+.vote-note{margin:26px 0 0;text-align:center;color:#fff;font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:18px;font-weight:700;line-height:1.35}
+@media (max-width:860px){.ev .rw-in img{width:72px}.goods-img{margin-top:64px}.a2-bar nav{gap:6px}.a2-bar nav a{padding:7px 10px}}
+@media (max-width:420px){.a2-bar nav{gap:4px}.a2-bar nav a{padding:6px 8px}.vote-note{font-size:16px}}
 </style>
 <script src="assets/js/demo.js"></script>
 <link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
@@ -468,7 +485,7 @@ footer.a2f b{display:block;color:#fff;font-size:13px;margin-bottom:4px}
 <section class="hero2" aria-label="리디 게임즈 팝업">
   <img class="art" src="assets/rimg/hero_a2.jpg" alt="카시안 · 공이삼 · 녹스 · 로아 일러스트">
   <div class="band"><div class="in">
-    <h1>이야기 속으로의 항해<small>리디 게임즈 팝업</small></h1>
+    <h1>이야기 속 세계가 열린다<small>리디 게임즈 팝업</small></h1>
     <img class="dateimg" src="assets/rimg/date_place.png" alt="3월 5일(금) – 3월 18일(목) · 성수 외곽 1층">
   </div></div>
   <div class="cta-zone">
@@ -480,14 +497,13 @@ footer.a2f b{display:block;color:#fff;font-size:13px;margin-bottom:4px}
 
 <section class="sec2" id="program">
   <h2>체험 프로그램</h2>
-  <p class="lead">체험존마다 키오스크로 1분 동안 플레이해요. 끝 화면 QR로 스탬프를 받아요.</p>
   <div class="evs">
     <div class="ev"><div class="card"><div class="tag">EVENT 1</div><div class="bd"><h3>AI 캐릭터 챗</h3><p class="ds">소설 속 주인공과<br>현실에서 이야기해 보세요</p><img class="cv" src="assets/rimg/cover_k.jpg" alt="「저와 공범이 되어 주시겠습니까?」 표지"><span class="gt">저와 공범이 되어 주시겠습니까? · 카시안 벨모어</span></div></div>
-      <div class="rw"><b>REWARD</b><span>카시안 포토카드</span></div></div>
+      <div class="rw"><b>REWARD</b><div class="rw-in"><img src="assets/rimg/pc_kassian.jpg" alt="카시안 포토카드 실물 목업" loading="lazy"><span>카시안 포토카드</span></div></div></div>
     <div class="ev"><div class="card"><div class="tag">EVENT 2</div><div class="bd"><h3>액션 슈팅</h3><p class="ds">직접 헌터가 되어<br>몬스터를 잡아 보세요</p><img class="cv" src="assets/rimg/cover_g.jpg" alt="「지각 사유: 게이트 폭주」 표지"><span class="gt">지각 사유: 게이트 폭주 · 공이삼</span></div></div>
-      <div class="rw"><b>REWARD</b><span>헌터 자격증 포카</span></div></div>
+      <div class="rw"><b>REWARD</b><div class="rw-in"><img src="assets/rimg/pc_gong.jpg" alt="공이삼 헌터 자격증 포카 실물 목업" loading="lazy"><span>헌터 자격증 포카</span></div></div></div>
     <div class="ev"><div class="card"><div class="tag">EVENT 3</div><div class="bd"><h3>방탈출</h3><p class="ds">녹스와 함께 로아를 도와<br>창고를 탈출하세요</p><img class="cv" src="assets/rimg/cover_n.jpg" alt="「저를 가두셨죠? 덕분에 전설의 환수를 얻었습니다」 표지"><span class="gt">저를 가두셨죠? 덕분에 전설의 환수를 얻었습니다 · 녹스</span></div></div>
-      <div class="rw"><b>REWARD</b><span>녹스 포카</span></div></div>
+      <div class="rw"><b>REWARD</b><div class="rw-in"><img src="assets/rimg/pc_nox.jpg" alt="녹스 포카 실물 목업" loading="lazy"><span>녹스 포카</span></div></div></div>
   </div>
   <div class="stampline"><b>스탬프 4개 = 특전 스티커</b><p>체험존 3곳과 투표존 스탬프를 모아 완료 화면을 굿즈존 직원에게 보여 주세요.</p></div>
 </section>
@@ -510,17 +526,12 @@ footer.a2f b{display:block;color:#fff;font-size:13px;margin-bottom:4px}
   </div>
 </section>
 
-<section class="sec2" id="goods">
-  <h2>판매 굿즈</h2>
-  <div class="wbox"><div class="gfeat"><img src="assets/rimg/gd_group.jpg" alt="방탈출 굿즈 단체 사진(목업)" loading="lazy"><div class="gf-t"><span class="gf-wm" aria-hidden="true">NOX</span><span class="gf-tag">EVENT 3 · 방탈출</span><b class="gf-h">녹스 굿즈<br>먼저 공개</b><p class="gf-w">「저를 가두셨죠? 덕분에 전설의 환수를 얻었습니다」</p><ul class="gf-chips"><li>대형 봉제 인형</li><li>인형 키링</li><li>SD 아크릴 키링</li><li>핀뱃지</li><li>렌티큘러 카드</li><li>단서 떡메모지</li></ul><p class="gf-price"><b>6종</b><span>3,500원부터</span></p><p class="gf-more"><span class="gav gav-k" aria-hidden="true"></span><span class="gav gav-g" aria-hidden="true"></span>카시안 · 공이삼 굿즈는 현장에서 공개해요</p></div></div>
-  <div class="goods"><div class="gd"><img src="assets/rimg/gd_plush.jpg" alt="대형 봉제 인형 목업 사진" loading="lazy"><b>대형 봉제 인형</b><span>녹스 · 21,000원~</span></div><div class="gd"><img src="assets/rimg/gd_plushkey.jpg" alt="인형 키링 목업 사진" loading="lazy"><b>인형 키링</b><span>녹스 · 19,000원~</span></div><div class="gd"><img src="assets/rimg/gd_sdkey.jpg" alt="SD 아크릴 키링 목업 사진" loading="lazy"><b>SD 아크릴 키링</b><span>녹스 · 12,500원</span></div><div class="gd"><img src="assets/rimg/gd_pin.jpg" alt="핀뱃지 목업 사진" loading="lazy"><b>핀뱃지</b><span>녹스 · 4,000원</span></div><div class="gd"><img src="assets/rimg/gd_lenti.jpg" alt="렌티큘러 카드 목업 사진" loading="lazy"><b>렌티큘러 카드</b><span>녹스 · 7,000원</span></div><div class="gd"><img src="assets/rimg/gd_memo.jpg" alt="단서 떡메모지 목업 사진" loading="lazy"><b>단서 떡메모지</b><span>녹스 · 3,500원*</span></div></div>
-  <div class="gsoon"><span class="gav gav-k" aria-hidden="true"></span><span class="gav gav-g" aria-hidden="true"></span><p><b>카시안 · 공이삼 굿즈는 현장에서 공개해요</b><br>세 작품 굿즈는 모두 굿즈존에서 만날 수 있어요.</p></div>
-  <p class="tiny-note">판매가는 진영 「팝업 굿즈 추천 v1」 기준(리디샵 같은 종류 상품 값), *는 팀 제안값이에요. 사진은 민지 굿즈 목업이에요.</p></div>
+<section class="goods-img" id="goods" aria-label="판매 굿즈">
+  <img src="assets/rimg/goods_section.jpg" alt="판매 굿즈: 녹스 굿즈 선공개(대형 봉제 인형 · 인형 키링 · SD 아크릴 키링 · 렌티큘러 카드 · 핀뱃지 · 단서 떡메모지) 가격표, 카시안 · 공이삼 굿즈는 현장 공개" loading="lazy">
 </section>
 
 <section class="sec2" id="book">
   <h2>사전예약</h2>
-  <p class="lead">30분마다 40명씩. 체험존은 전 기간 예약자만 들어와요. 평일 빈 시간은 현장에서 당일 예약할 수 있어요.</p>
   <div class="wbox"><div class="book">
     <div class="panel"><div class="mode" role="group" aria-label="예약 방식"><button id="modeAdv" aria-pressed="true" data-evt="reserve_mode(advance)">사전예약</button><button id="modeWalk" aria-pressed="false" data-evt="reserve_mode(walkin)">오늘 빈 시간 <small>현장 QR</small></button></div><h3><i>1</i>날짜</h3><div class="dates" id="dates" role="group" aria-label="날짜 선택"></div>
       <h3 style="margin-top:22px"><i>2</i>입장 시간</h3><div class="slots" id="slots" role="group" aria-label="입장 시간"></div>
@@ -540,12 +551,12 @@ footer.a2f b{display:block;color:#fff;font-size:13px;margin-bottom:4px}
 
 <section class="sec2" id="vote">
   <h2>다음 게임은?</h2>
-  <p class="lead">투표존에서 다음에 게임으로 만들 작품을 골라 주세요. 1계정 1표, 결과는 리디 앱에서만 공개해요.</p>
   <div class="vote">
     <div class="vc v1" role="img" aria-label="후보 1 「세상이 망해도 연애는 하는구나」 일러스트"><small>후보 1 · 아포칼립스</small><b>세상이 망해도 연애는 하는구나</b></div>
     <div class="vc v2" role="img" aria-label="후보 2 「모란연회: 모란꽃에 감춰진 진실」 일러스트"><small>후보 2 · 동양풍 궁중</small><b>모란연회: 모란꽃에 감춰진 진실</b></div>
     <div class="vc v3" role="img" aria-label="후보 3 「바른 사내 연애 생활」 일러스트"><small>후보 3 · 현대 오피스 BL</small><b>바른 사내 연애 생활</b></div>
   </div>
+  <p class="vote-note">투표존에서 다음에 게임으로 만들 작품을 골라 주세요. 1계정 1표, 결과는 리디 앱에서만 공개해요.</p>
 </section>
 
 <section class="sec2" id="faq">
