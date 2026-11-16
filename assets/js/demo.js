@@ -64,15 +64,15 @@
 
   // ---- 머리 · 꼬리 (목업 그대로 · 리디 실제 링크 없음)
   var HEAD = '<div class="demo-bar"><b>교육용 데모</b> · AI그로스마케팅 캡스톤 · 실제 리디 서비스가 아니며 로그인·결제가 되지 않습니다</div>' +
-    '<header class="hd"><div class="wrap"><div class="r1"><a class="logo" href="index.html">RIDI GAME</a><div class="sr"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div><span class="lg"><a href="reserve.html">팝업 사전예약</a> · <a href="mypage.html">마이페이지</a> · <a href="#" data-inert>로그인 / 회원가입</a></span></div></div>' +
+    '<header class="hd"><div class="wrap"><div class="r1"><a class="logo" href="index.html" aria-label="RIDI GAMES 게임 메인"><img src="assets/brand/ridigames_logo_h_blue.svg" alt="RIDI GAMES"></a><div class="sr"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div><span class="lg"><a href="reserve.html">팝업 사전예약</a> · <a href="mypage.html">마이페이지</a> · <a href="#" data-inert>로그인 / 회원가입</a></span></div></div>' +
     '<div class="r2"><nav class="nav"><a href="#" data-inert>만화</a><a href="#" data-inert>웹툰</a><a href="#" data-inert>웹소설</a><a href="#" data-inert>도서</a><a href="#" data-inert>리디샵</a><a href="#" data-inert>셀렉트</a><a class="on" href="index.html">게임</a></nav>' +
     '<div class="rt"><span>☰ 전체 카테고리</span><span>ⓒ 캐시충전</span></div></div></div></header>';
-  var FOOT = '<footer class="ft"><div class="wrap"><div class="cols"><div><p>🎧 고객센터</p><p>📢 공지사항</p></div><div><b>서비스</b><p>제휴카드</p><p>뷰어 다운로드</p><p>CP사이트</p><p>리디바탕</p></div><div><b>기타 문의</b><p>원고 투고</p><p>사업 제휴 문의</p></div><div><b>회사</b><p>회사 소개</p><p>인재채용</p></div>' +
-    '<div class="sns"><i>f</i><i>◎</i><i>𝕏</i><i>▶</i><i>♪</i></div></div><div class="biz"><p>리디(주) 사업자 정보 ⌄</p><div class="lk"><span>이용약관</span><span><b style="color:#555">개인정보 처리방침</b></span><span>청소년보호정책</span><span>사업자정보확인</span></div><p style="margin-top:12px">© RIDI Corp. · 이 페이지는 캡스톤 교육용 데모입니다</p></div></div></footer>';
+  var FOOT = '<footer class="ft"><div class="wrap"><a class="ft-logo" href="index.html"><img src="assets/brand/ridigames_logo_h_blue.svg" alt="RIDI GAMES"></a><div class="cols"><div><p>🎧 고객센터</p><p>📢 공지사항</p></div><div><b>서비스</b><p>제휴카드</p><p>뷰어 다운로드</p><p>CP사이트</p><p>리디바탕</p></div><div><b>기타 문의</b><p>원고 투고</p><p>사업 제휴 문의</p></div><div><b>회사</b><p>회사 소개</p><p>인재채용</p></div>' +
+    '<div class="sns"><i>f</i><i>◎</i><i>𝕏</i><i>▶</i><i>♪</i></div></div><div class="biz"><p>리디(주) 사업자 정보 ⌄</p><div class="lk"><span>이용약관</span><span><b style="color:#555">개인정보 처리방침</b></span><span>청소년보호정책</span><span>사업자정보확인</span></div><p style="margin-top:12px">© RIDI Corp. · 이 페이지는 캡스톤 교육용 데모입니다 · 팀 RIDIVERSE — 읽던 작품의 세계 속으로</p></div></div></footer>';
 
   // ---- 결제 시트 (패스 시안 ② 그대로)
   var SHEET = '<div class="sheet-bg" id="sheetBg"><div class="sheet" id="sheet"><button class="x" data-close>×</button>' +
-    '<div class="main"><span class="tag">예시 화면 · 교육용 · 가격 가정</span><h2>게임패스 구독</h2><p class="h2s">리디 계정 그대로 · 세 게임 공통</p>' +
+    '<div class="main"><div class="sh-top"><img src="assets/brand/ridigames_logo_h_blue.svg" alt="RIDI GAMES"><span class="tag">예시 화면 · 교육용 · 가격 가정</span></div><h2>게임패스 구독</h2><p class="h2s">리디 계정 그대로 · 세 게임 공통</p>' +
     '<button class="pl on" data-plan="basic" data-v="9900"><span class="r"></span><p class="t">기본 패스</p><p class="p">월 9,900원</p><ul><li>모든 게임 · 매월 새 2화</li><li>주간 도전 · 수집 카드 · 연속 구독 보상</li></ul></button>' +
     '<button class="pl" data-plan="premium" data-v="14900"><span class="r"></span><p class="t">프리미엄 패스</p><p class="p">월 14,900원</p><ul><li>기본 + 외전 루트 · 한정 꾸미기 · AI 대화 기억</li></ul></button>' +
     '<div class="gift"><b>4,900P</b><span>첫 구독 1회 지급 · 게임화 원작 구매에 사용<br>다음 결제일까지 사용 가능</span></div>' +
@@ -81,7 +81,7 @@
     '<p class="law">매달 같은 날 등록한 카드로 자동 결제됩니다. 마이페이지에서 언제든 해지할 수 있어요.</p>' +
     '<button class="go" data-buy>월 9,900원 구독하기</button></div>' +
     '<div class="cf cf1"><h3>교육용 데모예요</h3><p>실제 결제는 되지 않습니다.<br>발표 시연을 위해 "구독 완료"로만 기록할까요?</p><button class="go" data-ok>결제 완료로 기록 (데모)</button><button class="go gray" data-back>돌아가기</button></div>' +
-    '<div class="cf cf2"><h3>🎉 게임패스 구독 완료 (데모)</h3><p>세 게임의 모든 회차가 열렸어요.<br>첫 구독 4,900P는 게임화 원작에 쓸 수 있어요(데모라 실제 지급 없음).</p><button class="go" data-close>계속 플레이</button><a class="go gray" style="display:flex;align-items:center;justify-content:center" data-origin>원작 이어 읽기</a></div>' +
+    '<div class="cf cf2"><img src="assets/brand/ridigames_mark_blue.svg" alt="" style="width:44px;height:44px;margin-bottom:6px"><h3>게임패스 구독 완료 (데모)</h3><p>세 게임의 모든 회차가 열렸어요.<br>첫 구독 4,900P는 게임화 원작에 쓸 수 있어요(데모라 실제 지급 없음).</p><button class="go" data-close>계속 플레이</button><a class="go gray" style="display:flex;align-items:center;justify-content:center" data-origin>원작 이어 읽기</a></div>' +
     '</div></div>';
 
   var cur = { game: null, placement: null, plan: 'basic', value: 9900 };
@@ -97,6 +97,8 @@
     setTimeout(function () { location.href = 'origin.html?g=' + g.id; }, 150);
   };
 
+  // 탭 아이콘(모든 페이지)
+  var fi = document.createElement('link'); fi.rel = 'icon'; fi.type = 'image/svg+xml'; fi.href = 'assets/brand/favicon.svg'; document.head.appendChild(fi);
   document.addEventListener('DOMContentLoaded', function () {
     var h = document.getElementById('hd'); if (h) h.outerHTML = HEAD;
     var f = document.getElementById('ft'); if (f) f.outerHTML = FOOT;
