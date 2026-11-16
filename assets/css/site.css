@@ -241,3 +241,11 @@ body{letter-spacing:0}
 .read .pic .bg{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(14px) brightness(.85);transform:scale(1.05)}
 .read .pic .fg{position:relative;display:block;width:auto;height:391px;margin:0 auto;object-fit:contain}
 .read .desc{font-family:"RIDIBatang","Pretendard",serif;font-size:20px;line-height:1.5;color:#333;letter-spacing:0}
+
+/* 66차: 게임패스 띠 카피(리디 게임즈의 모든 게임, 패스 하나로) + 작은 글씨 · 리디 게임즈 카드 아래 여백 줄임 */
+.pass .k{padding-top:30px}
+.pass .h{margin-top:6px}
+.pass .s{margin-top:8px;font-size:20px;font-weight:500;opacity:.95;letter-spacing:-.2px}
+.pass .pill{margin-top:16px}
+.cards a{height:auto;padding-bottom:20px}
+.sec3{padding-bottom:96px}
