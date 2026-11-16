@@ -221,3 +221,11 @@ body{letter-spacing:0}
 .cards .ci .row{display:flex;align-items:center;gap:10px;margin-top:12px}
 .cards .ci .row .tg{margin-top:0}
 .cards .ci .row .f{margin:0 0 0 auto;font-size:14px;white-space:nowrap}
+/* 65차 3차: 민지 배너(1672×941) · 가운데 1126×634 + 좌우는 같은 그림 확대·흐림 */
+.hs-bg{inset:-60px;background-size:cover;background-position:center;filter:blur(22px) brightness(.72) saturate(1.1);transform:scale(1.12)}
+.hs-img{width:1126px;height:634px;margin-left:-563px;background-size:1126px 634px;background-position:center top}
+.hs-link{width:1126px;margin-left:-563px}
+.hs-play{border-radius:14px}
+/* 패스 띠: 캐릭터 원본 3장 합성(목업 위치 대조) */
+.pass .art{left:calc(50% - 550px);width:883px;height:449px;background:url(../img/pass_band_art.png) left bottom/883px 449px no-repeat}
+.hs-img,.hs-link{margin-left:-542px}
