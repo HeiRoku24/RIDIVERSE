@@ -9,6 +9,7 @@
   /* 66차: ?debug=1(한 번 들어오면 그 탭 동안 유지)일 때만 debug_mode → GA4 DebugView에 '테스트'로 따로 보임. 평소엔 넣지 않음(false도 넣지 않아야 함) */
   var DBG0 = new URLSearchParams(location.search).get('debug') === '1';
   try { DBG0 = DBG0 || sessionStorage.getItem('ridi_demo_debug') === '1'; } catch (e) {}
+  if (DBG0) gtag('set', { debug_mode: true });
   gtag('config', GA_ID, DBG0 ? { is_demo: true, debug_mode: true } : { is_demo: true });
   var s = document.createElement('script'); s.async = true;
   s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(s);
@@ -45,7 +46,7 @@
     },
     ev: function (name, p) {
       p = Object.assign({ is_demo: true }, p || {});
-      gtag('event', name, p);
+      gtag('event', name, DBG0 ? Object.assign({ debug_mode: true }, p) : p);
       if (DEBUG) logEv(name, p);
     },
     utm: UTM,
