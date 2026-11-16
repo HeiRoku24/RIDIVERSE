@@ -234,8 +234,10 @@ body{letter-spacing:0}
 .cards img{object-fit:cover;object-position:center}
 .ep .bg{background-position:center 40%;opacity:.85}
 
-/* 66차: '내가 읽은 작품의 게임' — 세로 일러스트 원본 비율 그대로(잘림 없음) · 설명 한 줄 따옴표 + 리디바탕 */
+/* 66차: '내가 읽은 작품의 게임' — 세로 일러스트 원본 비율 그대로(잘림 없음) · 칸 294×391 유지, 양옆은 같은 그림 흐리게(2안) · 설명 한 줄 따옴표 + 리디바탕 */
 @font-face{font-family:"RIDIBatang";src:url(../fonts/RIDIBatang.subset.woff2) format("woff2");font-display:swap}
-.read{height:auto;align-items:flex-start}
-.read img{width:294px;height:auto;aspect-ratio:772/1372;object-fit:contain;object-position:center}
+.read{height:423px;align-items:stretch}
+.read .pic{position:relative;width:294px;height:391px;flex:none;overflow:hidden;background:#222}
+.read .pic .bg{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(14px) brightness(.85);transform:scale(1.05)}
+.read .pic .fg{position:relative;display:block;width:auto;height:391px;margin:0 auto;object-fit:contain}
 .read .desc{font-family:"RIDIBatang","Pretendard",serif;font-size:20px;line-height:1.5;color:#333;letter-spacing:0}
