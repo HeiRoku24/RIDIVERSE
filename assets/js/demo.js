@@ -72,7 +72,7 @@
 
   // ---- 결제 시트 (패스 시안 ② 그대로)
   var SHEET = '<div class="sheet-bg" id="sheetBg"><div class="sheet" id="sheet"><button class="x" data-close>×</button>' +
-    '<div class="main"><div class="sh-top"><img src="assets/brand/ridigames_logo_h_blue.svg" alt="RIDI GAMES"><span class="tag">예시 화면 · 교육용 · 가격 가정</span></div><h2>게임패스 구독</h2><p class="h2s">리디 계정 그대로 · 세 게임 공통</p>' +
+    '<div class="main"><div class="sh-top"><img src="assets/brand/ridigames_logo_h_blue.svg" alt="RIDI GAMES"><span class="tag">예시 화면 · 교육용 · 가격 가정</span></div><h2>게임패스 구독</h2><p class="h2s">리디 계정 그대로 · 리디 게임즈 모든 게임</p>' +
     '<button class="pl on" data-plan="basic" data-v="9900"><span class="r"></span><p class="t">기본 패스</p><p class="p">월 9,900원</p><ul><li>모든 게임 · 매월 새 2화</li><li>주간 도전 · 수집 카드 · 연속 구독 보상</li></ul></button>' +
     '<button class="pl" data-plan="premium" data-v="14900"><span class="r"></span><p class="t">프리미엄 패스</p><p class="p">월 14,900원</p><ul><li>기본 + 외전 루트 · 한정 꾸미기 · AI 대화 기억</li></ul></button>' +
     '<div class="gift"><b>4,900P</b><span>첫 구독 1회 지급 · 게임화 원작 구매에 사용<br>다음 결제일까지 사용 가능</span></div>' +
@@ -81,7 +81,7 @@
     '<p class="law">매달 같은 날 등록한 카드로 자동 결제됩니다. 마이페이지에서 언제든 해지할 수 있어요.</p>' +
     '<button class="go" data-buy>월 9,900원 구독하기</button></div>' +
     '<div class="cf cf1"><h3>교육용 데모예요</h3><p>실제 결제는 되지 않습니다.<br>발표 시연을 위해 "구독 완료"로만 기록할까요?</p><button class="go" data-ok>결제 완료로 기록 (데모)</button><button class="go gray" data-back>돌아가기</button></div>' +
-    '<div class="cf cf2"><img src="assets/brand/ridigames_mark_blue.svg" alt="" style="width:44px;height:44px;margin-bottom:6px"><h3>게임패스 구독 완료 (데모)</h3><p>세 게임의 모든 회차가 열렸어요.<br>첫 구독 4,900P는 게임화 원작에 쓸 수 있어요(데모라 실제 지급 없음).</p><button class="go" data-close>계속 플레이</button><a class="go gray" style="display:flex;align-items:center;justify-content:center" data-origin>원작 이어 읽기</a></div>' +
+    '<div class="cf cf2"><img src="assets/brand/ridigames_mark_blue.svg" alt="" style="width:44px;height:44px;margin-bottom:6px"><h3>게임패스 구독 완료 (데모)</h3><p>리디 게임즈의 모든 게임이 열렸어요.<br>첫 구독 4,900P는 게임화 원작에 쓸 수 있어요(데모라 실제 지급 없음).</p><button class="go" data-close>계속 플레이</button><a class="go gray" style="display:flex;align-items:center;justify-content:center" data-origin>원작 이어 읽기</a></div>' +
     '</div></div>';
 
   var cur = { game: null, placement: null, plan: 'basic', value: 9900 };

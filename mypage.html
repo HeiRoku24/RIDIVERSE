@@ -433,7 +433,7 @@ V.pass=function(){
   if(S.plan==="none") st='<div class="status">지금은 패스가 없어요. 게임마다 1화는 무료로 즐길 수 있어요.</div>';
   else if(S.cancel) st='<div class="status cancel">해지 예약됨 · 6. 7까지 지금 혜택을 그대로 쓸 수 있어요.<button class="btn pri" style="margin-left:auto;height:34px" data-evt="pass_resubscribe" onclick="resub()">다시 구독</button></div>';
   else st='<div class="status">'+NAME[S.plan]+' 이용 중 · 다음 결제 6. 7에 '+PRICE[S.plan]+'원이 등록한 카드로 자동 결제돼요.</div>';
-  var basic=['세 게임 본편 전 회차','게임별 주간 도전·퍼즐·이벤트','수집 카드 받기','구독자 전용 굿즈 구매','연속 구독 보상'];
+  var basic=['리디 게임즈 모든 게임 전 회차','게임별 주간 도전·퍼즐·이벤트','수집 카드 받기','구독자 전용 굿즈 구매','연속 구독 보상'];
   var premX=['외전 루트 전부','그달 한정 꾸미기(아이콘·배너)','팝업 우선 입장','연속 구독 상위 보상','AI 챗 지난 대화 기억'];
   function pc(k){var cur=S.plan===k,isP=k==="prem";
     var li=basic.map(function(b){return '<li>'+b+'</li>'}).join("")+premX.map(function(b){return '<li class="'+(isP?'':'off')+'">'+b+'</li>'}).join("");
@@ -516,7 +516,7 @@ window.chg=function(k){var up=k==="prem";openModal('<h3>'+(up?'프리미엄으�
 window.doChg=function(k){closeModal();if(k==="prem"){S.plan="prem";toast("프리미엄 패스로 올렸어요")}else{S.plan="basic";fallback();toast("기본 패스로 바꿨어요 (데모는 바로 반영)")}sync();render()};
 /* 해지 = 안내만 (54차: 해지 방해 금지 · 다크패턴 규제) — 잃는 것 강조·붙잡는 버튼 없이 같은 무게의 두 버튼 */
 window.askCancel=function(){
-  openModal('<h3>구독을 해지할까요?</h3><p>다음 결제일(6. 7)부터 자동 결제가 멈춰요. 그때까지는 지금 혜택을 그대로 쓸 수 있어요.</p><ul class="lose"><li>6. 7 이후<span>세 게임 2화 이후 회차와 패스 혜택이 잠겨요</span></li><li>연속 구독<span>다시 구독하면 1개월부터 쌓여요</span></li></ul><div class="mrow"><button class="btn sub" onclick="closeModal()">닫기</button><button class="btn sub" data-evt="pass_cancel" onclick="doCancel()">해지 예약</button></div>')};
+  openModal('<h3>구독을 해지할까요?</h3><p>다음 결제일(6. 7)부터 자동 결제가 멈춰요. 그때까지는 지금 혜택을 그대로 쓸 수 있어요.</p><ul class="lose"><li>6. 7 이후<span>모든 게임의 2화 이후 회차와 패스 혜택이 잠겨요</span></li><li>연속 구독<span>다시 구독하면 1개월부터 쌓여요</span></li></ul><div class="mrow"><button class="btn sub" onclick="closeModal()">닫기</button><button class="btn sub" data-evt="pass_cancel" onclick="doCancel()">해지 예약</button></div>')};
 window.doCancel=function(){closeModal();S.cancel=true;toast("해지 예약됐어요. 6. 7까지 이용할 수 있어요");render()};
 window.resub=function(){S.cancel=false;toast("해지 예약을 취소했어요. 연속 구독도 그대로 이어져요");render()};
 window.claim=function(){S.claimed=true;toast("보상을 받았어요. 수집 카드·꾸미기 보관함에서 볼 수 있어요");render()};
