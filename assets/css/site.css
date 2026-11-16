@@ -1,12 +1,8 @@
 /* 리디 게임 데모(교육용) — 민지 목업(메인 main-1~4 · 상세 detail-1~4)을 1600px 화면 기준으로 옮김 */
-@font-face{font-family:"PretendardL";src:url(../fonts/Pretendard-Regular.subset.woff2) format("woff2");font-weight:400}
-@font-face{font-family:"PretendardL";src:url(../fonts/Pretendard-Medium.subset.woff2) format("woff2");font-weight:500}
-@font-face{font-family:"PretendardL";src:url(../fonts/Pretendard-SemiBold.subset.woff2) format("woff2");font-weight:600}
-@font-face{font-family:"PretendardL";src:url(../fonts/Pretendard-Bold.subset.woff2) format("woff2");font-weight:700 900}
 :root{--b:#1E9EFF;--ink:#141414;--ink2:#555;--ink3:#999;--line:#e5e5e5;--g1:#F2F2F2;--g2:#F7F7F7;--w:1190px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:"Noto Sans KR","Noto Sans CJK KR","PretendardL",sans-serif;color:var(--ink);background:#fff;word-break:keep-all;-webkit-font-smoothing:antialiased;min-width:1240px}
+body{font-family:"Pretendard","Noto Sans KR","Noto Sans CJK KR",sans-serif;color:var(--ink);background:#fff;word-break:keep-all;-webkit-font-smoothing:antialiased;min-width:1240px}
 a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
 .wrap{width:var(--w);margin:0 auto}
 /* 교육용 띠 (목업에 없음 · 데모 표기용) */
@@ -26,12 +22,6 @@ a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
 .hd .rt{display:flex;gap:22px;font-size:13px;font-weight:500;color:#333}
 .hd .rt span{display:flex;align-items:center;gap:6px}
 /* 메인 · 히어로 (민지 목업 이미지 그대로 · 탭과 버튼은 그 위 투명 링크) */
-.hero{position:relative;height:633px;background:#1a255d url(../img/hero_chat.jpg) center top/1600px 633px no-repeat;overflow:hidden}
-.hero a{position:absolute;display:block}
-.hero .hs-play{left:calc(50% + 172px);top:385px;width:374px;height:59px;border-radius:8px}
-.hero .hs-t{top:524px;height:109px;width:460px}
-.hero .t1{left:calc(50% - 663px)}.hero .t2{left:calc(50% - 202px)}.hero .t3{left:calc(50% + 258px)}
-.hero a:hover{background:rgba(255,255,255,.06)}
 /* 내가 읽은 작품의 게임 */
 .sec1{background:var(--g1);padding:92px 0 128px}
 .h2{font-size:28px;font-weight:700;margin-bottom:28px;display:flex;align-items:center;gap:6px}
@@ -125,7 +115,7 @@ a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
 /* 패스 결제 시트 (시안 ② 화면 그대로) */
 .sheet-bg{position:fixed;inset:0;background:rgba(11,15,34,.6);display:none;align-items:center;justify-content:center;z-index:50}
 .sheet-bg.on{display:flex}
-.sheet{width:440px;background:#fff;border-radius:24px;padding:24px 22px 20px;position:relative;font-family:"PretendardL","Noto Sans KR",sans-serif;max-height:94vh;overflow:auto}
+.sheet{width:440px;background:#fff;border-radius:24px;padding:24px 22px 20px;position:relative;font-family:"Pretendard","Noto Sans KR",sans-serif;max-height:94vh;overflow:auto}
 .sheet .x{position:absolute;right:16px;top:14px;border:0;background:none;font-size:26px;color:#999}
 .sheet .tag{display:inline-block;font-size:11px;font-weight:700;background:#141414;color:#fff;border-radius:6px;padding:3px 8px;margin-bottom:10px}
 .sheet h2{font-size:22px;font-weight:800}.sheet .h2s{font-size:13px;color:#8C939D;margin-top:2px}
@@ -162,3 +152,72 @@ a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
 .cards .ci .tg span{font-size:12px;color:#666;background:#f2f2f2;border-radius:4px;padding:3px 8px}
 .cards .ci .t{font-size:18px;font-weight:700;margin-top:12px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cards .ci .f{font-size:14px;color:var(--b);font-weight:600;margin-top:8px}
+/* ===== 65차: 민지 목업(1920 → 1600 환산) 글꼴·치수 맞춤 · Pretendard ===== */
+body{letter-spacing:0}
+.hd .wrap{position:relative;left:18px}
+.hd .r1,.hd .r2{height:62px}
+.logo img{height:23px}
+.search{width:281px;height:41px;border-radius:9px;background:#f3f3f3}
+.hd .lg{font-size:14.4px;font-weight:600;color:#777}
+.hd .sr{gap:43px}
+.nav{gap:26px;font-size:17px;font-weight:700;color:#141414}
+.hd .rt{gap:24px;font-size:16px;font-weight:500;color:#222}
+.hd .rt span{gap:8px}
+/* 히어로 슬라이드 */
+.hero{position:relative;height:633px;background:#141826;overflow:hidden}
+.hs-track{position:absolute;inset:0;display:flex;transition:transform .7s cubic-bezier(.65,0,.35,1)}
+.hs-slide{position:relative;flex:0 0 100%;height:633px;overflow:hidden}
+.hs-bg{position:absolute;inset:-40px;background:center/cover no-repeat;filter:blur(24px) brightness(.6)}
+.hs-img{position:absolute;left:50%;top:0;width:1600px;height:633px;margin-left:-800px;background:center top/1600px 633px no-repeat}
+.hs-link{position:absolute;left:50%;top:0;width:1600px;height:525px;margin-left:-800px}
+.hs-play{position:absolute;left:calc(50% + 172px);top:385px;width:374px;height:59px;border-radius:30px}
+.hs-play:hover{background:rgba(255,255,255,.08)}
+.hs-tabs{position:absolute;left:calc(50% - 663px);top:525px;width:1383px;height:108px;display:flex;z-index:2}
+.hs-t{flex:1;height:108px;border:0;background:rgba(40,40,48,.5);color:#fff;text-align:left;padding:27px 0 0 60px;display:flex;flex-direction:column;cursor:pointer;font-family:inherit;border-left:1px solid rgba(0,0,0,.35);position:relative;overflow:hidden}
+.hs-t:first-child{border-left:0}
+.hs-t small{font-size:17.5px;font-weight:600;line-height:1}
+.hs-t b{font-size:27px;font-weight:700;margin-top:17px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:40px}
+.hs-t:not(.on) small,.hs-t:not(.on) b{opacity:.55}
+.hs-t.on{background:rgba(128,128,134,.72)}
+.hs-t:nth-child(2){padding-left:99px}
+.hs-t:hover b{opacity:1}
+.hs-t .bar{display:none}
+/* 내가 읽은 작품의 게임 */
+.h2{font-size:30px;font-weight:700;margin-bottom:24px;letter-spacing:-.2px}
+.read h3{font-size:46px;font-weight:700;line-height:56px;letter-spacing:-.3px}
+.chips{gap:11px;margin-top:18px}
+.chips span{font-size:17px;font-weight:500;background:#f2f2f2;border-radius:4px;padding:7px 15px;color:#222;line-height:1.1}
+.read .desc{font-size:23px;font-weight:400;color:#141414;margin-top:31px;letter-spacing:-.2px}
+.read .btn-b{margin-top:30px;margin-bottom:0;width:112px;height:57px;font-size:17px;font-weight:700;border-radius:9px;background:#0aa0ff;box-shadow:none}
+/* 패스 띠 */
+.pass{background:#00A0FF;height:677px}
+.pass .k{padding-top:41px;font-size:25px;font-weight:600;line-height:1.3}
+.pass .h{font-size:54px;font-weight:700;margin-top:9px;letter-spacing:-.3px;line-height:1.25}
+.pass .pill{margin-top:19px;font-size:22px;font-weight:600;padding:0;width:109px;height:51px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;color:#00A0FF}
+.pass .art{left:calc(50% - 537px);width:853px;height:423px;background:url(../img/pass_band_art.png) left bottom/853px 423px no-repeat}
+.pass .note{right:1px;bottom:12px;font-size:15px;font-weight:500;opacity:1}
+/* 리디 게임 카드 — 세 칸 같은 크기 */
+.cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:52px}
+.cards a{height:415px;padding:7px 9px;border-radius:12px;overflow:hidden;min-width:0}
+.cards img{height:242px;display:block}
+.cards .ci{padding:20px 0 0}
+.cards .ci .t{font-size:22px;font-weight:600;line-height:33px;margin-top:0;white-space:normal;overflow:visible;letter-spacing:-.2px;color:#141414}
+.cards .ci .tg{margin-top:12px}
+.cards .ci .tg span{font-size:13px}
+.cards .ci .f{font-size:15px;margin-top:10px}
+.sec3 .h2 span{font-size:32px!important}
+.sec1{padding-top:96px}
+.read .tx{padding-top:40px}
+.chips{margin-top:13px}
+.chips span{font-size:18px}
+.read .desc{margin-top:31px}
+.hd .r2{height:61px}
+.sec1{padding-bottom:134px}
+.hero,.hs-slide{height:634px}
+.pass .h{margin-top:8px}
+.pass .pill{margin-top:22px}
+.sec3 .h2{margin-bottom:28px}
+.cards .ci{padding-top:38px}
+.cards .ci .row{display:flex;align-items:center;gap:10px;margin-top:12px}
+.cards .ci .row .tg{margin-top:0}
+.cards .ci .row .f{margin:0 0 0 auto;font-size:14px;white-space:nowrap}

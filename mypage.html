@@ -7,15 +7,9 @@
 <!-- 원본: 게시본 「마이리디 - 게임 (시안)」 https://claude.ai/artifact/MHDUQd81Q3D6dABnZB787W
      64차(11/16) 데모 사이트로 옮기며 고친 것: 결제 수단 = 카드 정기결제(리디 웹, 캐시·포인트 불가, S4) · 해지 창 = 안내만(해지 방해 금지)
      · 게임/이어 하기/원작/사전예약 링크를 데모 페이지로 연결 · data-evt를 GA4 이벤트로 보냄(demo.js) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
 <script src="assets/js/demo.js"></script>
 <style>
-@font-face{font-family:"Pretendard";src:url(assets/fonts/Pretendard-Regular.subset.woff2) format("woff2");font-weight:100 400}
-@font-face{font-family:"Pretendard";src:url(assets/fonts/Pretendard-Medium.subset.woff2) format("woff2");font-weight:500}
-@font-face{font-family:"Pretendard";src:url(assets/fonts/Pretendard-SemiBold.subset.woff2) format("woff2");font-weight:600}
-@font-face{font-family:"Pretendard";src:url(assets/fonts/Pretendard-Bold.subset.woff2) format("woff2");font-weight:700 900}
 :root{
   --ridi:#1f8ce6; --ridi-n:#4a9ff5; --ridi-bg:#eaf4fe;
   --deep:#0a3faa; --gold:#c8962b; --gold-bg:#fff6dd;
@@ -258,7 +252,7 @@ a{color:inherit;text-decoration:none}
 .stp{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .stp i{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;font-size:12px;background:var(--ridi);color:#fff}
 .vote{display:flex;gap:12px;align-items:center}
-.vote .vb{width:54px;height:72px;border-radius:6px;background:linear-gradient(160deg,#3b2a6b,#b5486b)}
+.vote .vb{width:54px;height:72px;border-radius:6px;background:url(assets/rimg/vote2.jpg) center 15%/cover;flex:none}
 .vote p{margin:0;font-size:13px;color:var(--ink-2)}
 .tiny{font-size:12px;color:var(--ink-3)}
 
@@ -317,6 +311,17 @@ a{color:inherit;text-decoration:none}
   .game-c .art .newep{top:auto;bottom:auto;right:auto;left:10px;top:34px}
 }
 @media (prefers-reduced-motion:reduce){.toast{transition:none}}
+
+/* 65차: 그림 넣기 */
+.cell .ci{width:34px;height:34px;border:0;border-radius:10px;background:#EAF4FF;color:#1E9EFF;margin-bottom:8px}
+.cell .ci svg{width:22px;height:22px}
+.pav,.preview .pf,.dg .dart{background-size:cover!important;background-position:center!important;overflow:hidden}
+.pav img,.dart img,.pf img{display:block}
+.cc.lock{position:relative;overflow:hidden}
+.cc.lock .lkimg{position:absolute;inset:0;background:center/cover no-repeat;filter:grayscale(1) blur(3px);opacity:.35}
+.cc.lock .lktx{position:relative}
+.stp i.si{background:#ddd center/cover no-repeat;position:relative;overflow:hidden;box-shadow:0 0 0 2px #1E9EFF}
+.stp i.si span{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.55);font-size:10px;line-height:1.6;text-align:center}
 </style>
 <style>/* 65차: 머리를 게임 쪽과 같게 */
 .ugh{background:#fff;border-bottom:1px solid #e5e5e5}
@@ -398,7 +403,7 @@ document.querySelectorAll("[data-out]").forEach(function(a){a.addEventListener("
 function head(t,btn){return '<div class="sh"><h2>'+t+'</h2>'+(btn?'<button class="all" onclick="location.hash=\''+btn+'\'">전체 보기 »</button>':'')+'</div>'}
 function gameCard(g){
   var locked=S.plan==="none"&&g.ep>=1;
-  return '<article class="game-c"><div class="art '+g.cls+'"><span class="tag">'+g.genre.split(" · ")[1]+'</span>'+(g.id!=="escape"?'<span class="newep">새 회차</span>':'')+g.t+'</div>'+
+  return '<article class="game-c"><div class="art '+g.cls+'" style="background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,0) 62%),url(assets/mimg/gm_'+g.id+'.jpg) center 30%/cover"><span class="tag">'+g.genre.split(" · ")[1]+'</span>'+(g.id!=="escape"?'<span class="newep">새 회차</span>':'')+g.t+'</div>'+
   '<div class="bd"><div class="meta"><span>'+g.ep+'화까지 플레이</span><span>공개 '+g.tot+'화</span></div><div class="bar"><i style="width:'+(g.ep/g.tot*100)+'%"></i></div>'+
   '<div class="tiny">다음: '+g.next+'</div>'+
   '<div class="row2"><button class="btn pri" data-evt="'+(locked?'pass_offer_view(from=myridi)':'play_resume(game_id='+g.id+')')+'" onclick="'+(locked?"location.hash='pass'":"location.href='detail.html?g="+g.id+"&from=mypage'")+'">'+(locked?'2화부터는 패스로':'이어 하기')+'</button>'+
@@ -412,15 +417,15 @@ V.game=function(){
   return profHTML(S.icon,S.banner,false)+'<section class="sumcard" aria-label="게임 요약"><div class="me"><div class="id">rid***** ›</div><div class="mail">rid*****@gmail.com</div>'+
   '<span class="badge '+S.plan+'">'+NAME[S.plan]+'</span>'+nx+'<button class="out" onclick="toast(\'로그아웃 (데모)\')">로그아웃</button></div>'+
   '<div class="cells">'+
-   cell("P","패스",S.plan==="none"?'<span class="v">-</span>':'<span class="v">'+(S.plan==="prem"?"프리미엄":"기본")+'</span>',S.plan==="none"?"패스 알아보기":"구독 관리","pass","pass_manage_view")+
-   cell("연","연속 구독",'<span class="v">'+(S.plan==="none"?0:S.months)+'<small>개월</small></span>',"다음 보상","streak","streak_view")+
-   cell("카","수집 카드",'<span class="v">7<small>장</small></span>',"보관함","cards","card_collection_view")+
-   cell("꾸","꾸미기",'<span class="v">'+(S.plan==="prem"?7:2)+'<small>개</small></span>',S.plan==="prem"?"바꾸기":"한정은 프리미엄","deco","deco_view")+
-   cell("게","하는 게임",'<span class="v">3<small>개</small></span>',"이어 하기","play","play_list_view")+
-   cell("팝","팝업 스탬프",'<span class="v">4<small>/4</small></span>',"팝업 기록","popup","popup_record_view")+
+   cell("<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 7h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4z\"/><path d=\"M14 7v12\" stroke-dasharray=\"2 2\"/></svg>","패스",S.plan==="none"?'<span class="v">-</span>':'<span class="v">'+(S.plan==="prem"?"프리미엄":"기본")+'</span>',S.plan==="none"?"패스 알아보기":"구독 관리","pass","pass_manage_view")+
+   cell("<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"5\" width=\"16\" height=\"15\" rx=\"2\"/><path d=\"M4 10h16M9 3v4M15 3v4\"/><path d=\"M9 15l2 2 4-4\"/></svg>","연속 구독",'<span class="v">'+(S.plan==="none"?0:S.months)+'<small>개월</small></span>',"다음 보상","streak","streak_view")+
+   cell("<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"6\" y=\"4\" width=\"12\" height=\"16\" rx=\"2\"/><path d=\"M3 7v11a2 2 0 0 0 2 2M21 7v11a2 2 0 0 1-2 2\"/><path d=\"M12 9l1.2 2.4 2.6.4-1.9 1.8.5 2.6-2.4-1.3-2.4 1.3.5-2.6-1.9-1.8 2.6-.4z\"/></svg>","수집 카드",'<span class="v">7<small>장</small></span>',"보관함","cards","card_collection_view")+
+   cell("<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8\"/><circle cx=\"9\" cy=\"9.5\" r=\"1.2\"/><circle cx=\"14.5\" cy=\"8.5\" r=\"1.2\"/><circle cx=\"16\" cy=\"13\" r=\"1.2\"/><path d=\"M12 20a3 3 0 0 1 0-6\"/></svg>","꾸미기",'<span class="v">'+(S.plan==="prem"?7:2)+'<small>개</small></span>',S.plan==="prem"?"바꾸기":"한정은 프리미엄","deco","deco_view")+
+   cell("<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"7\" width=\"18\" height=\"11\" rx=\"5\"/><path d=\"M8 10.5v4M6 12.5h4\"/><circle cx=\"15.5\" cy=\"11.5\" r=\"1\"/><circle cx=\"17.5\" cy=\"13.8\" r=\"1\"/></svg>","하는 게임",'<span class="v">3<small>개</small></span>',"이어 하기","play","play_list_view")+
+   cell("<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 20V9l7-5 7 5v11\"/><path d=\"M9 20v-5h6v5\"/><path d=\"M12 9.5l.8 1.6 1.7.2-1.2 1.2.3 1.7-1.6-.8-1.6.8.3-1.7-1.2-1.2 1.7-.2z\"/></svg>","팝업 스탬프",'<span class="v">4<small>/4</small></span>',"팝업 기록","popup","popup_record_view")+
   '</div></section>'+
   head("이어 하기","play")+'<div class="cont">'+GAMES.map(gameCard).join("")+'</div>'+
-  head("팝업 기록","popup")+'<div class="box" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><div class="stp" style="width:200px"><i>챗</i><i>슈팅</i><i>탈출</i><i>투표</i></div><div><b>스탬프 4개 완주 · 특전 스티커 받음</b><div class="tiny">2027. 3. 7(일) 14:30 회차 방문 · 투표한 작품: 모란연회</div></div></div>'};
+  head("팝업 기록","popup")+'<div class="box" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><div class="stp" style="width:200px"><i class="si" style="background-image:url(assets/mimg/st_chat.jpg)"><span>챗</span></i><i class="si" style="background-image:url(assets/mimg/st_shoot.jpg)"><span>슈팅</span></i><i class="si" style="background-image:url(assets/mimg/st_escape.jpg)"><span>탈출</span></i><i class="si" style="background-image:url(assets/rimg/vote_trio.jpg)"><span>투표</span></i></div><div><b>스탬프 4개 완주 · 특전 스티커 받음</b><div class="tiny">2027. 3. 7(일) 14:30 회차 방문 · 투표한 작품: 모란연회</div></div></div>'};
 function cell(ic,t,v,s,to,evt){return '<button class="cell" data-evt="'+evt+'" onclick="location.hash=\''+to+'\'"><span class="ci">'+ic+'</span><b>'+t+'</b>'+v+'<span class="s">'+s+'</span></button>'}
 
 V.pass=function(){
@@ -452,13 +457,13 @@ V.streak=function(){
     return '<div class="st'+(got?' got':'')+(now?' now':'')+'"><div class="m">'+r[0]+'개월</div><b>'+r[1]+'</b>'+(got?'<span class="ok">받음</span>':now?'<button class="btn pri" data-evt="streak_reward_claim(month='+r[0]+')" onclick="claim()">받기</button>':'<span class="tiny">'+(r[0]-m)+'개월 남음</span>')+'</div>'}).join("")+'</div>'};
 
 V.cards=function(){
-  var C=[["chat","a1","카시안","인장 반지"],["chat","a1","카시안","서신을 건네며"],["chat","a1","카시안","공범의 밤"],["shoot","a2","공이삼","등굣길 게이트"],["shoot","a2","공이삼","손가락총"],["shoot","a2","공이삼","원래 이런 표정"],["escape","a3","녹스","작은 검은 용"],["escape","a3","녹스","계약의 빛"]];
+  var C=[["chat","a1","카시안","인장 반지","cd_k_ring"],["chat","a1","카시안","서신을 건네며","cd_k_letter"],["chat","a1","카시안","공범의 밤","cd_k_night"],["shoot","a2","공이삼","등굣길 게이트","cd_g_gate"],["shoot","a2","공이삼","손가락총","cd_g_finger"],["shoot","a2","공이삼","원래 이런 표정","cd_g_face"],["escape","a3","녹스","작은 검은 용","cd_n_dragon"],["escape","a3","녹스","계약의 빛","cd_n_light"]];
   var got=[1,1,0,1,1,1,1,0];
   var tabs=[["all","전체"],["chat","AI 챗"],["shoot","슈팅"],["escape","방탈출"]];
   return head("수집 카드")+'<p class="tiny" style="margin:-4px 0 14px">패스 구독 중 주간 도전을 깨면 받아요. 팝업 결과 카드도 여기 모여요.</p><div class="ftabs" role="group" aria-label="게임 필터">'+
   tabs.map(function(t){return '<button aria-pressed="'+(S.filter===t[0])+'" onclick="filt(\''+t[0]+'\')">'+t[1]+'</button>'}).join("")+'</div><div class="cards">'+
   C.map(function(c,i){if(S.filter!=="all"&&S.filter!==c[0])return"";
-    return got[i]?'<div class="cc '+c[1]+'" data-evt="card_view"><span class="frm"></span><small>'+c[2]+'</small>'+c[3]+'</div>':'<div class="cc lock">아직 못 받은 카드<br><small>주간 도전 보상</small></div>'}).join("")+'</div>'};
+    return got[i]?'<div class="cc '+c[1]+'" data-evt="card_view" style="background:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,0) 45%),url(assets/mimg/'+c[4]+'.jpg) center/cover"><span class="frm"></span><small>'+c[2]+'</small>'+c[3]+'</div>':'<div class="cc lock"><span class="lkimg" style="background-image:url(assets/mimg/'+c[4]+'.jpg)"></span><span class="lktx">아직 못 받은 카드<br><small>주간 도전 보상</small></span></div>'}).join("")+'</div>'};
 
 V.deco=function(){
   return head("꾸미기 보관함")+'<p class="tiny" style="margin:-4px 0 12px">프리미엄 패스를 구독하면 매달 한정 프로필 아이콘과 배너가 들어와요. 고른 꾸미기는 내 프로필, 팝업 랭킹 보드, 투표 결과 페이지에 보여요.</p>'+
@@ -470,13 +475,13 @@ V.deco=function(){
 
 /* 프로필 꾸미기 데이터 (호요랩 개인센터 방식) */
 var DECO={
- icon:[["i0","리디 기본","base","free","","linear-gradient(135deg,#7aa7ff,#1f8ce6)","R"],["ip","팝업 기념","base","event","3월","linear-gradient(135deg,#ffd1e6,#8a2d62)","팝"],
-  ["ic3","카시안","chat","prem","6월","radial-gradient(circle at 40% 30%,#f9e3a3,#1e4a37)","카"],["is3","공이삼","shoot","prem","6월","radial-gradient(circle at 40% 30%,#ffb070,#6b1fa8)","공"],
-  ["ie3","녹스","escape","prem","6월","radial-gradient(circle at 40% 30%,#fff0b0,#2a2f9e)","녹"],["ic2","카시안 · 서신","chat","prem","5월","linear-gradient(160deg,#e7c873,#2f6b4f)","서"],
-  ["ie1","녹스 · 계약","escape","prem","4월","linear-gradient(160deg,#ffd86b,#2b33a6)","약"]],
- banner:[["b0","리디 블루","base","free","","linear-gradient(120deg,#1f8ce6,#0a3faa)"],["b1","밤의 서재","base","free","","linear-gradient(120deg,#1c2350,#0d1230 60%,#3a2a6b)"],
-  ["bc3","공범의 밤","chat","prem","6월","radial-gradient(ellipse at 70% 40%,#f9e3a3 0,#c39234 25%,#1e4a37 65%,#0b1a14)"],["bs3","게이트 폭주","shoot","prem","6월","radial-gradient(ellipse at 30% 50%,#ffd0a0 0,#ff7a3d 20%,#9a2fd0 55%,#1b0c3d)"],
-  ["be3","환수 계약진","escape","prem","6월","radial-gradient(ellipse at 60% 40%,#fff0b0 0,#6b6ff0 30%,#1d2180 65%,#080b2a)"],["bc2","백작가 정원","chat","prem","5월","linear-gradient(120deg,#2f6b4f,#e7c873)"]]};
+ icon:[["i0","리디 기본","base","free","","linear-gradient(135deg,#7aa7ff,#1f8ce6)","<img src=assets/brand/ridigames_mark_white.svg alt='' style='width:46%'>"],["ip","팝업 기념","base","event","3월","url(assets/mimg/ic_popup.jpg) center/cover",""],
+  ["ic3","카시안","chat","prem","6월","url(assets/mimg/ic_kassian.jpg) center/cover",""],["is3","공이삼","shoot","prem","6월","url(assets/mimg/ic_gong.jpg) center/cover",""],
+  ["ie3","녹스","escape","prem","6월","url(assets/mimg/ic_nox.jpg) center/cover",""],["ic2","카시안 · 서신","chat","prem","5월","url(assets/mimg/ic_kassian_letter.jpg) center/cover",""],
+  ["ie1","녹스 · 계약","escape","prem","4월","url(assets/mimg/ic_nox_dragon.jpg) center/cover",""]],
+ banner:[["b0","리디 블루","base","free","","linear-gradient(120deg,#1f8ce6,#0a3faa)"],["b1","밤의 서재","base","free","","url(assets/mimg/bn_library.jpg) center/cover"],
+  ["bc3","공범의 밤","chat","prem","6월","url(assets/mimg/bn_kassian.jpg) center/cover"],["bs3","게이트 폭주","shoot","prem","6월","url(assets/mimg/bn_gate.jpg) center/cover"],
+  ["be3","환수 계약진","escape","prem","6월","url(assets/mimg/bn_contract.jpg) center/cover"],["bc2","백작가 정원","chat","prem","5월","url(assets/mimg/bn_garden.jpg) center/cover"]]};
 function find(id){var all=DECO.icon.concat(DECO.banner);for(var i=0;i<all.length;i++)if(all[i][0]===id)return all[i]}
 function art(id){var d=find(id);return {bg:d[5],g:d[6]||"",nm:d[1]}}
 function usable(d){return d[3]!=="prem"||S.plan==="prem"}
@@ -499,11 +504,11 @@ V.play=function(){
     '<button class="btn '+(ok?'pri':'sub')+'" data-evt="'+(ok?'side_route_open':'side_route_offer')+'" onclick="'+(ok?"toast('외전 루트를 열어요 (데모)')":"location.hash='pass'")+'">'+(ok?'외전 열기':S.plan==="basic"?'첫 화 무료 · 이후 프리미엄':'첫 화 무료로 보기')+'</button></div>'}).join("")+'</div><p class="tiny">외전 루트는 조건부 출시예요. 첫 화는 누구나 무료이고, 전부 열려면 프리미엄 패스가 필요해요.</p>'};
 
 V.popup=function(){
-  return head("팝업 기록")+'<div class="pop"><div class="pbox"><h3>스탬프판</h3><div class="stp"><i>챗</i><i>슈팅</i><i>탈출</i><i>투표</i></div><p class="tiny" style="margin:12px 0 0">4개 완주 · 특전 스티커 받음 (3. 7 15:12)</p></div>'+
+  return head("팝업 기록")+'<div class="pop"><div class="pbox"><h3>스탬프판</h3><div class="stp"><i class="si" style="background-image:url(assets/mimg/st_chat.jpg)"><span>챗</span></i><i class="si" style="background-image:url(assets/mimg/st_shoot.jpg)"><span>슈팅</span></i><i class="si" style="background-image:url(assets/mimg/st_escape.jpg)"><span>탈출</span></i><i class="si" style="background-image:url(assets/rimg/vote_trio.jpg)"><span>투표</span></i></div><p class="tiny" style="margin:12px 0 0">4개 완주 · 특전 스티커 받음 (3. 7 15:12)</p></div>'+
   '<div class="pbox"><h3>내 투표</h3><div class="vote"><div class="vb"></div><div><b>모란연회: 모란꽃에 감춰진 진실</b><p>결과 발표됨 (3. 19, 리디 앱)</p></div></div><button class="btn sub" style="width:100%;margin-top:12px" data-evt="vote_result_view" onclick="toast(\'투표 결과 페이지로 이동 (데모 범위 밖)\')">투표 결과 보기</button></div></div>'+
   head("방문 예약")+'<table class="kv"><tr><th>예약 번호</th><td>RP-307-1263</td></tr><tr><th>일시</th><td>2027. 3. 7(일) 14:30 · 사전예약</td></tr><tr><th>상태</th><td style="color:var(--ok);font-weight:700">입장 완료</td></tr></table>'+
   '<div style="margin-top:12px;text-align:right"><a class="btn sub" style="display:inline-flex;align-items:center" href="reserve.html">팝업 사전예약 페이지 보기 →</a></div>'+
-  head("체험 결과 카드")+'<div class="cards"><div class="cc a1"><span class="frm"></span><small>AI 챗 결과</small>카시안의 답장</div><div class="cc a2"><span class="frm"></span><small>슈팅 결과</small>12,480점 · 7위</div><div class="cc a3"><span class="frm"></span><small>방탈출 결과</small>48초 탈출</div></div>'};
+  head("체험 결과 카드")+'<div class="cards"><div class="cc a1" style="background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,0) 50%),url(assets/mimg/rs_chat.jpg) center/cover"><span class="frm"></span><small>AI 챗 결과</small>카시안의 답장</div><div class="cc a2" style="background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,0) 50%),url(assets/mimg/rs_shoot.jpg) center/cover"><span class="frm"></span><small>슈팅 결과</small>12,480점 · 7위</div><div class="cc a3" style="background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,0) 50%),url(assets/mimg/rs_escape.jpg) center/cover"><span class="frm"></span><small>방탈출 결과</small>48초 탈출</div></div>'};
 
 /* 상태 바꾸기 */
 window.sub=function(k){S.plan=k;S.cancel=false;S.months=1;S.claimed=false;toast(NAME[k]+" 구독을 시작했어요 (데모 · 결제 안 됨)");sync();render()};
