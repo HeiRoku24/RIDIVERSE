@@ -24,20 +24,20 @@ document.addEventListener('DOMContentLoaded', function () {
     '<div class="bt"><a class="btn-b" href="ep1.html?g=' + id + '" data-play>처음부터</a><button class="btn-w" data-origin>원작보기</button></div>' +
     '<div class="info"><a href="#" data-origin><em>연재</em>원작 웹소설 보러가기<span class="rr">›</span></a>' +
     '<a href="index.html#"><em>추천</em>이 작품 다양하게 즐기기<span class="cnt">3작품</span></a>' +
-    '<a href="#" data-pass><em>이벤트</em>게임패스면 세 게임 회차 전부 9900원<span class="rr">›</span></a>' +
+    '<a href="#" data-pass><em>이벤트</em>게임패스면 세 게임 회차 전부 월 9,900원<span class="rr">›</span></a>' +
     '<a href="#" data-inert><em>독점</em>독점 작품 감상은 [RIDI ONLY 작품관]<span class="rr">›</span></a></div>' +
     (g.note ? '<p style="font-size:12px;color:#aaa;margin-top:10px">* ' + g.note + '</p>' : '') + '</div></section>' +
     '<section class="dt-sec"><h2>스테이지</h2><div class="stg" style="border-top:1px solid #ddd">' + st + '</div></section>' +
     '<div class="notice">본 게임의 무료 회차는 1 stage 입니다.<br>게임패스를 구독하시면 세 게임의 모든 stage를 플레이할 수 있습니다.</div>' +
     '<section class="dt-sec"><h2 style="margin-top:110px">이 작품의 키워드</h2><div class="kw">' + kw.map(function (k) { return '<span>' + k + '</span>'; }).join('') + '</div></section>' +
-    '<section class="rv"><h2 style="font-size:34px;margin-top:110px">리뷰<span class="ex">(평점·구매자 수·리뷰는 목업의 예시 값)</span></h2>' +
+    '<section class="rv"><h2 style="font-size:34px;margin-top:110px">리뷰<span class="ex">(평점·플레이 수·리뷰는 예시 값)</span></h2>' +
     '<div class="sc"><b>4.9</b><div><p>이용자 별점</p><div class="st">★★★★★</div></div></div>' +
     '<p class="ask">이 작품을 평가해 주세요!</p><p class="big">★★★★★</p>' +
     '<div class="box">리뷰를 10자 이상 입력해 주세요. 광고 및 욕설, 타인을 비방하는 문구는 비공개될 수 있습니다.<span class="sp">◯ 스포일러가 있습니다.</span><span class="reg">리뷰 등록</span></div>' +
     '<p style="font-size:15px;color:#666;margin:16px 15px">리뷰 작성 유의사항 ⌄</p>' +
-    '<div class="tabs"><span>구매자 2,492</span><span>전체 2,761</span></div>' +
+    '<div class="tabs"><span>플레이한 독자 2,492</span><span>전체 2,761</span></div>' +
     '<div class="sort"><span>최신순</span><span>공감순</span><span>별점 높은순</span><span>별점 낮은순</span></div>' +
-    '<div class="one"><div class="st">★★★★★</div><p style="margin-top:8px">아 재미떠!!!!!</p><p style="color:#999;margin-top:8px;font-size:13px">[구매자] ann***</p><p class="meta">2026.10.08 · 신고 · 차단</p><div class="act"><span>댓글 0</span><span>👍 0</span></div></div>' +
+    '<div class="one"><div class="st">★★★★★</div><p style="margin-top:8px">아 재미떠!!!!!</p><p style="color:#999;margin-top:8px;font-size:13px">[플레이] ann***</p><p class="meta">2027.03.08 · 신고 · 차단</p><div class="act"><span>댓글 0</span><span>👍 0</span></div></div>' +
     '<div class="more">더보기 ⌄</div></section><div style="height:120px"></div>';
 
   RD.ev('game_detail_view', { game_id: id, placement: new URLSearchParams(location.search).get('from') || 'direct' });

@@ -658,5 +658,8 @@ function qrDraw(seed){var h="",s=0;for(var i=0;i<seed.length;i++)s=(s*31+seed.ch
 drawDates();drawSlots();sync();
 })();
 </script>
+<script>/* 65차: 측정 이벤트 버튼·팀용 패널은 ?debug=1일 때만 */
+if(!/[?&]debug=1/.test(location.search)){document.write('<style>#evtBtn,.evt-toggle,#dev{display:none!important}</style>')}
+</script>
 </body>
 </html>
