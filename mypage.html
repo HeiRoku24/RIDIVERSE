@@ -403,7 +403,7 @@ document.querySelectorAll("[data-out]").forEach(function(a){a.addEventListener("
 function head(t,btn){return '<div class="sh"><h2>'+t+'</h2>'+(btn?'<button class="all" onclick="location.hash=\''+btn+'\'">전체 보기 »</button>':'')+'</div>'}
 function gameCard(g){
   var locked=S.plan==="none"&&g.ep>=1;
-  return '<article class="game-c"><div class="art '+g.cls+'" style="background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,0) 62%),url(assets/mimg/gm_'+g.id+'.jpg) center 30%/cover"><span class="tag">'+g.genre.split(" · ")[1]+'</span>'+(g.id!=="escape"?'<span class="newep">새 회차</span>':'')+g.t+'</div>'+
+  return '<article class="game-c"><div class="art '+g.cls+'" style="background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,0) 62%),url(assets/mimg/gm_'+g.id+'.jpg) center/cover"><span class="tag">'+g.genre.split(" · ")[1]+'</span>'+(g.id!=="escape"?'<span class="newep">새 회차</span>':'')+g.t+'</div>'+
   '<div class="bd"><div class="meta"><span>'+g.ep+'화까지 플레이</span><span>공개 '+g.tot+'화</span></div><div class="bar"><i style="width:'+(g.ep/g.tot*100)+'%"></i></div>'+
   '<div class="tiny">다음: '+g.next+'</div>'+
   '<div class="row2"><button class="btn pri" data-evt="'+(locked?'pass_offer_view(from=myridi)':'play_resume(game_id='+g.id+')')+'" onclick="'+(locked?"location.hash='pass'":"location.href='detail.html?g="+g.id+"&from=mypage'")+'">'+(locked?'2화부터는 패스로':'이어 하기')+'</button>'+

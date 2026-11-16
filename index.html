@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=1240">
-<title>리디 게임 (교육용 데모)</title><meta name="robots" content="noindex">
+<title>리디 게임즈 (교육용 데모)</title><meta name="robots" content="noindex">
 <link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
 <link rel="stylesheet" href="assets/css/site.css"><script src="assets/js/demo.js"></script></head>
 <body>
@@ -22,7 +22,7 @@
   <div class="art"></div><p class="note">인 게임 내 아이템 별도 구매</p>
 </section>
 <section class="sec3"><div class="wrap">
-  <h2 class="h2">리디 게임 <svg width="16" height="26" viewBox="0 0 16 26" fill="none" stroke="#333" stroke-width="2.2" style="margin-left:6px"><path d="M3 3l10 10L3 23"/></svg></h2>
+  <h2 class="h2">리디 게임즈 <svg width="16" height="26" viewBox="0 0 16 26" fill="none" stroke="#333" stroke-width="2.2" style="margin-left:6px"><path d="M3 3l10 10L3 23"/></svg></h2>
   <div class="cards">
     <a href="detail.html?g=chat" data-detail="chat"><img src="assets/img/thumb_chat.jpg" alt="저와 공범이 되어 주시겠습니까?"><div class="ci"><p class="t">저와 공범이 되어 주시겠습니까?</p><div class="row"><div class="tg"><span>AI채팅</span><span>로맨스판타지</span></div><p class="f">1화 무료 · 2화부터 게임패스</p></div></div></a>
     <a href="detail.html?g=shoot" data-detail="shoot"><img src="assets/img/thumb_shoot.jpg" alt="지각 사유 : 게이트 폭주"><div class="ci"><p class="t">지각 사유 : 게이트 폭주</p><div class="row"><div class="tg"><span>슈팅</span><span>헌터물</span><span>액션</span></div><p class="f">1화 무료 · 2화부터 게임패스</p></div></div></a>
@@ -43,7 +43,7 @@ var HERO = [  /* img: 1672×941(16:9) 배너 · play: 그림 안 "지금 플레�
   tr.innerHTML = HERO.map(function (h, i) {
     return '<div class="hs-slide" aria-hidden="' + (i ? 'true' : 'false') + '"><div class="hs-bg" style="background-image:url(' + h.img + ')"></div><div class="hs-img" style="background-image:url(' + h.img + ')"></div>' +
       '<a class="hs-link" href="detail.html?g=' + h.g + '" data-detail="' + h.g + '" aria-label="' + h.title + ' 상세"></a>' +
-      '<a class="hs-play" style="' + pr(h.play) + '" href="ep1.html?g=' + h.g + '" data-play="' + h.g + '" aria-label="' + h.title + ' 지금 플레이하기"></a></div>';
+      '<a class="hs-play" style="' + pr(h.play) + '" href="' + RD.GAMES[h.g].real + '" data-play="' + h.g + '" aria-label="' + h.title + ' 지금 플레이하기"></a></div>';
   }).join('');
   tb.innerHTML = HERO.map(function (h, i) {
     return '<button class="hs-t' + (i ? '' : ' on') + '" role="tab" aria-selected="' + (i ? 'false' : 'true') + '" data-i="' + i + '"><small>' + h.label + '</small><b>' + h.title + '</b><i class="bar"></i></button>';

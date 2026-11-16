@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=1240">
-<title>1화 완료 · 리디 게임 (교육용 데모)</title><meta name="robots" content="noindex">
+<title>게임패스 안내 · 리디 게임즈 (교육용 데모)</title><meta name="robots" content="noindex">
 <link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
 <link rel="stylesheet" href="assets/css/site.css"><script src="assets/js/demo.js"></script></head>
 <body>
@@ -12,19 +12,25 @@
 document.addEventListener('DOMContentLoaded', function () {
   var id = new URLSearchParams(location.search).get('g') || 'escape';
   var g = RD.GAMES[id] || RD.GAMES.escape; id = g.id;
+  var PASS = new URLSearchParams(location.search).get('mode') === 'pass';  // 상세의 결제 버튼에서 온 패스 안내(1화 완료 아님)
+  document.title = (PASS ? '게임패스 안내 · ' + g.title : '1화 완료 · ' + g.title) + ' · 리디 게임즈 (교육용 데모)';
   document.getElementById('epbg').style.backgroundImage = 'url(assets/img/' + g.thumb + ')';
   document.getElementById('ep').innerHTML =
-    '<div><span class="pill">1화 완료</span><p class="gt">' + g.title + ' · ' + g.type + '</p>' +
-    '<div class="bub"><em>' + g.who + '</em><p>' + g.line.join('<br>') + '</p></div>' +
-    '<p class="real">대사는 데모용 예시예요 · 실제 1화 체험판: <a href="' + g.real + '" target="_blank" rel="noopener">진영 체험판 열기</a></p></div>' +
-    '<div class="cta"><img class="lg2" src="assets/brand/ridigames_logo_h_blue.svg" alt="RIDI GAMES"><h3>이야기는 계속됩니다,<br><i>2화부터는 게임패스</i>로</h3><p class="sub">세 게임의 모든 회차가 열려요</p>' +
+    (PASS ? '<div><span class="pill">게임패스</span><p class="gt">' + g.title + ' · ' + g.type + '</p>' +
+      '<div class="bub"><em>2 stage부터는 게임패스</em><p>1 stage는 무료로 즐길 수 있어요.<br>게임패스를 구독하면 세 게임의 모든 stage가 열려요.</p></div>' +
+      '<p class="real">무료 1 stage 먼저 해 보기: <a href="' + g.real + '" data-play>지금 플레이하기</a></p></div>'
+    : '<div><span class="pill">1화 완료</span><p class="gt">' + g.title + ' · ' + g.type + '</p>' +
+      '<div class="bub"><em>' + g.who + '</em><p>' + g.line.join('<br>') + '</p></div>' +
+      '<p class="real">대사는 데모용 예시예요 · 실제 1화 체험판: <a href="' + g.real + '" target="_blank" rel="noopener">진영 체험판 열기</a></p></div>') +
+    '<div class="cta"><img class="lg2" src="assets/brand/ridigames_logo_h_blue.svg" alt="RIDI GAMES"><h3>' + (PASS ? '세 게임의 모든 stage,<br><i>게임패스 하나로</i>' : '이야기는 계속됩니다,<br><i>2화부터는 게임패스</i>로') + '</h3><p class="sub">세 게임의 모든 회차가 열려요</p>' +
     '<div class="g3"><span>AI 대화형 챗</span><span>액션 로맨스 슈팅</span><span>방탈출 스토리</span></div>' +
     '<div class="pr"><b>월 9,900원</b><span>첫 구독 4,900P 지급</span></div>' +
     '<button class="b1" id="toPass">패스 안내 보기</button><a class="b2" href="#" id="toOrigin">원작 이어 읽기</a></div>';
-  // ③ 1화 끝 도착
-  RD.ev('episode_complete', { game_id: id, episode_no: 1 });
-  document.getElementById('toPass').addEventListener('click', function () { RD.openPass(id, 'ep1_end'); });
-  document.getElementById('toOrigin').addEventListener('click', function (e) { e.preventDefault(); RD.goOrigin(id, 'ep1_end'); });
+  var PL = PASS ? 'game_detail' : 'ep1_end';
+  if (!PASS) RD.ev('episode_complete', { game_id: id, episode_no: 1 });  // ③ 1화 끝 도착(패스 안내 모드에선 안 보냄)
+  document.getElementById('toPass').addEventListener('click', function () { RD.openPass(id, PL); });
+  document.getElementById('toOrigin').addEventListener('click', function (e) { e.preventDefault(); RD.goOrigin(id, PL); });
+  document.querySelectorAll('[data-play]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); RD.ev('play_start', { game_id: id, placement: 'pass_page' }); var h = a.href; setTimeout(function () { location.href = h; }, 150); }); });
 });
 </script>
 </body></html>

@@ -229,3 +229,7 @@ body{letter-spacing:0}
 /* 패스 띠: 캐릭터 원본 3장 합성(목업 위치 대조) */
 .pass .art{left:calc(50% - 550px);width:883px;height:449px;background:url(../img/pass_band_art.png) left bottom/883px 449px no-repeat}
 .hs-img,.hs-link{margin-left:-542px}
+/* 65차 4차: 타이틀 일러스트 원본 */
+.read img{object-position:center 47%}
+.cards img{object-fit:cover;object-position:center}
+.ep .bg{background-position:center 40%;opacity:.85}

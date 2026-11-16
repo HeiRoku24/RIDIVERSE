@@ -1,4 +1,4 @@
-/* 리디 게임 데모(교육용) — 공통: 머리·꼬리·결제 시트·GA4 이벤트
+/* 리디 게임즈 데모(교육용) — 공통: 머리·꼬리·결제 시트·GA4 이벤트
    이벤트 이름·매개변수 = demo54/버튼_이벤트_대응표_초안.md (B 게임 메뉴 경로). 모든 이벤트에 is_demo=true.
    ★ 표시는 데모 보조 이벤트(GA4 데모에만): game_detail_view · begin_checkout */
 (function () {
@@ -27,18 +27,18 @@
         tags: ['AI채팅', '로맨스판타지'], cover: 'cover_chat_v.jpg', play: 'play_chat.jpg', thumb: 'thumb_chat.jpg',
         desc: ['남주 카시안 벨모어에게 한 마디를 건네면 답장이 옵니다.', '선택지 3개 중에 고르거나 직접 입력하세요. 대화마다 호감도가 쌓입니다.'],
         stages: ['1 stage - 밤에 온 편지', '2 stage - 공범의 조건', '3 stage - 가면무도회', '4 stage - 마지막 서명'], who: '카시안 벨모어', line: ['"조건은 하나뿐입니다.', '그건… 다음 밤에 말씀드리지요."'],
-        real: 'https://belmore-accomplice.vercel.app', kw: ['#AI채팅', '#로맨스판타지', '#웹소설', '#RIDI_ONLY'], note: '설명·회차 이름은 목업에 없어 데모용 예시' },
+        real: 'https://belmore-accomplice.vercel.app/?k=dZKGRpWboXDyG0gJ', kw: ['#AI채팅', '#로맨스판타지', '#웹소설', '#RIDI_ONLY'], note: '설명·회차 이름은 목업에 없어 데모용 예시' },
       shoot: { id: 'shoot', origin: 'o2', type: '슈팅', title: '지각 사유 : 게이트 폭주', title2: ['지각 사유 :', '게이트 폭주'],
         tags: ['슈팅', '헌터물', '액션'], cover: 'cover_shoot_v.jpg', play: 'play_shoot.jpg', thumb: 'thumb_shoot.jpg',
         desc: ['60초 동안 몰려오는 몬스터를 처치하고 대사 컷을 확인하세요.', '콤보를 이어 가고 능력을 강화해 그날의 랭킹에 도전합니다.'],
         stages: ['1 stage - 지각한 아침', '2 stage - 터져 버린 게이트', '3 stage - 등급 재측정', '4 stage - 폭주의 끝'], who: '공이삼', line: ['"지각 사유요? 게이트가 터졌거든요.', '다음엔… 더 큰 놈이 옵니다."'],
-        real: 'https://late-gate.vercel.app', kw: ['#슈팅', '#헌터물', '#액션', '#웹소설', '#RIDI_ONLY'], note: '설명·회차 이름은 목업에 없어 데모용 예시' },
+        real: 'https://late-gate.vercel.app/9927c00b2d3a1d9962c92871/', kw: ['#슈팅', '#헌터물', '#액션', '#웹소설', '#RIDI_ONLY'], note: '설명·회차 이름은 목업에 없어 데모용 예시' },
       escape: { id: 'escape', origin: 'o3', type: '방탈출', title: '저를 가두셨죠? 덕분에 전설의 환수를 얻었습니다', title2: ['저를 가두셨죠?', '덕분에 전설의 환수를 얻었습니다'],
         tags: ['방탈출', '판타지', '학원물'], cover: 'cover_escape_v.jpg', play: 'play_escape.jpg', thumb: 'thumb_escape.jpg',
         desc: ['재능은 있지만 신분이 평민인 마법사 로아. 아카데미 장학생이 되어 입학하는데...', '시기와 질투를 받아 괴롭힘을 당하던 어느날 환수 계약의식날에 창고에 갇히다.', '하지만 그곳에서 인생을 바꿀만한 사건이 일어난다.'],
         stages: ['1 stage - 용을 만나다', '2 stage - 갑자기 생긴 남자친구', '3 stage - 정식으로 시작하다', '4 stage - 드디어 맞붙게된 두사람'],
         who: '녹스', line: ['"계약은 끝났다, 주인.', '그런데… 이 창고 밖에서도 날 부를 거냐?"'],
-        real: 'https://nox-storeroom.vercel.app', note: '' }
+        real: 'https://nox-storeroom.vercel.app/9920aa3ddbae31e1beb46c48/', note: '' }
     },
     ev: function (name, p) {
       p = Object.assign({ is_demo: true }, p || {});
