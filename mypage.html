@@ -336,6 +336,18 @@ a{color:inherit;text-decoration:none}
 .ugh .nv{display:flex;gap:28px;font-size:15px;font-weight:700;color:#141414}
 .ugh .nv a.on{color:#1E9EFF}
 .ugh .rt{display:flex;gap:22px;font-size:13px;font-weight:500;color:#333}
+/* 67차: 좁은 화면에서 머리줄이 넘치지 않게 */
+@media (max-width:1239px){.ugh-in{padding:0 24px}.ugh .sch{width:200px}.ugh .sr{gap:20px}.ugh .rt{display:none}}
+@media (max-width:760px){
+  .ugh-in{padding:0 16px}
+  .ugh .r1{height:54px}.ugh .lgo img{height:18px}
+  .ugh .sch{display:none}
+  .ugh .lk{font-size:12px;white-space:nowrap}.ugh .lk .lgn{display:none}
+  .ugh .r2{height:48px;overflow-x:auto;scrollbar-width:none}.ugh .r2::-webkit-scrollbar{display:none}
+  .ugh .nv{gap:16px;white-space:nowrap}
+}
+@media (max-width:359px){.ugh-in{padding:0 12px}.ugh .lgo img{height:15px}.ugh .lk{font-size:11px}
+}
 </style>
 </head>
 <body data-nosheet data-page="mypage">
@@ -343,7 +355,7 @@ a{color:inherit;text-decoration:none}
 <header class="ugh"><div class="ugh-in">
   <div class="r1"><a class="lgo" href="index.html" aria-label="RIDI GAMES 게임 메인"><img src="assets/brand/ridigames_logo_h_blue.svg" alt="RIDI GAMES"></a>
     <div class="sr"><div class="sch"><svg viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
-    <span class="lk"><a href="reserve.html">팝업 사전예약</a> · <a href="mypage.html">마이페이지</a> · <a href="#" data-out>로그인 / 회원가입</a></span></div></div>
+    <span class="lk"><a href="reserve.html">팝업 사전예약</a> · <a href="mypage.html">마이페이지</a><span class="lgn"> · <a href="#" data-out>로그인 / 회원가입</a></span></span></div></div>
   <div class="r2"><nav class="nv" aria-label="리디 메뉴"><a href="#" data-out>만화</a><a href="#" data-out>웹툰</a><a href="#" data-out>웹소설</a><a href="#" data-out>도서</a><a href="#" data-out>리디샵</a><a href="#" data-out>셀렉트</a><a class="on" href="index.html?utm_content=myridi">게임</a></nav>
     <div class="rt"><span>☰ 전체 카테고리</span><span>ⓒ 캐시충전</span></div></div>
 </div></header>
@@ -386,7 +398,7 @@ a{color:inherit;text-decoration:none}
 var MENU=[["game","게임 홈"],["pass","패스 구독 관리"],["streak","연속 구독 보상"],["cards","수집 카드"],["deco","꾸미기 보관함"],["play","이어 하기"],["popup","팝업 기록"]];
 var GAMES=[
  {id:"chat",cls:"a1",genre:"로맨스 판타지 · AI 대화",t:"저와 공범이 되어 주시겠습니까?",hero:"카시안",ep:6,tot:10,next:"7화 · 서신 속 이름",origin:"원작 소설 이어 읽기",side:"외전 루트: 이복동생의 편지"},
- {id:"shoot",cls:"a2",genre:"헌터물 · 슈팅",t:"지각 사유: 게이트 폭주",hero:"공이삼",ep:9,tot:10,next:"10화 · 운동장의 균열",origin:"원작 웹툰 이어 보기",side:"외전 루트: 의문의 S급"},
+ {id:"shoot",cls:"a2",genre:"헌터물 · 슈팅",t:"지각 사유: 게이트 폭주",hero:"공이삼",ep:9,tot:10,next:"10화 · 운동장의 균열",origin:"원작 소설 이어 읽기",side:"외전 루트: 의문의 S급"},
  {id:"escape",cls:"a3",genre:"마법학원 · 방탈출",t:"저를 가두셨죠? 덕분에 전설의 환수를 얻었습니다",hero:"녹스",ep:1,tot:10,next:"2화 · 잠긴 도서관",origin:"원작 소설 이어 읽기",side:"외전 루트: 녹스의 첫 계약자"}];
 var S={plan:"prem",cancel:false,months:3,claimed:false,filter:"all",icon:"ic3",banner:"bc3",dtab:"icon"};
 var PRICE={basic:"9,900",prem:"14,900"};

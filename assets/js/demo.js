@@ -28,21 +28,48 @@
   window.RD = {
     GAMES: {
       chat: { id: 'chat', origin: 'o1', type: 'AI채팅', title: '저와 공범이 되어 주시겠습니까?', title2: ['저와 공범이 되어', '주시겠습니까?'],
-        tags: ['AI채팅', '로맨스판타지'], cover: 'cover_chat_v.jpg', play: 'play_chat.jpg', thumb: 'thumb_chat.jpg',
+        tags: ['AI채팅', '로맨스판타지'], cover: 'cover_chat_v.webp', play: 'play_chat.webp', thumb: 'thumb_chat.webp',
         desc: ['남주 카시안 벨모어에게 한 마디를 건네면 답장이 옵니다.', '선택지 3개 중에 고르거나 직접 입력하세요. 대화마다 호감도가 쌓입니다.'],
-        stages: ['1 stage - 밤에 온 편지', '2 stage - 공범의 조건', '3 stage - 가면무도회', '4 stage - 마지막 서명'], who: '카시안 벨모어', line: ['"조건은 하나뿐입니다.', '그건… 다음 밤에 말씀드리지요."'],
-        real: 'https://belmore-accomplice.vercel.app/?k=dZKGRpWboXDyG0gJ', kw: ['#AI채팅', '#로맨스판타지', '#웹소설', '#RIDI_ONLY'], note: '설명·회차 이름은 목업에 없어 데모용 예시' },
+        stages: ['1화 · 밤에 온 편지', '2화 · 공범의 조건', '3화 · 가면무도회', '4화 · 마지막 서명'], who: '카시안 벨모어', line: ['"조건은 하나뿐입니다.', '그건… 다음 밤에 말씀드리지요."'],
+        real: 'https://belmore-accomplice.vercel.app/?k=dZKGRpWboXDyG0gJ', kw: ['#AI채팅', '#로맨스판타지', '#웹소설', '#RIDI_ONLY'] },
       shoot: { id: 'shoot', origin: 'o2', type: '슈팅', title: '지각 사유 : 게이트 폭주', title2: ['지각 사유 :', '게이트 폭주'],
-        tags: ['슈팅', '헌터물', '액션'], cover: 'cover_shoot_v.jpg', play: 'play_shoot.jpg', thumb: 'thumb_shoot.jpg',
+        tags: ['슈팅', '헌터물', '액션'], cover: 'cover_shoot_v.webp', play: 'play_shoot.webp', thumb: 'thumb_shoot.webp',
         desc: ['60초 동안 몰려오는 몬스터를 처치하고 대사 컷을 확인하세요.', '콤보를 이어 가고 능력을 강화해 그날의 랭킹에 도전합니다.'],
-        stages: ['1 stage - 지각한 아침', '2 stage - 터져 버린 게이트', '3 stage - 등급 재측정', '4 stage - 폭주의 끝'], who: '공이삼', line: ['"지각 사유요? 게이트가 터졌거든요.', '다음엔… 더 큰 놈이 옵니다."'],
-        real: 'https://late-gate.vercel.app/9927c00b2d3a1d9962c92871/', kw: ['#슈팅', '#헌터물', '#액션', '#웹소설', '#RIDI_ONLY'], note: '설명·회차 이름은 목업에 없어 데모용 예시' },
+        stages: ['1화 · 지각한 아침', '2화 · 터져 버린 게이트', '3화 · 등급 재측정', '4화 · 폭주의 끝'], who: '공이삼', line: ['"지각 사유요? 게이트가 터졌거든요.', '다음엔… 더 큰 놈이 옵니다."'],
+        real: 'https://late-gate.vercel.app/9927c00b2d3a1d9962c92871/', kw: ['#슈팅', '#헌터물', '#액션', '#웹소설', '#RIDI_ONLY'] },
       escape: { id: 'escape', origin: 'o3', type: '방탈출', title: '저를 가두셨죠? 덕분에 전설의 환수를 얻었습니다', title2: ['저를 가두셨죠?', '덕분에 전설의 환수를 얻었습니다'],
-        tags: ['방탈출', '판타지', '학원물'], cover: 'cover_escape_v.jpg', play: 'play_escape.jpg', thumb: 'thumb_escape.jpg',
+        tags: ['방탈출', '판타지', '학원물'], cover: 'cover_escape_v.webp', play: 'play_escape.webp', thumb: 'thumb_escape.webp',
         desc: ['재능은 있지만 신분이 평민인 마법사 로아. 아카데미 장학생이 되어 입학하는데...', '시기와 질투를 받아 괴롭힘을 당하던 어느날 환수 계약의식날에 창고에 갇히다.', '하지만 그곳에서 인생을 바꿀만한 사건이 일어난다.'],
-        stages: ['1 stage - 용을 만나다', '2 stage - 갑자기 생긴 남자친구', '3 stage - 정식으로 시작하다', '4 stage - 드디어 맞붙게된 두사람'],
+        stages: ['1화 · 용을 만나다', '2화 · 갑자기 생긴 남자친구', '3화 · 정식으로 시작하다', '4화 · 드디어 맞붙게 된 두 사람'],
         who: '녹스', line: ['"계약은 끝났다, 주인.', '그런데… 이 창고 밖에서도 날 부를 거냐?"'],
-        real: 'https://nox-storeroom.vercel.app/9920aa3ddbae31e1beb46c48/', note: '' }
+        real: 'https://nox-storeroom.vercel.app/9920aa3ddbae31e1beb46c48/' }
+    },
+    /* 상세 '이렇게 플레이해요'(1화 체험판 기준) · 원작 페이지(origin.html)용 가상 정보.
+       작가 필명·화수·별점·가격·연재 요일은 모두 데모용 예시 값(근거 없음) */
+    PLAY: {
+      chat: { time: '약 1분 30초', how: ['카시안의 말에 선택지 3개 중 하나를 고르거나 직접 입력해요.', '카시안이 보인 감정에 따라 호감도가 쌓여요.'] },
+      shoot: { time: '약 1분', how: ['몰려오는 괴물을 손가락으로 눌러 쏴요. 꾹 누르면 연사돼요.', '빗나가지 않고 콤보를 이으면 공격이 세지고, 그날의 랭킹에 기록돼요.'] },
+      escape: { time: '약 2분', how: ['화면을 눌러 소리가 나는 곳과 숨은 단서를 찾아요.', '녹스의 능력(불꽃·날개·코)을 골라 길을 열어요.'] }
+    },
+    ORIGIN: {
+      chat: { author: '벨벳잉크', genre: '로맨스판타지', total: 186, status: '완결', days: '', rating: '4.8', raters: '12,408', webtoon: true,
+        intro: ['왕실 문장원의 실사관인 나에게 자정의 편지가 도착했다. 보낸 사람은 벨모어 백작가의 장남, 카시안 벨모어.',
+                '사흘 뒤면 사생아로 판정될 그는 어머니의 혼인 기록을 되찾기 위해 나에게 공범이 되어 달라고 한다.',
+                '들키면 함께 무너지는 거래. 그런데 이 남자의 미소에는 숨긴 것이 너무 많다.'],
+        eps: ['자정의 편지', '봉랍의 조건', '지하 문서고', '엘리안느의 서명', '이복동생의 횃불'],
+        kw: ['#로맨스판타지', '#계약관계', '#귀족', '#비밀', '#능글남', '#웹툰화', '#RIDI_ONLY'] },
+      shoot: { author: '지각대장', genre: '현대판타지', total: 241, status: '연재중', days: '매주 월·목', rating: '4.7', raters: '9,815', webtoon: true,
+        intro: ['오늘도 지각 확정인 고등학생 공이삼. 학교 앞 횡단보도 위로 하늘이 찢어지고 게이트가 열렸다.',
+                '도망쳐야 하는데 손끝이 뜨겁다. 등급 측정도 받은 적 없는 평범한 학생의 손에서 빛이 터져 나온다.',
+                '그리고 지각 사유서에 쓸 말이 하나 생겼다. "게이트가 터져서요."'],
+        eps: ['8시 52분', '횡단보도 위의 게이트', '지각 사유서', '등급 재측정', '운동장의 균열'],
+        kw: ['#현대판타지', '#헌터물', '#각성', '#학원', '#성장물', '#웹툰화', '#RIDI_ONLY'] },
+      escape: { author: '은방울', genre: '로맨스판타지', total: 154, status: '연재중', days: '매주 화·금', rating: '4.9', raters: '15,232', webtoon: true,
+        intro: ['재능은 있지만 신분은 평민인 마법사 로아. 아카데미 장학생으로 입학했지만 돌아온 건 시기와 괴롭힘뿐이었다.',
+                '환수 계약 의식 날, 누군가 로아를 창고에 가둔다. 의식에 못 가면 퇴학이다.',
+                '그런데 그 창고 구석에서, 아무도 모르던 전설의 환수가 눈을 뜬다.'],
+        eps: ['평민 장학생', '잠긴 창고', '작은 용의 계약', '녹스', '잠긴 도서관'],
+        kw: ['#로맨스판타지', '#학원물', '#마법학교', '#환수계약', '#인외남주', '#사이다/복수', '#웹툰화', '#RIDI_ONLY'] }
     },
     ev: function (name, p) {
       p = Object.assign({ is_demo: true }, p || {});
@@ -68,7 +95,7 @@
 
   // ---- 머리 · 꼬리 (목업 그대로 · 리디 실제 링크 없음)
   var HEAD = '<div class="demo-bar"><b>교육용 데모</b> · AI그로스마케팅 캡스톤 · 실제 리디 서비스가 아니며 로그인·결제가 되지 않습니다</div>' +
-    '<header class="hd"><div class="wrap"><div class="r1"><a class="logo" href="index.html" aria-label="RIDI GAMES 게임 메인"><img src="assets/brand/ridigames_logo_h_blue.svg" alt="RIDI GAMES"></a><div class="sr"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div><span class="lg"><a href="reserve.html">팝업 사전예약</a> · <a href="mypage.html">마이페이지</a> · <a href="#" data-inert>로그인 / 회원가입</a></span></div></div>' +
+    '<header class="hd"><div class="wrap"><div class="r1"><a class="logo" href="index.html" aria-label="RIDI GAMES 게임 메인"><img src="assets/brand/ridigames_logo_h_blue.svg" alt="RIDI GAMES"></a><div class="sr"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div><span class="lg"><a href="reserve.html">팝업 사전예약</a> · <a href="mypage.html">마이페이지</a><span class="lgn"> · <a href="#" data-inert>로그인 / 회원가입</a></span></span></div></div>' +
     '<div class="r2"><nav class="nav"><a href="#" data-inert>만화</a><a href="#" data-inert>웹툰</a><a href="#" data-inert>웹소설</a><a href="#" data-inert>도서</a><a href="#" data-inert>리디샵</a><a href="#" data-inert>셀렉트</a><a class="on" href="index.html">게임</a></nav>' +
     '<div class="rt"><span>☰ 전체 카테고리</span><span>ⓒ 캐시충전</span></div></div></div></header>';
   var FOOT = '<footer class="ft"><div class="wrap"><a class="ft-logo" href="index.html"><img src="assets/brand/ridigames_logo_h_blue.svg" alt="RIDI GAMES"></a><div class="cols"><div><p>🎧 고객센터</p><p>📢 공지사항</p></div><div><b>서비스</b><p>제휴카드</p><p>뷰어 다운로드</p><p>CP사이트</p><p>리디바탕</p></div><div><b>기타 문의</b><p>원고 투고</p><p>사업 제휴 문의</p></div><div><b>회사</b><p>회사 소개</p><p>인재채용</p></div>' +

@@ -38,7 +38,7 @@ a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer}
 .pass .k{padding-top:44px;font-size:23px;font-weight:500}
 .pass .h{font-size:50px;font-weight:700;margin-top:10px;letter-spacing:-.5px}
 .pass .pill{display:inline-block;margin-top:20px;background:#fff;color:var(--b);border-radius:8px;font-size:22px;font-weight:700;padding:8px 18px;border:0}
-.pass .art{position:absolute;left:calc(50% - 530px);bottom:0;width:860px;height:393px;background:url(../img/pass_band_art.png) left bottom/860px 393px no-repeat}
+.pass .art{position:absolute;left:calc(50% - 530px);bottom:0;width:860px;height:393px;background:url(../img/pass_band_art.webp) left bottom/860px 393px no-repeat}
 .pass .note{position:absolute;right:25px;bottom:18px;font-size:15px;opacity:.95}
 /* 리디 게임 */
 .sec3{background:var(--g2);padding:96px 0 200px}
@@ -194,7 +194,7 @@ body{letter-spacing:0}
 .pass .k{padding-top:41px;font-size:25px;font-weight:600;line-height:1.3}
 .pass .h{font-size:54px;font-weight:700;margin-top:9px;letter-spacing:-.3px;line-height:1.25}
 .pass .pill{margin-top:19px;font-size:22px;font-weight:600;padding:0;width:109px;height:51px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;color:#00A0FF}
-.pass .art{left:calc(50% - 537px);width:853px;height:423px;background:url(../img/pass_band_art.png) left bottom/853px 423px no-repeat}
+.pass .art{left:calc(50% - 537px);width:853px;height:423px;background:url(../img/pass_band_art.webp) left bottom/853px 423px no-repeat}
 .pass .note{right:1px;bottom:12px;font-size:15px;font-weight:500;opacity:1}
 /* 리디 게임 카드 — 세 칸 같은 크기 */
 .cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:52px}
@@ -227,7 +227,7 @@ body{letter-spacing:0}
 .hs-link{width:1126px;margin-left:-563px}
 .hs-play{border-radius:14px}
 /* 패스 띠: 캐릭터 원본 3장 합성(목업 위치 대조) */
-.pass .art{left:calc(50% - 550px);width:883px;height:449px;background:url(../img/pass_band_art.png) left bottom/883px 449px no-repeat}
+.pass .art{left:calc(50% - 550px);width:883px;height:449px;background:url(../img/pass_band_art.webp) left bottom/883px 449px no-repeat}
 .hs-img,.hs-link{margin-left:-542px}
 /* 65차 4차: 타이틀 일러스트 원본 */
 .read img{object-position:center 47%}
@@ -249,3 +249,200 @@ body{letter-spacing:0}
 .pass .pill{margin-top:16px}
 .cards a{height:auto;padding-bottom:20px}
 .sec3{padding-bottom:96px}
+
+/* ===== 67차(11/17): 원작 페이지 · 상세 '이렇게 플레이해요' · 문구 정리 · 좁은 화면(반응형) ===== */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* 히어로: 그림과 버튼을 한 틀(.hs-frame)에 넣어 함께 줄어들게 */
+.hs-frame{position:absolute;left:50%;top:0;width:1126px;height:634px;margin-left:-542px}
+.hs-frame .hs-img{position:absolute;inset:0;left:0;width:100%;height:100%;margin:0;background-size:100% 100%;background-position:center}
+.hs-frame .hs-link{position:absolute;left:0;top:0;width:100%;height:82.8%;margin:0}
+.hs-frame .hs-play{position:absolute}
+/* 내가 읽은 작품: 원작 읽은 근거 한 줄 */
+.read .rdn{display:flex;align-items:center;gap:7px;margin-top:14px;font-size:15px;color:#555}
+.read .rdn svg{width:18px;height:18px;stroke:var(--b);stroke-width:1.6;flex:none}
+.read .rdn a{color:var(--b);font-weight:600}
+/* 패스 띠 버튼: 동사 있는 글자 */
+.pass .pill{width:auto;padding:0 22px;font-size:20px}
+/* 상세: 버튼 글자 길이에 맞춤 · 잠긴 회차 = 게임패스 자물쇠 */
+.dt-top .bt .btn-b{width:auto;padding:0 22px}
+.stg .bd{width:auto;min-width:60px;padding:0 10px;gap:4px}
+.stg .bd.pay svg{width:13px;height:13px;fill:#fff;stroke:#fff;stroke-width:1.4}
+.stg .bd.pay{font-weight:700}
+/* 상세: 이렇게 플레이해요 */
+.dt-how h2{margin-top:110px}
+.how{display:flex;gap:40px;align-items:flex-start;background:#F6F8FB;border-radius:14px;padding:28px}
+.how img{width:220px;aspect-ratio:9/16;object-fit:cover;border-radius:12px;flex:none;box-shadow:0 6px 18px rgba(0,0,0,.12);background:#111}
+.how .hw{flex:1;padding-top:4px}
+.how dl{display:grid;grid-template-columns:72px 1fr;gap:10px 12px;font-size:17px}
+.how dt{color:#888}.how dd{font-weight:700}
+.how ol{margin-top:22px;padding-left:22px;font-size:17px;line-height:1.7;color:#333}.how li{margin-bottom:6px}
+.how .ex{margin-top:14px;font-size:13px;color:#999}
+/* 원작 페이지 */
+.btn-w2{display:inline-flex;align-items:center;justify-content:center;height:56px;padding:0 22px;border:1.5px solid #ddd;border-radius:8px;background:#fff;font-size:15px;font-weight:700;color:#333}
+.og-top{display:flex;gap:40px}
+.og-cv{width:300px;flex:none}
+.og-cv img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.15);display:block}
+.og-in{flex:1;min-width:0}
+.og-cat{display:flex;align-items:center;gap:10px}
+.og-cat .on{font-size:14px;font-weight:700;color:var(--b);background:#E6F4FF;border-radius:4px;padding:4px 10px}
+.og-wt{border:1px solid #ddd;background:#fff;border-radius:4px;padding:4px 10px;font-size:14px;color:#666}
+.og-in h1{font-family:"RIDIBatang","Pretendard",serif;font-size:38px;font-weight:700;line-height:1.35;margin-top:14px}
+.og-au{margin-top:14px;font-size:17px;color:#555;display:flex;align-items:center;gap:10px}.og-au b{color:#141414}
+.og-au .sep{width:1px;height:13px;background:#ccc}
+.og-rt{margin-top:10px;font-size:17px;display:flex;align-items:center;gap:5px}.og-rt .star{color:#E5484D}.og-rt .ct{color:#999;font-size:14px}
+.og-meta{margin-top:6px;font-size:15px;color:#777}
+.og-badge{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.og-badge span{font-size:13px;font-weight:600;border-radius:4px;padding:4px 10px;background:#f2f2f2;color:#444}
+.og-badge .gm{background:var(--b);color:#fff}
+.og-bt{display:flex;gap:12px;margin-top:24px}
+.og-ex{margin-top:12px;font-size:12px;color:#aaa}
+.og-game{margin-top:48px;display:flex;align-items:center;gap:24px;border:1.5px solid #CFE6FF;background:linear-gradient(90deg,#F2F9FF,#fff);border-radius:16px;padding:18px 22px}
+.og-game .th{width:176px;aspect-ratio:4/3;object-fit:cover;border-radius:10px;flex:none}
+.og-game .tx{flex:1;min-width:0}
+.og-game .k{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--b)}.og-game .k img{width:16px;height:16px}
+.og-game .t{font-size:22px;font-weight:700;margin-top:6px;line-height:1.35}
+.og-game .s{font-size:15px;color:#666;margin-top:6px}
+.og-game .bt{display:flex;flex-direction:column;gap:8px;flex:none}
+.og-game .bt .btn-b,.og-game .bt .btn-w2{height:48px}
+.og-gift{display:flex;align-items:center;gap:16px;width:100%;margin-top:16px;border:0;background:#FFF6DA;border-radius:12px;padding:14px 20px;text-align:left;font-family:inherit}
+.og-gift b{font-size:22px;font-weight:900;white-space:nowrap}.og-gift span{flex:1;font-size:15px;color:#4B5563;line-height:1.5}.og-gift i{font-style:normal;font-size:14px;font-weight:700;color:#8a6a10;white-space:nowrap}
+.og-sec h2{font-size:26px;font-weight:700;margin:64px 0 18px}.og-sec h2 small{font-size:14px;color:#999;font-weight:500;margin-left:8px}
+.og-intro p{font-size:17px;line-height:1.85;color:#333}.og-intro p+p{margin-top:8px}
+.og-eps{list-style:none;border-top:1px solid #ddd}
+.og-eps li{display:flex;align-items:center;gap:14px;height:58px;border-bottom:1px solid #eee;font-size:16px}
+.og-eps .no{width:48px;color:#888;flex:none}.og-eps .et{flex:1;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.og-eps .pr{font-size:14px;color:#666;flex:none}.og-eps .pr.free{color:var(--b);font-weight:700}
+.og-eps .rd{flex:none;border:1px solid #ddd;background:#fff;border-radius:5px;height:32px;padding:0 14px;font-size:13px;color:#555}
+.og-more{display:block;width:100%;margin-top:16px;height:52px;border:1px solid #ccc;border-radius:6px;background:#fff;font-size:15px}
+.og-sec .kw span{font-size:15px;padding:5px 14px}
+
+/* ---- 좁은 화면 (1239px 이하) : 1240 고정 해제 ---- */
+@media (max-width:1239px){
+  body{min-width:0}
+  .wrap{width:auto;max-width:var(--w);margin:0 auto;padding:0 24px}
+  .hd .wrap{left:0}
+  .search{width:200px}
+  .hd .sr{gap:20px}
+  .nav{gap:18px;font-size:15px}
+  .hd .rt{display:none}
+  .ft .cols{flex-wrap:wrap;gap:28px 48px}
+  .ft .sns{margin-left:0}
+  /* 히어로: 그림이 화면 폭에 맞게 줄고 탭은 그림 아래로 */
+  .hero,.hs-slide{height:auto}
+  .hs-track{position:relative}
+  .hs-slide{overflow:hidden}
+  .hs-frame{position:relative;left:auto;margin:0 auto;width:min(100%,1126px);height:auto;aspect-ratio:1126/634}
+  .hs-tabs{position:relative;left:auto;top:auto;width:100%;height:auto}
+  .hs-t{height:auto;padding:14px 16px!important}
+  .hs-t small{font-size:12px}.hs-t b{font-size:16px;margin-top:6px;padding-right:0}
+  /* 내가 읽은 작품 */
+  .read{height:auto}
+  .read h3{font-size:34px;line-height:1.35}
+  /* 패스 띠 */
+  .pass{height:auto;padding-bottom:0}
+  .pass .h{font-size:40px}
+  .pass .art{position:relative;left:auto;margin:28px auto 0;width:min(883px,100%);height:auto;aspect-ratio:883/449;background-size:100% auto}
+  .pass .note{position:static;padding:10px 0 14px}
+  .cards{gap:24px}
+  /* 상세 */
+  .dt-top{margin-left:0;gap:28px}
+  .dt-top .cv{width:300px;height:450px}
+  .dt-top h1{font-size:36px}
+  .dt-sec,.rv{margin:0}.notice{margin:60px 0 0}
+  /* 1화 끝·패스 안내 */
+  .ep .in{width:auto;padding:60px 24px 80px;grid-template-columns:1fr 400px;gap:40px}
+}
+/* ---- 폰 (760px 이하) ---- */
+@media (max-width:760px){
+  .demo-bar{font-size:11px;padding:6px 12px;line-height:1.4}
+  .wrap{padding:0 16px}
+  .hd .r1{height:54px}
+  .search{display:none}
+  .hd .lg{font-size:12px}
+  .hd .r2{height:48px;overflow-x:auto;scrollbar-width:none}
+  .hd .r2::-webkit-scrollbar{display:none}
+  .nav{gap:16px;font-size:15px;white-space:nowrap}
+  .hs-t{padding:10px 12px!important}
+  .hs-t b{font-size:13px;white-space:normal;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .h2{font-size:22px;margin-bottom:16px}
+  .sec1{padding:48px 0 56px}
+  .read{flex-direction:column;gap:16px;padding:14px}
+  .read .pic{width:100%;height:auto;aspect-ratio:3/4}
+  .read .pic .fg{height:100%}
+  .read .tx{padding-top:0}
+  .read h3{font-size:24px}
+  .chips span{font-size:14px;padding:5px 11px}
+  .read .desc{font-size:17px;margin-top:18px}
+  .read .btn-b{margin-top:20px;width:auto;height:50px;padding:0 22px;font-size:15px}
+  .pass .k{font-size:16px;padding-top:28px}
+  .pass .h{font-size:26px;padding:0 16px}
+  .pass .s{font-size:14px;padding:0 16px}
+  .pass .pill{font-size:16px;height:46px;padding:0 18px}
+  .pass .note{font-size:12px}
+  .sec3{padding:48px 0 56px}
+  .cards{grid-template-columns:1fr;gap:16px}
+  .cards img{height:auto;aspect-ratio:4/3}
+  .cards .ci{padding-top:16px}
+  .cards .ci .t{font-size:18px;line-height:1.4}
+  .cards .ci .row{flex-wrap:wrap}
+  .cards .ci .row .f{margin-left:0}
+  .ft{padding:44px 0 64px}
+  .ft .cols{gap:22px 36px}
+  /* 상세 */
+  .dt-top{flex-direction:column;padding-top:24px;gap:20px}
+  .dt-top .cv{width:min(260px,70%);height:auto;aspect-ratio:2/3;margin:0 auto}
+  .dt-top h1{font-size:28px}
+  .dt-top .ds{font-size:15px}
+  .dt-top .ds br{display:none}
+  .dt-top .bt .btn-b,.btn-w{height:50px}
+  .info a{font-size:14px;height:auto;min-height:50px;padding:8px 0}
+  .info em{flex:none;margin-right:14px;width:52px;font-size:12px}
+  .dt-sec h2,.dt-how h2{font-size:24px;margin:56px 0 16px}
+  .how{flex-direction:column;align-items:center;gap:20px;padding:20px}
+  .how img{width:min(220px,70%)}
+  .how dl,.how ol{font-size:15px}
+  .stg a,.stg div{font-size:15px;gap:10px}
+  .notice{font-size:15px;padding:20px;margin-top:36px}
+  .kw{gap:10px}.kw span{font-size:14px;padding:5px 12px}
+  .rv h2{font-size:24px!important;margin-top:56px!important}
+  .rv .sc b{font-size:56px}.rv .big{font-size:40px}
+  .rv .box{height:150px;font-size:14px}
+  .rv .tabs span{height:56px;font-size:15px}
+  .rv .sort{flex-wrap:wrap;gap:8px}.rv .sort span{font-size:13px;padding:7px 12px}
+  .rv .one .act{position:static;margin-top:12px}
+  .rv .more{height:56px;font-size:15px}
+  /* 1화 끝·패스 안내 */
+  .ep .in{grid-template-columns:1fr;padding:32px 16px 48px;gap:24px}
+  .ep .bub p{font-size:20px}
+  .ep .cta{padding:24px 20px}
+  .ep .cta h3{font-size:22px}
+  .ep .g3{flex-wrap:wrap}
+  /* 결제 시트 */
+  .sheet{width:calc(100% - 24px)}
+  /* 원작 페이지 */
+
+  .og-top{flex-direction:column;gap:22px}
+  .og-cv{width:min(220px,62%);margin:0 auto}
+  .og-in h1{font-size:28px}
+  .og-bt{flex-wrap:wrap}.og-bt .btn-b,.og-bt .btn-w2{flex:1;height:50px}
+  .og-game{flex-direction:column;align-items:stretch;gap:14px;padding:16px}
+  .og-game .th{width:100%}
+  .og-game .t{font-size:19px}
+  .og-game .bt{flex-direction:row}.og-game .bt a{flex:1}
+  .og-gift{flex-wrap:wrap;gap:6px 12px}.og-gift span{flex-basis:100%;order:3;font-size:14px}
+  .og-sec h2{font-size:22px;margin-top:44px}
+  .og-intro p{font-size:16px}
+  .og-eps li{font-size:15px;gap:10px}.og-eps .no{width:38px}
+}
+/* 67차 보정: 폰 머리줄 · 원작 페이지 좌우 여백 · 가격 줄바꿈 */
+.og-pg{padding-top:56px;padding-bottom:120px}
+.ep .pr{flex-wrap:wrap}.ep .pr b{white-space:nowrap}
+@media (max-width:1239px){.og-pg{padding-left:24px;padding-right:24px}}
+@media (max-width:760px){
+  .logo img{height:18px}
+  .hd .lg{font-size:12px;white-space:nowrap}
+  .hd .lg .lgn{display:none}
+  .og-pg{padding:24px 16px 64px}
+}
+@media (max-width:1239px){.cards .ci .row{flex-wrap:wrap}.cards .ci .row .f{margin-left:0}}
+@media (max-width:359px){.logo img{height:15px}.hd .lg{font-size:11px}.wrap{padding:0 12px}}

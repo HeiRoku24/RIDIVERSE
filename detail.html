@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=1240">
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>리디 게임즈 상세 (교육용 데모)</title><meta name="robots" content="noindex">
 <link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
 <link rel="stylesheet" href="assets/css/site.css"><script src="assets/js/demo.js"></script></head>
@@ -14,21 +14,24 @@ document.addEventListener('DOMContentLoaded', function () {
   document.title = g.title + ' · 리디 게임즈 (교육용 데모)';
   var st = g.stages.map(function (s, i) {
     return i === 0 ? '<a href="' + g.real + '" data-play><span>' + s + '</span><span class="bd">무료</span></a>'
-                   : '<div><span>' + s + '</span><a class="bd pay" href="ep1.html?g=' + id + '&mode=pass" data-passpage>결제</a></div>';
+                   : '<div><span>' + s + '</span><a class="bd pay" href="ep1.html?g=' + id + '&mode=pass" data-passpage><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none"/></svg>게임패스</a></div>';
   }).join('');
   var kw = g.kw || ['#학원물','#로맨스판타지','#환수계약','#마법학교','#판타지','#성장물','#인외남주','#사이다/복수','#힘숨찐','#웹소설','#평점4점이상','#RIDI_ONLY'];
   document.getElementById('dt').innerHTML =
     '<section class="dt-top"><img class="cv" src="assets/img/' + g.cover + '" alt="" style="object-position:center ' + ({ chat: '72%', shoot: '55%', escape: '52%' }[id]) + '">' +
     '<div class="in"><div class="tg">' + g.tags.map(function (t) { return '<span>' + t + '</span>'; }).join('') + '</div>' +
     '<h1>' + g.title2.join('<br>') + '</h1><p class="ds">' + g.desc.join('<br>') + '</p>' +
-    '<div class="bt"><a class="btn-b" href="' + g.real + '" data-play>처음부터</a><button class="btn-w" data-origin>원작보기</button></div>' +
+    '<div class="bt"><a class="btn-b" href="' + g.real + '" data-play>1화 무료 플레이</a><button class="btn-w" data-origin>원작보기</button></div>' +
     '<div class="info"><a href="#" data-origin><em>연재</em>원작 웹소설 보러가기<span class="rr">›</span></a>' +
     '<a href="index.html#"><em>추천</em>이 작품 다양하게 즐기기<span class="cnt">3작품</span></a>' +
     '<a href="ep1.html?g=' + id + '&mode=pass" data-passpage><em>이벤트</em>게임패스면 리디 게임즈 모든 게임 월 9,900원<span class="rr">›</span></a>' +
     '<a href="#" data-inert><em>독점</em>독점 작품 감상은 [RIDI ONLY 작품관]<span class="rr">›</span></a></div>' +
-    (g.note ? '<p style="font-size:12px;color:#aaa;margin-top:10px">* ' + g.note + '</p>' : '') + '</div></section>' +
-    '<section class="dt-sec"><h2>스테이지</h2><div class="stg" style="border-top:1px solid #ddd">' + st + '</div></section>' +
-    '<div class="notice">본 게임의 무료 회차는 1 stage 입니다.<br>게임패스를 구독하시면 리디 게임즈의 모든 게임, 모든 stage를 플레이할 수 있습니다.</div>' +
+    '</div></section>' +
+    '<section class="dt-sec dt-how"><h2>이렇게 플레이해요</h2><div class="how"><img src="assets/img/' + g.play + '" alt="' + g.title + ' 플레이 화면" loading="lazy">' +
+    '<div class="hw"><dl><dt>한 판</dt><dd>' + RD.PLAY[id].time + '</dd><dt>장르</dt><dd>' + g.type + '</dd><dt>기기</dt><dd>PC · 모바일 웹</dd></dl>' +
+    '<ol>' + RD.PLAY[id].how.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ol><p class="ex">1화 체험판 기준이에요.</p></div></div></section>' +
+    '<section class="dt-sec"><h2>회차</h2><div class="stg" style="border-top:1px solid #ddd">' + st + '</div></section>' +
+    '<div class="notice">이 게임의 무료 회차는 1화예요.<br>게임패스를 구독하면 리디 게임즈의 모든 게임, 모든 회차를 플레이할 수 있어요.</div>' +
     '<section class="dt-sec"><h2 style="margin-top:110px">이 작품의 키워드</h2><div class="kw">' + kw.map(function (k) { return '<span>' + k + '</span>'; }).join('') + '</div></section>' +
     '<section class="rv"><h2 style="font-size:34px;margin-top:110px">리뷰<span class="ex">(평점·플레이 수·리뷰는 예시 값)</span></h2>' +
     '<div class="sc"><b>4.9</b><div><p>이용자 별점</p><div class="st">★★★★★</div></div></div>' +

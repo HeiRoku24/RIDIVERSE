@@ -1,21 +1,65 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=1240">
-<title>원작 이어 읽기 · 리디 게임즈 (교육용 데모)</title><meta name="robots" content="noindex">
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>원작 웹소설 · 리디 (교육용 데모)</title><meta name="robots" content="noindex">
 <link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
 <link rel="stylesheet" href="assets/css/site.css"><script src="assets/js/demo.js"></script></head>
 <body>
 <div id="hd"></div>
-<!-- ⑤ 원작 이어 읽기: 실제로는 리디 원작 작품 페이지로 이동. 원작 구매(origin_purchase)는 리디 쪽 데이터라 데모에서 보내지 않음 -->
-<main class="wrap orig" id="og"></main>
+<!-- 원작 작품 페이지(데모): 실제로는 리디 웹소설 작품 페이지. 작가 필명·화수·별점·가격·연재 요일은 데모용 예시 값.
+     원작 구매(origin_purchase)는 리디 쪽 데이터라 데모에서 보내지 않음. 원작 → 게임 클릭은 play_start(placement=origin) -->
+<main class="wrap og-pg" id="og"></main>
 <div id="ft"></div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   var id = new URLSearchParams(location.search).get('g') || 'escape';
-  var g = RD.GAMES[id] || RD.GAMES.escape;
-  document.getElementById('og').innerHTML = '<img src="assets/img/' + g.cover + '" alt="">' +
-    '<img src="assets/brand/ridigames_mark_blue.svg" alt="" style="width:28px;height:28px;box-shadow:none;border-radius:0;margin-top:26px">' + '<h1 style="margin-top:8px">「' + g.title + '」 원작 웹소설</h1>' +
-    '<p>실제 서비스라면 여기서 리디 원작 작품 페이지로 이동합니다.<br>원작은 게임패스에 포함되지 않고 지금처럼 따로 소장해요.</p>' +
-    '<div class="btns"><a class="btn-b" href="detail.html?g=' + g.id + '">게임으로 돌아가기</a><a class="btn-b" style="background:#fff;color:#141414;border:1.5px solid #ddd" href="index.html">게임 메인</a></div>';
+  var g = RD.GAMES[id] || RD.GAMES.escape; id = g.id;
+  var o = RD.ORIGIN[id];
+  document.title = g.title + ' · 원작 웹소설 · 리디 (교육용 데모)';
+  var eps = o.eps.map(function (t, i) {
+    var n = i + 1;
+    return '<li><span class="no">' + n + '화</span><span class="et">' + t + '</span>' +
+      (n <= 3 ? '<span class="pr free">무료</span>' : '<span class="pr">100원</span>') +
+      '<button type="button" class="rd" data-read>' + (n <= 3 ? '읽기' : '소장') + '</button></li>';
+  }).join('');
+  document.getElementById('og').innerHTML =
+    '<section class="og-top">' +
+      '<div class="og-cv"><img src="assets/img/' + g.cover + '" alt="' + g.title + ' 표지"></div>' +
+      '<div class="og-in">' +
+        '<div class="og-cat"><span class="on">웹소설</span>' + (o.webtoon ? '<button type="button" class="og-wt" data-read>웹툰으로 보기</button>' : '') + '</div>' +
+        '<h1>' + g.title2.join('<br>') + '</h1>' +
+        '<p class="og-au"><b>' + o.author + '</b> 글 <span class="sep"></span>' + o.genre + '</p>' +
+        '<p class="og-rt"><span class="star">★</span><b>' + o.rating + '</b><span class="ct">(' + o.raters + '명)</span></p>' +
+        '<p class="og-meta">총 ' + o.total + '화 · ' + o.status + (o.days ? ' · ' + o.days + ' 연재' : '') + '</p>' +
+        '<div class="og-badge"><span>RIDI ONLY</span>' + (o.webtoon ? '<span>웹툰 연재 중</span>' : '') + '<span class="gm">게임 출시</span></div>' +
+        '<div class="og-bt"><button type="button" class="btn-b" data-read>1화 무료로 읽기</button><button type="button" class="btn-w2" data-read>전체 소장</button></div>' +
+        '<p class="og-ex">작가 필명·화수·별점·가격은 데모용 예시예요</p>' +
+      '</div>' +
+    '</section>' +
+
+    '<section class="og-game">' +
+      '<img class="th" src="assets/img/' + g.thumb + '" alt="' + g.title + ' 게임 장면" loading="lazy">' +
+      '<div class="tx"><p class="k"><img src="assets/brand/ridigames_mark_blue.svg" alt="">이 작품의 게임 · ' + g.type + '</p>' +
+        '<p class="t">' + g.title + '</p>' +
+        '<p class="s">원작 속 장면을 직접 플레이해요 · 1화 무료, 2화부터 게임패스</p></div>' +
+      '<div class="bt"><a class="btn-b" href="' + g.real + '" data-play>1화 무료 플레이</a><a class="btn-w2" href="detail.html?g=' + id + '&from=origin">게임 자세히 보기</a></div>' +
+    '</section>' +
+
+    '<button type="button" class="og-gift" id="ogGift"><b>4,900P</b><span>게임패스를 처음 구독하면 4,900P를 드려요. 이 작품 같은 게임화 원작을 소장하는 데 쓸 수 있어요.</span><i>패스 안내 ›</i></button>' +
+
+    '<section class="og-sec"><h2>작품 소개</h2><div class="og-intro">' + o.intro.map(function (t) { return '<p>' + t + '</p>'; }).join('') + '</div></section>' +
+
+    '<section class="og-sec"><h2>회차 <small>총 ' + o.total + '화 중 1~5화</small></h2><ul class="og-eps">' + eps + '</ul>' +
+      '<button type="button" class="og-more" data-read>전체 회차 보기</button></section>' +
+
+    '<section class="og-sec"><h2>이 작품의 키워드</h2><div class="kw">' + o.kw.map(function (k) { return '<span>' + k + '</span>'; }).join('') + '</div></section>';
+
+  document.querySelectorAll('[data-read]').forEach(function (b) {
+    b.addEventListener('click', function (e) { e.preventDefault(); RD.toast('데모에서는 원작을 열 수 없어요'); });
+  });
+  document.querySelectorAll('[data-play]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); RD.ev('play_start', { game_id: id, placement: 'origin' }); var h = a.href; setTimeout(function () { location.href = h; }, 150); });
+  });
+  document.getElementById('ogGift').addEventListener('click', function () { RD.openPass(id, 'origin'); });
 });
 </script>
 </body></html>
