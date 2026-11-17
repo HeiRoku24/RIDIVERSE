@@ -133,6 +133,15 @@
   document.addEventListener('DOMContentLoaded', function () {
     var h = document.getElementById('hd'); if (h) h.outerHTML = HEAD;
     var f = document.getElementById('ft'); if (f) f.outerHTML = FOOT;
+    /* 67차: 리디 쪽 화면(원작 웹소설 등, <body data-brand="ridi" data-nav="웹소설">)은 머리·꼬리를 RIDI로, 탭은 해당 메뉴로 */
+    if (document.body.getAttribute('data-brand') === 'ridi') {
+      var WM = '<span class="ridi-wm">RIDI</span>';
+      document.querySelectorAll('.hd .logo, .ft .ft-logo').forEach(function (a) {
+        a.innerHTML = WM; a.setAttribute('aria-label', 'RIDI 홈'); a.setAttribute('href', '#'); a.setAttribute('data-inert', '');
+      });
+      var nv = document.body.getAttribute('data-nav');
+      document.querySelectorAll('.hd .nav a').forEach(function (a) { a.classList.toggle('on', a.textContent === nv); });
+    }
     if (!document.body.hasAttribute('data-nosheet')) document.body.insertAdjacentHTML('beforeend', SHEET);
     // 사전예약·마이페이지 시안: 버튼의 data-evt="이름(k=v)"를 그대로 GA4 이벤트로 보냄 (reserve_complete → reserve, 대응표 A)
     var page = document.body.getAttribute('data-page');

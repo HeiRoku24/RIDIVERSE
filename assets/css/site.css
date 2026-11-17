@@ -446,3 +446,7 @@ body{letter-spacing:0}
 }
 @media (max-width:1239px){.cards .ci .row{flex-wrap:wrap}.cards .ci .row .f{margin-left:0}}
 @media (max-width:359px){.logo img{height:15px}.hd .lg{font-size:11px}.wrap{padding:0 12px}}
+/* 67차: 리디 쪽 화면 로고(RIDI 글자) */
+.ridi-wm{display:block;font-family:"Pretendard",sans-serif;font-weight:900;font-size:28px;line-height:1;letter-spacing:-.5px;color:#1E9EFF}
+.ft .ft-logo .ridi-wm{font-size:22px}
+@media (max-width:760px){.hd .logo .ridi-wm{font-size:22px}}
