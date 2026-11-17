@@ -165,7 +165,8 @@
         RD.ev('purchase', { game_id: cur.game, item_type: 'game_pass', plan: cur.plan, value: cur.value, currency: 'KRW', placement: cur.placement, pay_channel: 'web', transaction_id: 'demo-' + Date.now().toString(36) });
         sh.className = 'sheet st-done'; return;
       }
-      if (e.target.closest('[data-origin]')) { e.preventDefault(); RD.goOrigin(cur.game === 'all' ? 'escape' : cur.game, 'pass_done'); }
+      /* 67차 버그 수정: 결제 완료 창 안의 '원작 이어 읽기'에만 반응(예전엔 상세 페이지의 원작 버튼까지 잡아 늘 방탈출로 보냄) */
+      if (e.target.closest('#sheet [data-origin]')) { e.preventDefault(); RD.goOrigin(RD.GAMES[cur.game] ? cur.game : 'escape', 'pass_done'); }
     });
   });
 })();
